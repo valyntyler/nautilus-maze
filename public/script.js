@@ -2,10 +2,26 @@ document.addEventListener('DOMContentLoaded', function() {
   const gridContainer = document.getElementById('grid');
   const resetButton = document.getElementById('reset');
   const resizeButton = document.getElementById('resize');
+  const tools = document.querySelectorAll('.tool');
 
   let isMouseDown = false;
   let rows = 10;
   let cols = 10;
+  let selected = document.getElementById('pencil');
+
+  // setup tool buttons
+  tools.forEach(tool => {
+    tool.addEventListener('click', () => selectTool(tool))
+  });
+
+  function selectTool(tool) {
+    tools.forEach(t => {
+      t.classList.remove("selected")
+    })
+    tool.classList.add("selected")
+    selected = tool
+  }
+  selectTool(selected)
 
   // Function to create the grid
   function createGrid(rows, cols) {
@@ -20,13 +36,13 @@ document.addEventListener('DOMContentLoaded', function() {
       // Add event listeners for mouse interactions
       cell.addEventListener('mousedown', function(e) {
         isMouseDown = true;
-        toggleColor(cell);
+        useTool(cell);
         e.preventDefault(); // Prevent text selection
       });
 
       cell.addEventListener('mouseenter', function() {
         if (isMouseDown) {
-          toggleColor(cell);
+          useTool(cell);
         }
       });
 
@@ -35,8 +51,12 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   // Function to toggle cell color
-  function toggleColor(cell) {
-    cell.classList.toggle('black');
+  function useTool(cell) {
+    if (selected.id === "pencil") {
+      cell.classList.add('black');
+    } else {
+      cell.classList.remove('black');
+    }
   }
 
   // Listen for mouse up event on the entire document
