@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const gridContainer = document.getElementById('grid');
   const resetButton = document.getElementById('reset');
   const resizeButton = document.getElementById('resize');
+  const saveButton = document.getElementById('save');
   const tools = document.querySelectorAll('.tool');
 
   let isMouseDown = false;
@@ -50,6 +51,22 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
+  function saveGrid() {
+    const state = {
+      rows: rows,
+      cols: cols,
+      grid: Array(rows).fill().map(() => (Array(cols).fill(0))),
+    };
+
+    for (let i = 0; i < rows; i++) {
+      for (let j = 0; j < cols; j++) {
+        state.grid[i][j] = gridContainer.children[i * rows + j].classList.contains("black") ? 1 : 0
+      }
+    }
+
+    console.log(state.grid)
+  }
+
   // Function to toggle cell color
   function useTool(cell) {
     if (selected.id === "pencil") {
@@ -81,6 +98,8 @@ document.addEventListener('DOMContentLoaded', function() {
       alert('Please enter a valid number between 1 and 30.');
     }
   });
+
+  saveButton.addEventListener('click', () => saveGrid())
 
   // Initialize the grid
   createGrid(rows, cols);
