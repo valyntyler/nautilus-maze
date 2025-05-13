@@ -4,6 +4,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
+    "watch": "esbuild src/index.ts --outfile=dist/bundle.js --bundle --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -20,5 +21,8 @@
   "description": "",
   "dependencies": {
     "typescript": "^5.8.3"
+  },
+  "devDependencies": {
+    "esbuild": "0.25.4"
   }
 }
