@@ -27,7 +27,7 @@ body {
   text-align: center;
   font-weight: bold;
   animation:
-    slide-up 0.3s forwards,
+    slide-up 0.12s ease-out forwards,
     fade-out 0.2s 1s forwards;
 }
 
@@ -58,9 +58,19 @@ body {
   width: 40px;
   border-radius: 100%;
   padding: 4px;
+  user-select: none;
+  transition: background-color 0.1s;
 }
 
 .tool-drawer .selected {
+  background: skyblue;
+}
+
+.tool-drawer :hover {
+  background: #ccc;
+}
+
+.tool-drawer :active {
   background: skyblue;
 }
 
