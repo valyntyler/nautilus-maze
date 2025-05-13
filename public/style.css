@@ -74,7 +74,7 @@ body {
   background: skyblue;
 }
 
-.tool-drawer :last-child {
+.tool-drawer :nth-last-child(3) {
   margin-left: auto;
 }
 
