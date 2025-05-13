@@ -16,9 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
   console.log(savedData)
 
   // setup tool buttons
-  tools.forEach(tool => {
-    tool.addEventListener('click', () => selectTool(tool))
-  });
+  tools.forEach(tool => tool.addEventListener('mousedown', () => selectTool(tool)));
 
   function selectTool(tool) {
     tools.forEach(t => {
@@ -115,7 +113,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  saveButton.addEventListener('click', () => {
+  saveButton.addEventListener('mousedown', () => {
       saveGrid()
       showNotification("Saved successfully!")
     }
