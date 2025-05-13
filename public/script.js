@@ -9,6 +9,31 @@ document.addEventListener('DOMContentLoaded', function() {
   let rows = 10;
   let cols = 10;
   let selected = document.getElementById('pencil');
+
+  // handle key presses
+  document.addEventListener('keydown', function(event) {
+    // eraser
+    if (event.key === 'e' || event.key === 'E') {
+      selected = document.getElementById('eraser')
+      selectTool(selected)
+    }
+    // pencil
+    if (event.key === 'b' || event.key === 'B') {
+      selected = document.getElementById('pencil')
+      selectTool(selected)
+    }
+    if (event.key === 'p' || event.key === 'P') {
+      selected = document.getElementById('pencil')
+      selectTool(selected)
+    }
+    // save
+    if (event.key === 's' || event.key === 'S') {
+      saveGrid()
+      showNotification("Saved successfully!")
+      event.preventDefault()
+    }
+  });
+
   
   // load save
   // const savedData = localStorage.getItem('editor-state');
