@@ -124,7 +124,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
-  function saveGrid() {
+  function readState() {
     const state = {
       rows: rows,
       cols: cols,
@@ -137,7 +137,11 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }
 
-    localStorage.setItem("editor-state", JSON.stringify(state))
+    return state
+  }
+
+  function saveGrid() {
+    localStorage.setItem("editor-state", JSON.stringify(readState()))
   }
 
   // Function to toggle cell color
@@ -183,10 +187,14 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   saveButton.addEventListener('mousedown', () => {
-      saveGrid()
-      showNotification("Saved successfully!")
+      exportJSON()
     }
   )
+
+  function exportJSON() {
+    showNotification("Export successful!")
+    saveJSON(readState())
+  }
 
   // Initialize the grid
   createGrid(rows, cols);
@@ -213,3 +221,29 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
+// save JSON file
+function saveJSON(data) {
+  // Convert JSON object to a string with formatting
+  const jsonString = JSON.stringify(data, null, 2);
+
+  // Create a Blob with the JSON data
+  const blob = new Blob([jsonString], { type: 'application/json' });
+
+  // Create a URL for the Blob
+  const url = URL.createObjectURL(blob);
+
+  // Create a temporary anchor element
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'maze.json'; // Set the file name
+
+  // Append the anchor to the document
+  document.body.appendChild(a);
+
+  // Trigger a click on the anchor
+  a.click();
+
+  // Clean up
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
