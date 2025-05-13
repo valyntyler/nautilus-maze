@@ -9,6 +9,11 @@ document.addEventListener('DOMContentLoaded', function() {
   let rows = 10;
   let cols = 10;
   let selected = document.getElementById('pencil');
+  
+  // load save
+  // const savedData = localStorage.getItem('editor-state');
+  const savedData = JSON.parse(localStorage.getItem('editor-state'));
+  console.log(savedData)
 
   // setup tool buttons
   tools.forEach(tool => {
@@ -30,24 +35,33 @@ document.addEventListener('DOMContentLoaded', function() {
     gridContainer.style.gridTemplateColumns = `repeat(${cols}, 40px)`;
     gridContainer.style.gridTemplateRows = `repeat(${rows}, 40px)`;
 
-    for (let i = 0; i < rows * cols; i++) {
-      const cell = document.createElement('div');
-      cell.className = 'grid-cell';
+    for (let i = 0; i < rows; i++) {
+      for (let j = 0; j < cols; j++) {
 
-      // Add event listeners for mouse interactions
-      cell.addEventListener('mousedown', function(e) {
-        isMouseDown = true;
-        useTool(cell);
-        e.preventDefault(); // Prevent text selection
-      });
+        const cell = document.createElement('div');
+        cell.className = 'grid-cell';
 
-      cell.addEventListener('mouseenter', function() {
-        if (isMouseDown) {
+        // Add event listeners for mouse interactions
+        cell.addEventListener('mousedown', function(e) {
+          isMouseDown = true;
           useTool(cell);
-        }
-      });
+          e.preventDefault(); // Prevent text selection
+        });
 
-      gridContainer.appendChild(cell);
+        cell.addEventListener('mouseenter', function() {
+          if (isMouseDown) {
+            useTool(cell);
+          }
+        });
+
+        if (savedData) {
+          if (savedData.grid[i][j]) {
+            cell.classList.add('black');
+          }
+        }
+
+        gridContainer.appendChild(cell);
+      }
     }
   }
 
@@ -64,8 +78,7 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }
 
-    console.log(state.grid)
-    showNotification("Saved successfully!")
+    localStorage.setItem("editor-state", JSON.stringify(state))
   }
 
   // Function to toggle cell color
@@ -75,6 +88,7 @@ document.addEventListener('DOMContentLoaded', function() {
     } else {
       cell.classList.remove('black');
     }
+    saveGrid()
   }
 
   // Listen for mouse up event on the entire document
@@ -100,7 +114,11 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  saveButton.addEventListener('click', () => saveGrid())
+  saveButton.addEventListener('click', () => {
+      saveGrid()
+      showNotification("Saved successfully!")
+    }
+  )
 
   // Initialize the grid
   createGrid(rows, cols);
