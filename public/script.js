@@ -100,6 +100,7 @@ document.addEventListener('DOMContentLoaded', function() {
   resetButton.addEventListener('click', function() {
     const cells = document.querySelectorAll('.grid-cell');
     cells.forEach(cell => cell.classList.remove('black'));
+    saveGrid()
   });
 
   // Resize button functionality
