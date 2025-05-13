@@ -16,11 +16,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // export/import
   exportButton?.addEventListener('mousedown', () => {
-    saveJSON(readState())
+    exportJSON(readState())
+    showNotification("Export successful!")
   })
 
   importButton?.addEventListener('mousedown', () => {
-    console.log("import")
+    importJSON()
   })
 
   // undo/redo
@@ -198,14 +199,9 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   saveButton?.addEventListener('mousedown', () => {
-      exportJSON()
+      showNotification("Saved successfully!")
     }
   )
-
-  function exportJSON() {
-    showNotification("Export successful!")
-    saveJSON(readState())
-  }
 
   // Initialize the grid
   createGrid(rows, cols);
@@ -232,8 +228,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
-// save JSON file
-function saveJSON(data) {
+function exportJSON(data) {
   // Convert JSON object to a string with formatting
   const jsonString = JSON.stringify(data, null, 2);
 
@@ -257,4 +252,39 @@ function saveJSON(data) {
   // Clean up
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
+}
+
+function importJSON() {
+  // Create a hidden file input
+  const input = document.createElement('input');
+  input.type = 'file';
+
+  // Optional: configure the input
+  input.multiple = false;
+  input.accept = '.json';
+
+  // Set up the change handler
+  input.onchange = (event) => {
+    const file = event.target.files[0];
+
+    // Create a FileReader object
+    const reader = new FileReader();
+
+    // Define what happens once the file is loaded
+    reader.onload = function(event) {
+      console.log('File contents:');
+      console.log(event.target.result);
+    };
+
+    // Define error handling
+    reader.onerror = function() {
+      console.error('Error reading file');
+    };
+
+    // Read the file as text
+    reader.readAsText(file);
+  };
+
+  // Trigger the file picker dialog
+  input.click();
 }
