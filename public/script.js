@@ -53,6 +53,15 @@ document.addEventListener('DOMContentLoaded', function() {
       console.log("redo")
       event.preventDefault()
     }
+    if (event.key === 'x' || event.key === 'X') {
+      if (selected.id === "pencil") {
+        selected = document.getElementById('eraser')
+        selectTool(selected)
+      } else {
+        selected = document.getElementById('pencil')
+        selectTool(selected)
+      }
+    }
   });
 
   
