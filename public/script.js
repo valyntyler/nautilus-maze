@@ -94,6 +94,11 @@ document.addEventListener('DOMContentLoaded', function() {
         const cell = document.createElement('div');
         cell.className = 'grid-cell';
 
+        // Disable context menu
+        cell.addEventListener('contextmenu', function(e) {
+          e.preventDefault();
+        })
+
         // Add event listeners for mouse interactions
         cell.addEventListener('mousedown', function(e) {
           isMouseDown = true;
