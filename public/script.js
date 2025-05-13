@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // export/import
   exportButton?.addEventListener('mousedown', () => {
-    console.log("export")
+    saveJSON(readState())
   })
 
   importButton?.addEventListener('mousedown', () => {
