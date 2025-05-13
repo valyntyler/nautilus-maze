@@ -47,14 +47,18 @@ body {
   margin-top: 20px;
 }
 
-.tool-drawer {
+.edit-menu {
   display: flex;
   flex-direction: row;
   gap: 10px;
   margin-bottom: 20px;
 }
 
-.tool-drawer img {
+.edit-menu :last-child {
+  margin-left: auto;
+}
+
+.edit-menu img {
   width: 40px;
   border-radius: 100%;
   padding: 4px;
@@ -62,28 +66,24 @@ body {
   transition: background-color 0.1s;
 }
 
-.tool-drawer .selected {
+.edit-menu .selected {
   background: skyblue;
 }
 
-.tool-drawer .disabled,
-.tool-drawer .disabled:hover,
-.tool-drawer .disabled:active {
+.edit-menu .disabled,
+.edit-menu .disabled:hover,
+.edit-menu .disabled:active {
   opacity: 0.3;
   background: #00000000;
   pointer-events: none;
 }
 
-.tool-drawer :hover {
+.edit-menu :hover {
   background: #ccc;
 }
 
-.tool-drawer :active {
+.edit-menu :active {
   background: skyblue;
-}
-
-.tool-drawer :nth-last-child(2) {
-  margin-left: auto;
 }
 
 .grid-container {
