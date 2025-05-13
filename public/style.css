@@ -66,6 +66,14 @@ body {
   background: skyblue;
 }
 
+.tool-drawer .disabled,
+.tool-drawer .disabled:hover,
+.tool-drawer .disabled:active {
+  opacity: 0.3;
+  background: #00000000;
+  pointer-events: none;
+}
+
 .tool-drawer :hover {
   background: #ccc;
 }
