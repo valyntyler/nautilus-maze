@@ -82,7 +82,7 @@ body {
   background: skyblue;
 }
 
-.tool-drawer :nth-last-child(3) {
+.tool-drawer :nth-last-child(2) {
   margin-left: auto;
 }
 

@@ -13,11 +13,11 @@ document.addEventListener('DOMContentLoaded', function() {
   let selected = document.getElementById('pencil');
 
   // undo/redo
-  undoButton.addEventListener('mousedown', () => {
+  undoButton?.addEventListener('mousedown', () => {
     console.log("undo")
   })
 
-  redoButton.addEventListener('mousedown', () => {
+  redoButton?.addEventListener('mousedown', () => {
     console.log("redo")
   })
 
@@ -186,7 +186,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  saveButton.addEventListener('mousedown', () => {
+  saveButton?.addEventListener('mousedown', () => {
       exportJSON()
     }
   )
