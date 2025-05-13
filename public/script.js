@@ -3,12 +3,23 @@ document.addEventListener('DOMContentLoaded', function() {
   const resetButton = document.getElementById('reset');
   const resizeButton = document.getElementById('resize');
   const saveButton = document.getElementById('save');
+  const undoButton = document.getElementById('undo');
+  const redoButton = document.getElementById('redo');
   const tools = document.querySelectorAll('.tool');
 
   let isMouseDown = false;
   let rows = 10;
   let cols = 10;
   let selected = document.getElementById('pencil');
+
+  // undo/redo
+  undoButton.addEventListener('mousedown', () => {
+    console.log("undo")
+  })
+
+  redoButton.addEventListener('mousedown', () => {
+    console.log("redo")
+  })
 
   // handle key presses
   document.addEventListener('keydown', function(event) {
@@ -30,6 +41,16 @@ document.addEventListener('DOMContentLoaded', function() {
     if (event.key === 's' || event.key === 'S') {
       saveGrid()
       showNotification("Saved successfully!")
+      event.preventDefault()
+    }
+    // undo
+    if (event.key === 'z') {
+      console.log("undo")
+      event.preventDefault()
+    }
+    // redo
+    if (event.key === 'y' || event.key === 'Y' || event.key === 'Z') {
+      console.log("redo")
       event.preventDefault()
     }
   });
