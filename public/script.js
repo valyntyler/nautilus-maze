@@ -102,13 +102,14 @@ document.addEventListener('DOMContentLoaded', function() {
         // Add event listeners for mouse interactions
         cell.addEventListener('mousedown', function(e) {
           isMouseDown = true;
-          useTool(cell);
+          useTool(cell, e.button === 2);
+
           e.preventDefault(); // Prevent text selection
         });
 
-        cell.addEventListener('mouseenter', function() {
+        cell.addEventListener('mouseenter', function(e) {
           if (isMouseDown) {
-            useTool(cell);
+            useTool(cell, e.buttons === 2);
           }
         });
 
@@ -140,11 +141,19 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   // Function to toggle cell color
-  function useTool(cell) {
-    if (selected.id === "pencil") {
-      cell.classList.add('black');
+  function useTool(cell, isRightClick) {
+    if (selected.id === "pencil" ) {
+      if (isRightClick) {
+        cell.classList.remove('black');
+      } else {
+        cell.classList.add('black');
+      }
     } else {
-      cell.classList.remove('black');
+      if (isRightClick) {
+        cell.classList.add('black');
+      } else {
+        cell.classList.remove('black');
+      }
     }
     saveGrid()
   }
