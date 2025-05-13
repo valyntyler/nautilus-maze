@@ -205,27 +205,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Initialize the grid
   createGrid(rows, cols);
-
-  // handle notifications
-  function showNotification(message, type = '') {
-    const container = document.getElementById('notificationContainer');
-
-    // Clear notifications
-    container.innerHTML = '';
-
-    // Create notification element
-    const notification = document.createElement('div');
-    notification.className = `notification ${type}`;
-    notification.textContent = message;
-
-    // Add to container
-    container.appendChild(notification);
-
-    // Remove after animation completes (1.2 seconds)
-    setTimeout(() => {
-      notification.remove();
-    }, 1200);
-  }
 });
 
 function exportJSON(data) {
@@ -274,6 +253,7 @@ function importJSON() {
     reader.onload = function(event) {
       console.log('File contents:');
       console.log(event.target.result);
+      showNotification("Import successful!")
     };
 
     // Define error handling
@@ -287,4 +267,25 @@ function importJSON() {
 
   // Trigger the file picker dialog
   input.click();
+}
+
+// handle notifications
+function showNotification(message, type = '') {
+  const container = document.getElementById('notificationContainer');
+
+  // Clear notifications
+  container.innerHTML = '';
+
+  // Create notification element
+  const notification = document.createElement('div');
+  notification.className = `notification ${type}`;
+  notification.textContent = message;
+
+  // Add to container
+  container.appendChild(notification);
+
+  // Remove after animation completes (1.2 seconds)
+  setTimeout(() => {
+    notification.remove();
+  }, 1200);
 }
