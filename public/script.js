@@ -5,12 +5,23 @@ document.addEventListener('DOMContentLoaded', function() {
   const saveButton = document.getElementById('save');
   const undoButton = document.getElementById('undo');
   const redoButton = document.getElementById('redo');
+  const exportButton = document.getElementById('export');
+  const importButton = document.getElementById('import');
   const tools = document.querySelectorAll('.tool');
 
   let isMouseDown = false;
   let rows = 10;
   let cols = 10;
   let selected = document.getElementById('pencil');
+
+  // export/import
+  exportButton?.addEventListener('mousedown', () => {
+    console.log("export")
+  })
+
+  importButton?.addEventListener('mousedown', () => {
+    console.log("import")
+  })
 
   // undo/redo
   undoButton?.addEventListener('mousedown', () => {
