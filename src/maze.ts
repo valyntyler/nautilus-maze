@@ -6,7 +6,7 @@ let mousePressed: boolean;
 document.addEventListener("mousedown", () => (mousePressed = true));
 document.addEventListener("mouseup", () => (mousePressed = false));
 
-type MazeState = {
+export type MazeState = {
   rows: number;
   cols: number;
   grid: number[][];
@@ -107,5 +107,6 @@ export default class Maze {
         cell.classList.remove("black");
         break;
     }
+    localStorage.setItem("editor-state", JSON.stringify(this.state));
   }
 }
