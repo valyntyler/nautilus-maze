@@ -6,47 +6,22 @@ body {
   margin: 20px;
 }
 
-.snackbar-container {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  display: flex;
-  justify-content: center;
-  z-index: 1000;
-  pointer-events: none;
+.controls button {
+  padding: 8px 24px;
+  margin: 0 5px;
+  cursor: pointer;
+  border-radius: 4px;
+  border: 0px;
+  background-color: lightgrey;
+  transition: all 0.1s ease;
 }
 
-.snackbar {
-  padding: 16px 36px;
-  background: skyblue;
-  border-radius: 8px;
-  box-shadow: 0 0px 10px rgba(0, 0, 0, 0.2);
-  margin-bottom: -100px;
-  max-width: 200px;
-  text-align: center;
-  font-weight: bold;
-  animation:
-    slide-up 0.12s ease-out forwards,
-    fade-out 0.2s 1s forwards;
+.controls button.main {
+  background-color: skyblue;
 }
 
-@keyframes slide-up {
-  from {
-    margin-bottom: -100px;
-  }
-  to {
-    margin-bottom: 80px;
-  }
-}
-
-@keyframes fade-out {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
+.controls button:active {
+  opacity: 0.8;
 }
 
 .edit-container {
@@ -117,8 +92,45 @@ body {
   margin: 20px 0;
 }
 
-button {
-  padding: 8px 16px;
-  margin: 0 5px;
-  cursor: pointer;
+.snackbar-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+.snackbar {
+  padding: 16px 36px;
+  background: skyblue;
+  border-radius: 8px;
+  box-shadow: 0 0px 10px rgba(0, 0, 0, 0.2);
+  margin-bottom: -100px;
+  max-width: 200px;
+  text-align: center;
+  font-weight: bold;
+  animation:
+    slide-up 0.12s ease-out forwards,
+    fade-out 0.2s 1s forwards;
+}
+
+@keyframes slide-up {
+  from {
+    margin-bottom: -100px;
+  }
+  to {
+    margin-bottom: 80px;
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
 }
