@@ -49,7 +49,7 @@ body {
   transition: background-color 0.1s;
 }
 
-.edit-menu .selected {
+.edit-menu img.selected {
   background: skyblue;
 }
 
