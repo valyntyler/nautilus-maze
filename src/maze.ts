@@ -1,3 +1,4 @@
+import MazeState from "./maze_state";
 import Tool from "./tool";
 import Toolbar from "./toolbar";
 
@@ -6,34 +7,22 @@ let mousePressed: boolean;
 document.addEventListener("mousedown", () => (mousePressed = true));
 document.addEventListener("mouseup", () => (mousePressed = false));
 
-export type MazeState = {
-  rows: number;
-  cols: number;
-  grid: number[][];
-};
-
 export default class Maze {
   container: HTMLDivElement;
 
   get state(): MazeState {
-    let grid: number[][] = Array(this.rows)
-      .fill([])
-      .map(() => Array(this.cols).fill(0));
+    const _state = new MazeState(10, 10);
 
     for (let i = 0; i < this.rows; i++) {
       for (let j = 0; j < this.cols; j++) {
         const index = i * this.rows + j;
         const cell = this.container.children[index];
 
-        grid[i][j] = cell.classList.contains("black") ? 1 : 0;
+        _state.grid[i][j] = cell.classList.contains("black") ? 1 : 0;
       }
     }
 
-    return {
-      rows: this.rows,
-      cols: this.cols,
-      grid,
-    };
+    return _state;
   }
 
   set state(value: MazeState) {

@@ -1,4 +1,5 @@
-import Maze, { MazeState } from "./maze";
+import Maze from "./maze";
+import MazeState from "./maze_state";
 import Snackbar from "./snackbar";
 import Tool from "./tool";
 import Toolbar from "./toolbar";
@@ -10,7 +11,7 @@ const toolbar = new Toolbar();
 const maze = new Maze(10, 10, toolbar);
 
 const local = localStorage.getItem("editor-state");
-const state: MazeState = local ? JSON.parse(local) : null;
+const state: MazeState = local ? JSON.parse(local) : new MazeState(10, 10);
 
 maze.create();
 maze.state = state;
