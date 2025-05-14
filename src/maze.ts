@@ -1,4 +1,8 @@
+import Tool from "./tool";
+import Toolbar from "./toolbar";
+
 let mousePressed: boolean;
+
 document.addEventListener("mousedown", () => (mousePressed = true));
 document.addEventListener("mouseup", () => (mousePressed = false));
 
@@ -8,6 +12,7 @@ export default class Maze {
   constructor(
     readonly rows: number,
     readonly cols: number,
+    private toolbar: Toolbar,
   ) {
     this.container = document.getElementById("maze")! as HTMLDivElement;
   }
@@ -24,16 +29,16 @@ export default class Maze {
         cell.className = "maze-cell";
 
         // register its mouse events
-        cell.addEventListener("mousedown", function (e) {
+        cell.addEventListener("mousedown", (e) => {
           mousePressed = true;
-          this.classList.toggle("black");
+          this.draw(cell);
 
           e.preventDefault();
         });
 
-        cell.addEventListener("mouseenter", function () {
+        cell.addEventListener("mouseenter", () => {
           if (mousePressed) {
-            this.classList.toggle("black");
+            this.draw(cell);
           }
         });
 
@@ -46,5 +51,15 @@ export default class Maze {
     }
   }
 
-  static update() {}
+  draw(cell: HTMLDivElement) {
+    switch (this.toolbar.selected) {
+      case Tool.Pencil:
+        cell.classList.add("black");
+        break;
+
+      case Tool.Eraser:
+        cell.classList.remove("black");
+        break;
+    }
+  }
 }
