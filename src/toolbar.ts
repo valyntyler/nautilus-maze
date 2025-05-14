@@ -38,6 +38,7 @@ export default class Toolbar {
     });
     const tool = document.getElementById(toolId(this.selected))!;
     tool.classList.add("selected");
+    localStorage.setItem("tool-selected", JSON.stringify(this.selected));
   }
 
   constructor() {
@@ -48,6 +49,10 @@ export default class Toolbar {
         () => (this.selected = parseTool(tool.id)!),
       ),
     );
-    this.selected = Tool.Pencil;
+
+    const local = localStorage.getItem("tool-selected");
+    const state = local ? parseInt(local) : Tool.Pencil;
+
+    this.selected = state;
   }
 }
