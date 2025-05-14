@@ -6,8 +6,54 @@ let mousePressed: boolean;
 document.addEventListener("mousedown", () => (mousePressed = true));
 document.addEventListener("mouseup", () => (mousePressed = false));
 
+type MazeState = {
+  rows: number;
+  cols: number;
+  grid: number[][];
+};
+
 export default class Maze {
   container: HTMLDivElement;
+
+  get state(): MazeState {
+    let grid: number[][] = Array(this.rows)
+      .fill([])
+      .map(() => Array(this.cols).fill(0));
+
+    for (let i = 0; i < this.rows; i++) {
+      for (let j = 0; j < this.cols; j++) {
+        const index = i * this.rows + j;
+        const cell = this.container.children[index];
+
+        grid[i][j] = cell.classList.contains("black") ? 1 : 0;
+      }
+    }
+
+    return {
+      rows: this.rows,
+      cols: this.cols,
+      grid,
+    };
+  }
+
+  set state(value: MazeState) {
+    for (let i = 0; i < this.rows; i++) {
+      for (let j = 0; j < this.cols; j++) {
+        const index = i * this.rows + j;
+        const cell = this.container.children[index];
+
+        switch (value.grid[i][j]) {
+          case 0:
+            cell.classList.remove("black");
+            break;
+
+          case 1:
+            cell.classList.add("black");
+            break;
+        }
+      }
+    }
+  }
 
   constructor(
     readonly rows: number,
