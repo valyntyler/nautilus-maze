@@ -94,48 +94,6 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   selectTool(selected)
 
-  // Function to create the grid
-  function createGrid(rows, cols) {
-    gridContainer.innerHTML = '';
-    gridContainer.style.gridTemplateColumns = `repeat(${cols}, 40px)`;
-    gridContainer.style.gridTemplateRows = `repeat(${rows}, 40px)`;
-
-    for (let i = 0; i < rows; i++) {
-      for (let j = 0; j < cols; j++) {
-
-        const cell = document.createElement('div');
-        cell.className = 'grid-cell';
-
-        // Disable context menu
-        cell.addEventListener('contextmenu', function(e) {
-          e.preventDefault();
-        })
-
-        // Add event listeners for mouse interactions
-        cell.addEventListener('mousedown', function(e) {
-          isMouseDown = true;
-          useTool(cell, e.button === 2);
-
-          e.preventDefault(); // Prevent text selection
-        });
-
-        cell.addEventListener('mouseenter', function(e) {
-          if (isMouseDown) {
-            useTool(cell, e.buttons === 2);
-          }
-        });
-
-        if (savedData) {
-          if (savedData.grid[i][j]) {
-            cell.classList.add('black');
-          }
-        }
-
-        gridContainer.appendChild(cell);
-      }
-    }
-  }
-
   function readState() {
     const state = {
       rows: rows,
