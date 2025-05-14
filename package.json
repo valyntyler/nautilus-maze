@@ -3,10 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "build": "tsc",
-    "serve": "http-server .",
-    "watch": "esbuild src/index.ts --outfile=dist/bundle.js --bundle --watch",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "npx tsc",
+    "serve": "npx http-server .",
+    "watch": "npx esbuild src/index.ts --outfile=dist/bundle.js --bundle --watch"
   },
   "repository": {
     "type": "git",
