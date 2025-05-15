@@ -41,6 +41,7 @@ export default class Maze {
         }
       }
     }
+    localStorage.setItem("editor-state", JSON.stringify(this.state));
   }
 
   constructor(
