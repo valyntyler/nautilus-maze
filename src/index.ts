@@ -77,6 +77,13 @@ import_btn.addEventListener("mousedown", () => {
   input.click();
 });
 
+document.addEventListener("mousedown", (e) => {
+  if (!(e.target as any).closest("#menubar-container")) {
+    menubar.open = false;
+    e.preventDefault();
+  }
+});
+
 // handle key presses
 document.addEventListener("keydown", function (e) {
   switch (e.key) {
