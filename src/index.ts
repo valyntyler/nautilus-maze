@@ -1,10 +1,10 @@
-import Maze from "./maze";
-import MazeState from "./maze_state";
-import Menubar from "./menubar";
-import Player from "./player";
-import Snackbar from "./snackbar";
-import Tool from "./tool";
-import Toolbar from "./toolbar";
+import Maze from "./views/maze";
+import MazeState from "./model/maze_state";
+import Player from "./model/player";
+import Tool from "./model/tool";
+import Toolbar from "./views/toolbar";
+import Menubar from "./views/menubar";
+import Snackbar from "./views/snackbar";
 
 const save_btn = document.getElementById("save")!;
 const load_btn = document.getElementById("load")!;
