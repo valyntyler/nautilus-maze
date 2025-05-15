@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Maze Editor</title>
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
     <h1>Maze Editor</h1>
@@ -15,11 +15,54 @@
       <button id="load">Load</button>
     </div>
 
-    <div class="edit-container">
-      <div class="edit-menu">
-        <img draggable="false" alt="pencil-tool" id="pencil" class="tool" src="./assets/bx-pencil-draw.svg">
-        <img draggable="false" alt="eraser-tool" id="eraser" class="tool" src="./assets/bx-eraser.svg">
-        <img draggable="false" alt="open-menu" id="menu-btn" class="menu" src="./assets/bx-dots-horizontal-rounded.svg">
+    <div class="editor">
+      <div class="bar">
+        <div class="toolbar" id="toolbar">
+          <img
+            draggable="false"
+            alt="pencil tool"
+            id="pencil"
+            src="./assets/bx-pencil-draw.svg"
+          />
+          <img
+            draggable="false"
+            alt="eraser tool"
+            id="eraser"
+            src="./assets/bx-eraser.svg"
+          />
+        </div>
+
+        <div class="menubar" id="menubar">
+          <div class="menubar-wrapper">
+            <img
+              draggable="false"
+              alt="open-menu"
+              id="menu"
+              class="menu"
+              src="./assets/bx-dots-horizontal-rounded.svg"
+            />
+            <div class="flyout">
+              <img
+                draggable="false"
+                alt="save"
+                id="save"
+                src="./assets/bx-save.svg"
+              />
+              <img
+                draggable="false"
+                alt="import"
+                id="import"
+                src="./assets/bx-arrow-from-top-stroke.svg"
+              />
+              <img
+                draggable="false"
+                alt="export"
+                id="export"
+                src="./assets/bx-arrow-from-bottom-stroke.svg"
+              />
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="maze-container" id="maze"></div>

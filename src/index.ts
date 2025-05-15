@@ -36,3 +36,7 @@ document.addEventListener("keydown", function (e) {
       break;
   }
 });
+
+document.querySelector("#menu")?.addEventListener("click", () => {
+  document.querySelector(".menubar")?.classList.toggle("open");
+});
