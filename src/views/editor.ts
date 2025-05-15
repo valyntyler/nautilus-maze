@@ -11,11 +11,11 @@ export default class Editor {
 
   set state(value: State) {
     this.container.innerHTML = "";
-    this.container.style.gridTemplateColumns = `repeat(${this.state.cols}, 32px)`;
-    this.container.style.gridTemplateRows = `repeat(${this.state.rows}, 32px)`;
+    this.container.style.gridTemplateColumns = `repeat(${value.cols}, 32px)`;
+    this.container.style.gridTemplateRows = `repeat(${value.rows}, 32px)`;
 
-    for (let i = 0; i < this.state.rows; i++) {
-      for (let j = 0; j < this.state.cols; j++) {
+    for (let i = 0; i < value.rows; i++) {
+      for (let j = 0; j < value.cols; j++) {
         const cell = document.createElement("div");
         cell.className = "maze-cell";
 
