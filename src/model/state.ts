@@ -7,7 +7,7 @@ export default class State {
     readonly grid: number[][] = [],
     readonly start: Player = new Player(),
   ) {
-    if (grid.length > 0) {
+    if (grid.length === 0) {
       grid = Array(rows)
         .fill([])
         .map(() => Array(cols).fill(0));
