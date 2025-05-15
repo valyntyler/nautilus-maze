@@ -88,6 +88,14 @@ body {
   opacity: 1;
 }
 
+.toolbar img {
+  transition: background 0.1s;
+}
+
+.toolbar img.selected {
+  background: skyblue;
+}
+
 .maze-container {
   display: grid;
   grid-template-columns: repeat(10, 40px);
