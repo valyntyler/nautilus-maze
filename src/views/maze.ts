@@ -1,5 +1,5 @@
 import Direction from "../model/direction";
-import MazeState from "../model/maze_state";
+import State from "../model/state";
 import Player from "../model/player";
 import Tool from "../model/tool";
 import Toolbar from "./toolbar";
@@ -28,8 +28,8 @@ export default class Maze {
     return this._start;
   }
 
-  get state(): MazeState {
-    const _state = new MazeState(this.rows, this.cols, new Player());
+  get state(): State {
+    const _state = new State(this.rows, this.cols, new Player());
 
     for (let i = 0; i < this.rows; i++) {
       for (let j = 0; j < this.cols; j++) {
@@ -48,7 +48,7 @@ export default class Maze {
     return _state;
   }
 
-  set state(value: MazeState) {
+  set state(value: State) {
     this._rows = value.rows;
     this._cols = value.cols;
     this._start = value.start;
