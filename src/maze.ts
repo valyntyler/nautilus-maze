@@ -51,14 +51,16 @@ export default class Maze {
         cell.className = "maze-cell";
 
         // set its value
-        switch (value.grid[i][j]) {
-          case 0:
-            cell.classList.remove("black");
-            break;
+        if (value.grid[i]) {
+          switch (value.grid[i][j]) {
+            case 0:
+              cell.classList.remove("black");
+              break;
 
-          case 1:
-            cell.classList.add("black");
-            break;
+            case 1:
+              cell.classList.add("black");
+              break;
+          }
         }
 
         // register its mouse events

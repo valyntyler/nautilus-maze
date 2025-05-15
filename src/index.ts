@@ -46,7 +46,12 @@ resize_btn.addEventListener("mousedown", () => {
   if (input) {
     const new_size = parseInt(input);
     if (new_size && !isNaN(new_size) && new_size > 0 && new_size <= 30) {
-      maze.state = new MazeState(new_size, new_size);
+      const new_state = maze.state;
+
+      new_state.rows = new_size;
+      new_state.cols = new_size;
+
+      maze.state = new_state;
 
       Snackbar.show("Resized!");
       menubar.open = false;
