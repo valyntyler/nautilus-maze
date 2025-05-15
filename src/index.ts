@@ -1,7 +1,7 @@
-import Maze from "./views/maze";
-import MazeState from "./model/maze_state";
-import Player from "./model/player";
+import State from "./model/state";
 import Tool from "./model/tool";
+
+import Editor from "./views/editor";
 import Toolbar from "./views/toolbar";
 import Menubar from "./views/menubar";
 import Snackbar from "./views/snackbar";
@@ -14,16 +14,12 @@ const trash_btn = document.getElementById("trash")!;
 const export_btn = document.getElementById("export")!;
 const import_btn = document.getElementById("import")!;
 
-const toolbar = new Toolbar();
 const menubar = new Menubar();
-const maze = new Maze(10, 10, toolbar);
+const toolbar = new Toolbar();
+const editor = new Editor(toolbar);
 
 const local = localStorage.getItem("editor-state");
-const state: MazeState = local
-  ? JSON.parse(local)
-  : new MazeState(10, 10, new Player());
-
-maze.state = state;
+const state: State = local ? JSON.parse(local) : new State();
 
 save_btn.addEventListener("mousedown", () => {
   Snackbar.show("Saved!");
@@ -38,12 +34,12 @@ menu_btn.addEventListener("mousedown", () => {
 });
 
 trash_btn.addEventListener("mousedown", () => {
-  maze.state = new MazeState(maze.rows, maze.cols, maze.start);
+  editor.state = new State();
   Snackbar.show("Cleared!");
 });
 
 export_btn.addEventListener("mousedown", () => {
-  const jsonString = JSON.stringify(maze.state, null, 2);
+  const jsonString = JSON.stringify(editor.state);
   const blob = new Blob([jsonString], { type: "application/json" });
   const url = URL.createObjectURL(blob);
 
@@ -74,7 +70,7 @@ import_btn.addEventListener("mousedown", () => {
 
     reader.onload = (e) => {
       const target = e.target as any;
-      maze.state = JSON.parse(target.result);
+      editor.state = JSON.parse(target.result);
 
       Snackbar.show("Import successful!");
       menubar.open = false;
@@ -92,7 +88,6 @@ document.addEventListener("mousedown", (e) => {
   }
 });
 
-// handle key presses
 document.addEventListener("keydown", function (e) {
   switch (e.key) {
     case "b":
