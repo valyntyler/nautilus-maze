@@ -1,4 +1,3 @@
-import Direction from "./direction";
 import Player from "./player";
 
 export default class MazeState {
@@ -8,20 +7,12 @@ export default class MazeState {
     readonly grid: number[][] = [],
     readonly start: Player = new Player(),
   ) {
-    return {
-      rows,
-      cols,
-      grid:
-        grid.length > 0
-          ? grid
-          : Array(rows)
-              .fill([])
-              .map(() => Array(cols).fill(0)),
-      start: {
-        x: 0,
-        y: 0,
-        dir: Direction.Up,
-      },
-    };
+    if (grid.length > 0) {
+      grid = Array(rows)
+        .fill([])
+        .map(() => Array(cols).fill(0));
+    }
+
+    return { rows, cols, grid, start };
   }
 }
