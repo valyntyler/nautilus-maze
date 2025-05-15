@@ -54,7 +54,7 @@ body {
   opacity: 0.4;
 }
 
-.menubar {
+.menubar-container {
   display: flex;
   flex-direction: row;
   height: 48px;
@@ -63,7 +63,7 @@ body {
   position: absolute;
 }
 
-.menubar-wrapper {
+.menubar {
   width: 48px;
   display: flex;
   flex-direction: row-reverse;
@@ -76,7 +76,7 @@ body {
     background 0.5s;
 }
 
-.menubar.open .menubar-wrapper {
+.menubar-container.open .menubar {
   width: 100%;
   background: lightgrey;
 }
@@ -90,7 +90,7 @@ body {
   transition: opacity 0.5s;
 }
 
-.menubar.open .flyout {
+.menubar-container.open .flyout {
   opacity: 1;
 }
 

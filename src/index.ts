@@ -1,15 +1,19 @@
 import Maze from "./maze";
 import MazeState from "./maze_state";
+import Menubar from "./menubar";
 import Snackbar from "./snackbar";
 import Tool from "./tool";
 import Toolbar from "./toolbar";
 
 const save_btn = document.getElementById("save")!;
 const load_btn = document.getElementById("load")!;
+
+const menu_btn = document.getElementById("menu")!;
 const export_btn = document.getElementById("export")!;
 const import_btn = document.getElementById("import")!;
 
 const toolbar = new Toolbar();
+const menubar = new Menubar();
 const maze = new Maze(10, 10, toolbar);
 
 const local = localStorage.getItem("editor-state");
@@ -26,6 +30,10 @@ load_btn.addEventListener("mousedown", () => {
   Snackbar.show("Loaded!");
 });
 
+menu_btn.addEventListener("mousedown", () => {
+  menubar.open = !menubar.open;
+});
+
 export_btn.addEventListener("mousedown", () => {
   const jsonString = JSON.stringify(maze.state, null, 2);
   const blob = new Blob([jsonString], { type: "application/json" });
@@ -40,6 +48,9 @@ export_btn.addEventListener("mousedown", () => {
 
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
+
+  Snackbar.show("Export successful!");
+  menubar.open = false;
 });
 
 import_btn.addEventListener("mousedown", () => {
@@ -56,6 +67,9 @@ import_btn.addEventListener("mousedown", () => {
     reader.onload = (e) => {
       const target = e.target as any;
       maze.state = JSON.parse(target.result);
+
+      Snackbar.show("Import successful!");
+      menubar.open = false;
     };
     reader.readAsText(file);
   };
@@ -73,9 +87,12 @@ document.addEventListener("keydown", function (e) {
     case "e":
       toolbar.selected = Tool.Eraser;
       break;
-  }
-});
 
-document.querySelector("#menu")?.addEventListener("click", () => {
-  document.querySelector(".menubar")?.classList.toggle("open");
+    case "Escape":
+      if (menubar.open) {
+        menubar.open = false;
+        e.preventDefault();
+      }
+      break;
+  }
 });
