@@ -16,7 +16,7 @@ const import_btn = document.getElementById("import")!;
 
 const toolbar = new Toolbar();
 const menubar = new Menubar();
-const maze = new Maze(10, 10, toolbar);
+let maze = new Maze(10, 10, toolbar);
 
 const local = localStorage.getItem("editor-state");
 const state: MazeState = local ? JSON.parse(local) : new MazeState(10, 10);
@@ -39,6 +39,26 @@ menu_btn.addEventListener("mousedown", () => {
 trash_btn.addEventListener("mousedown", () => {
   maze.state = new MazeState(maze.rows, maze.cols);
   Snackbar.show("Cleared!");
+});
+
+resize_btn.addEventListener("mousedown", () => {
+  const input = prompt('Enter grid size (e.g., "10" for 10x10 grid):', "10");
+
+  if (input) {
+    const new_size = parseInt(input);
+    if (new_size && !isNaN(new_size) && new_size > 0 && new_size <= 30) {
+      let rows = new_size;
+      let cols = new_size;
+
+      maze = new Maze(rows, cols, toolbar);
+      maze.create();
+
+      Snackbar.show("Resized!");
+      menubar.open = false;
+    } else if (new_size) {
+      alert("Please enter a valid number between 1 and 30.");
+    }
+  }
 });
 
 export_btn.addEventListener("mousedown", () => {
