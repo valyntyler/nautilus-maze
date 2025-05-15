@@ -4,7 +4,6 @@ import Toolbar from "./toolbar";
 
 let mousePressed: boolean;
 
-document.addEventListener("mousedown", () => (mousePressed = true));
 document.addEventListener("mouseup", () => (mousePressed = false));
 
 export default class Maze {
