@@ -19,7 +19,9 @@ const menubar = new Menubar();
 const maze = new Maze(10, 10, toolbar);
 
 const local = localStorage.getItem("editor-state");
-const state: MazeState = local ? JSON.parse(local) : new MazeState(10, 10);
+const state: MazeState = local
+  ? JSON.parse(local)
+  : new MazeState(10, 10, [5, 5]);
 
 maze.state = state;
 
@@ -36,7 +38,7 @@ menu_btn.addEventListener("mousedown", () => {
 });
 
 trash_btn.addEventListener("mousedown", () => {
-  maze.state = new MazeState(maze.rows, maze.cols);
+  maze.state = new MazeState(maze.rows, maze.cols, maze.start);
   Snackbar.show("Cleared!");
 });
 

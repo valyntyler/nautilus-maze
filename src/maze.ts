@@ -12,6 +12,7 @@ export default class Maze {
 
   _cols: number;
   _rows: number;
+  _start: [number, number];
 
   get rows(): number {
     return this._rows;
@@ -21,8 +22,12 @@ export default class Maze {
     return this._cols;
   }
 
+  get start(): [number, number] {
+    return this._start;
+  }
+
   get state(): MazeState {
-    const _state = new MazeState(this.rows, this.cols);
+    const _state = new MazeState(this.rows, this.cols, [0, 0]);
 
     for (let i = 0; i < this.rows; i++) {
       for (let j = 0; j < this.cols; j++) {
@@ -30,6 +35,10 @@ export default class Maze {
         const cell = this.container.children[index];
 
         _state.grid[i][j] = cell.classList.contains("black") ? 1 : 0;
+
+        if (cell.innerHTML != "") {
+          _state.start = [i, j];
+        }
       }
     }
 
@@ -39,6 +48,7 @@ export default class Maze {
   set state(value: MazeState) {
     this._rows = value.rows;
     this._cols = value.cols;
+    this._start = value.start;
 
     this.container.innerHTML = "";
     this.container.style.gridTemplateColumns = `repeat(${this.cols}, 40px)`;
@@ -50,8 +60,8 @@ export default class Maze {
         const cell = document.createElement("div");
         cell.className = "maze-cell";
 
-        // set its value
         if (value.grid[i]) {
+          // set its value
           switch (value.grid[i][j]) {
             case 0:
               cell.classList.remove("black");
@@ -60,6 +70,11 @@ export default class Maze {
             case 1:
               cell.classList.add("black");
               break;
+          }
+
+          // check if it contains the robot
+          if (i === this.start[0] && j === this.start[1]) {
+            this.place(cell);
           }
         }
 
@@ -91,6 +106,7 @@ export default class Maze {
   constructor(rows: number, cols: number, toolbar: Toolbar) {
     this._rows = rows;
     this._cols = cols;
+    this._start = [0, 0];
     this.toolbar = toolbar;
     this.container = document.getElementById("maze")! as HTMLDivElement;
   }
@@ -108,19 +124,25 @@ export default class Maze {
         break;
 
       case Tool.Finger:
-        if (!cell.classList.contains("black") && !enter) {
-          const img = document.createElement("img");
-          img.src = "./assets/bx-robot.svg";
-
-          for (let i = 0; i < this.container.children.length; i++) {
-            const cell = this.container.children[i] as HTMLDivElement;
-            cell.innerHTML = "";
-          }
-
-          cell.appendChild(img);
+        if (!enter) {
+          this.place(cell);
         }
         break;
     }
     localStorage.setItem("editor-state", JSON.stringify(this.state));
+  }
+
+  private place(cell: HTMLDivElement) {
+    if (!cell.classList.contains("black")) {
+      const img = document.createElement("img");
+      img.src = "./assets/bx-robot.svg";
+
+      for (let i = 0; i < this.container.children.length; i++) {
+        const cell = this.container.children[i] as HTMLDivElement;
+        cell.innerHTML = "";
+      }
+
+      cell.appendChild(img);
+    }
   }
 }
