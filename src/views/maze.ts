@@ -1,8 +1,8 @@
-import Direction from "./direction";
+import Direction from "../model/direction";
 import MazeState from "../model/maze_state";
 import Player from "../model/player";
-import Tool from "./tool";
-import Toolbar from "./views/toolbar";
+import Tool from "../model/tool";
+import Toolbar from "./toolbar";
 
 let mousePressed: boolean;
 
