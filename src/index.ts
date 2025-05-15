@@ -9,6 +9,8 @@ const save_btn = document.getElementById("save")!;
 const load_btn = document.getElementById("load")!;
 
 const menu_btn = document.getElementById("menu")!;
+const trash_btn = document.getElementById("trash")!;
+const resize_btn = document.getElementById("resize")!;
 const export_btn = document.getElementById("export")!;
 const import_btn = document.getElementById("import")!;
 
@@ -32,6 +34,11 @@ load_btn.addEventListener("mousedown", () => {
 
 menu_btn.addEventListener("mousedown", () => {
   menubar.open = !menubar.open;
+});
+
+trash_btn.addEventListener("mousedown", () => {
+  maze.state = new MazeState(maze.rows, maze.cols);
+  Snackbar.show("Cleared!");
 });
 
 export_btn.addEventListener("mousedown", () => {
