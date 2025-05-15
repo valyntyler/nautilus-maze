@@ -8,6 +8,18 @@ document.addEventListener("mouseup", () => (mousePressed = false));
 
 export default class Maze {
   container: HTMLDivElement;
+  toolbar: Toolbar;
+
+  _cols: number;
+  _rows: number;
+
+  get rows(): number {
+    return this._rows;
+  }
+
+  get cols(): number {
+    return this._cols;
+  }
 
   get state(): MazeState {
     const _state = new MazeState(this.rows, this.cols);
@@ -25,34 +37,9 @@ export default class Maze {
   }
 
   set state(value: MazeState) {
-    for (let i = 0; i < this.rows; i++) {
-      for (let j = 0; j < this.cols; j++) {
-        const index = i * this.rows + j;
-        const cell = this.container.children[index];
+    this._rows = value.rows;
+    this._cols = value.cols;
 
-        switch (value.grid[i][j]) {
-          case 0:
-            cell.classList.remove("black");
-            break;
-
-          case 1:
-            cell.classList.add("black");
-            break;
-        }
-      }
-    }
-    localStorage.setItem("editor-state", JSON.stringify(this.state));
-  }
-
-  constructor(
-    readonly rows: number,
-    readonly cols: number,
-    private toolbar: Toolbar,
-  ) {
-    this.container = document.getElementById("maze")! as HTMLDivElement;
-  }
-
-  create() {
     this.container.innerHTML = "";
     this.container.style.gridTemplateColumns = `repeat(${this.cols}, 40px)`;
     this.container.style.gridTemplateRows = `repeat(${this.rows}, 40px)`;
@@ -62,6 +49,17 @@ export default class Maze {
         // create cell
         const cell = document.createElement("div");
         cell.className = "maze-cell";
+
+        // set its value
+        switch (value.grid[i][j]) {
+          case 0:
+            cell.classList.remove("black");
+            break;
+
+          case 1:
+            cell.classList.add("black");
+            break;
+        }
 
         // register its mouse events
         cell.addEventListener("mousedown", (e) => {
@@ -84,9 +82,18 @@ export default class Maze {
         this.container.appendChild(cell);
       }
     }
+
+    localStorage.setItem("editor-state", JSON.stringify(this.state));
   }
 
-  draw(cell: HTMLDivElement) {
+  constructor(rows: number, cols: number, toolbar: Toolbar) {
+    this._rows = rows;
+    this._cols = cols;
+    this.toolbar = toolbar;
+    this.container = document.getElementById("maze")! as HTMLDivElement;
+  }
+
+  private draw(cell: HTMLDivElement) {
     switch (this.toolbar.selected) {
       case Tool.Pencil:
         cell.classList.add("black");

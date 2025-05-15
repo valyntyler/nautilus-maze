@@ -16,12 +16,11 @@ const import_btn = document.getElementById("import")!;
 
 const toolbar = new Toolbar();
 const menubar = new Menubar();
-let maze = new Maze(10, 10, toolbar);
+const maze = new Maze(10, 10, toolbar);
 
 const local = localStorage.getItem("editor-state");
 const state: MazeState = local ? JSON.parse(local) : new MazeState(10, 10);
 
-maze.create();
 maze.state = state;
 
 save_btn.addEventListener("mousedown", () => {
@@ -47,11 +46,7 @@ resize_btn.addEventListener("mousedown", () => {
   if (input) {
     const new_size = parseInt(input);
     if (new_size && !isNaN(new_size) && new_size > 0 && new_size <= 30) {
-      let rows = new_size;
-      let cols = new_size;
-
-      maze = new Maze(rows, cols, toolbar);
-      maze.create();
+      maze.state = new MazeState(new_size, new_size);
 
       Snackbar.show("Resized!");
       menubar.open = false;
