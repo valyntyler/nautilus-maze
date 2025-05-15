@@ -11,7 +11,6 @@ const load_btn = document.getElementById("load")!;
 
 const menu_btn = document.getElementById("menu")!;
 const trash_btn = document.getElementById("trash")!;
-const resize_btn = document.getElementById("resize")!;
 const export_btn = document.getElementById("export")!;
 const import_btn = document.getElementById("import")!;
 
@@ -41,27 +40,6 @@ menu_btn.addEventListener("mousedown", () => {
 trash_btn.addEventListener("mousedown", () => {
   maze.state = new MazeState(maze.rows, maze.cols, maze.start);
   Snackbar.show("Cleared!");
-});
-
-resize_btn.addEventListener("mousedown", () => {
-  const input = prompt('Enter grid size (e.g., "10" for 10x10 grid):', "10");
-
-  if (input) {
-    const new_size = parseInt(input);
-    if (new_size && !isNaN(new_size) && new_size > 0 && new_size <= 30) {
-      const new_state = maze.state;
-
-      new_state.rows = new_size;
-      new_state.cols = new_size;
-
-      maze.state = new_state;
-
-      Snackbar.show("Resized!");
-      menubar.open = false;
-    } else if (new_size) {
-      alert("Please enter a valid number between 1 and 30.");
-    }
-  }
 });
 
 export_btn.addEventListener("mousedown", () => {
