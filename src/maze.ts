@@ -66,14 +66,14 @@ export default class Maze {
         // register its mouse events
         cell.addEventListener("mousedown", (e) => {
           mousePressed = true;
-          this.draw(cell);
+          this.draw(cell, false);
 
           e.preventDefault();
         });
 
         cell.addEventListener("mouseenter", () => {
           if (mousePressed) {
-            this.draw(cell);
+            this.draw(cell, true);
           }
         });
 
@@ -95,14 +95,30 @@ export default class Maze {
     this.container = document.getElementById("maze")! as HTMLDivElement;
   }
 
-  private draw(cell: HTMLDivElement) {
+  private draw(cell: HTMLDivElement, enter: boolean) {
     switch (this.toolbar.selected) {
       case Tool.Pencil:
-        cell.classList.add("black");
+        if (cell.innerHTML === "") {
+          cell.classList.add("black");
+        }
         break;
 
       case Tool.Eraser:
         cell.classList.remove("black");
+        break;
+
+      case Tool.Finger:
+        if (!cell.classList.contains("black") && !enter) {
+          const img = document.createElement("img");
+          img.src = "./assets/bx-robot.svg";
+
+          for (let i = 0; i < this.container.children.length; i++) {
+            const cell = this.container.children[i] as HTMLDivElement;
+            cell.innerHTML = "";
+          }
+
+          cell.appendChild(img);
+        }
         break;
     }
     localStorage.setItem("editor-state", JSON.stringify(this.state));

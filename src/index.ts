@@ -122,6 +122,10 @@ document.addEventListener("keydown", function (e) {
       toolbar.selected = Tool.Eraser;
       break;
 
+    case "c":
+      toolbar.selected = Tool.Finger;
+      break;
+
     case "Escape":
       if (menubar.open) {
         menubar.open = false;

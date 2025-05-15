@@ -7,6 +7,9 @@ function toolId(tool: Tool): string {
 
     case Tool.Eraser:
       return "eraser";
+
+    case Tool.Finger:
+      return "finger";
   }
 }
 
@@ -17,6 +20,9 @@ function parseTool(id: string): Tool | null {
 
     case "eraser":
       return Tool.Eraser;
+
+    case "finger":
+      return Tool.Finger;
 
     default:
       return null;
