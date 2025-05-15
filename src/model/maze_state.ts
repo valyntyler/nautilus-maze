@@ -2,19 +2,21 @@ import Direction from "./direction";
 import Player from "./player";
 
 export default class MazeState {
-  readonly grid: number[][] = [];
-
   constructor(
-    readonly rows: number,
-    readonly cols: number,
-    readonly start: Player,
+    readonly rows: number = 14,
+    readonly cols: number = 15,
+    readonly grid: number[][] = [],
+    readonly start: Player = new Player(),
   ) {
     return {
       rows,
       cols,
-      grid: Array(rows)
-        .fill([])
-        .map(() => Array(cols).fill(0)),
+      grid:
+        grid.length > 0
+          ? grid
+          : Array(rows)
+              .fill([])
+              .map(() => Array(cols).fill(0)),
       start: {
         x: 0,
         y: 0,
