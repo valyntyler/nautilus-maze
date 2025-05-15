@@ -101,15 +101,15 @@ body {
 
 .maze-container {
   display: grid;
-  grid-template-columns: repeat(10, 40px);
-  grid-template-rows: repeat(10, 40px);
+  grid-template-columns: repeat(10, 32px);
+  grid-template-rows: repeat(10, 32px);
   gap: 2px;
 }
 
 .maze-cell {
   display: flex;
-  width: 40px;
-  height: 40px;
+  width: 32px;
+  height: 32px;
   background-color: white;
   border: 1px solid #ccc;
   transition: background-color 0.1s;

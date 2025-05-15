@@ -54,8 +54,8 @@ export default class Maze {
     this._start = value.start;
 
     this.container.innerHTML = "";
-    this.container.style.gridTemplateColumns = `repeat(${this.cols}, 40px)`;
-    this.container.style.gridTemplateRows = `repeat(${this.rows}, 40px)`;
+    this.container.style.gridTemplateColumns = `repeat(${this.cols}, 32px)`;
+    this.container.style.gridTemplateRows = `repeat(${this.rows}, 32px)`;
 
     for (let i = 0; i < this.rows; i++) {
       for (let j = 0; j < this.cols; j++) {
