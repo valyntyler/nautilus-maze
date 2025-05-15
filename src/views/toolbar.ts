@@ -1,4 +1,4 @@
-import Tool from "./tool";
+import Tool from "../model/tool";
 
 export default class Toolbar {
   tools: NodeListOf<HTMLImageElement>;
