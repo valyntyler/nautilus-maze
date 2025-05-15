@@ -1,4 +1,6 @@
+import Direction from "./direction";
 import MazeState from "./maze_state";
+import Player from "./player";
 import Tool from "./tool";
 import Toolbar from "./toolbar";
 
@@ -12,7 +14,7 @@ export default class Maze {
 
   _cols: number;
   _rows: number;
-  _start: [number, number];
+  _start: Player;
 
   get rows(): number {
     return this._rows;
@@ -22,12 +24,12 @@ export default class Maze {
     return this._cols;
   }
 
-  get start(): [number, number] {
+  get start(): Player {
     return this._start;
   }
 
   get state(): MazeState {
-    const _state = new MazeState(this.rows, this.cols, [0, 0]);
+    const _state = new MazeState(this.rows, this.cols, new Player());
 
     for (let i = 0; i < this.rows; i++) {
       for (let j = 0; j < this.cols; j++) {
@@ -37,7 +39,8 @@ export default class Maze {
         _state.grid[i][j] = cell.classList.contains("black") ? 1 : 0;
 
         if (cell.innerHTML != "") {
-          _state.start = [i, j];
+          // FIX: specify direction
+          _state.start = new Player(j, i);
         }
       }
     }
@@ -73,8 +76,8 @@ export default class Maze {
           }
 
           // check if it contains the robot
-          if (i === this.start[0] && j === this.start[1]) {
-            this.place(cell);
+          if (i === this.start.y && j === this.start.x) {
+            this.place(cell, Direction.Up);
           }
         }
 
@@ -106,7 +109,7 @@ export default class Maze {
   constructor(rows: number, cols: number, toolbar: Toolbar) {
     this._rows = rows;
     this._cols = cols;
-    this._start = [0, 0];
+    this._start = new Player();
     this.toolbar = toolbar;
     this.container = document.getElementById("maze")! as HTMLDivElement;
   }
@@ -125,17 +128,20 @@ export default class Maze {
 
       case Tool.Finger:
         if (!enter) {
-          this.place(cell);
+          this.place(cell, Direction.Up);
         }
         break;
     }
     localStorage.setItem("editor-state", JSON.stringify(this.state));
   }
 
-  private place(cell: HTMLDivElement) {
+  private place(cell: HTMLDivElement, dir: Direction) {
     if (!cell.classList.contains("black")) {
       const img = document.createElement("img");
-      img.src = "./assets/bx-robot.svg";
+      const id = Direction.id(dir);
+
+      img.src = `./assets/bx-caret-${id}.svg`;
+      img.id = id;
 
       for (let i = 0; i < this.container.children.length; i++) {
         const cell = this.container.children[i] as HTMLDivElement;

@@ -1,6 +1,7 @@
 import Maze from "./maze";
 import MazeState from "./maze_state";
 import Menubar from "./menubar";
+import Player from "./player";
 import Snackbar from "./snackbar";
 import Tool from "./tool";
 import Toolbar from "./toolbar";
@@ -21,7 +22,7 @@ const maze = new Maze(10, 10, toolbar);
 const local = localStorage.getItem("editor-state");
 const state: MazeState = local
   ? JSON.parse(local)
-  : new MazeState(10, 10, [5, 5]);
+  : new MazeState(10, 10, new Player());
 
 maze.state = state;
 
