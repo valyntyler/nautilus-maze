@@ -6,6 +6,8 @@ import Toolbar from "./toolbar";
 
 const save_btn = document.getElementById("save")!;
 const load_btn = document.getElementById("load")!;
+const export_btn = document.getElementById("export")!;
+const import_btn = document.getElementById("import")!;
 
 const toolbar = new Toolbar();
 const maze = new Maze(10, 10, toolbar);
@@ -22,6 +24,22 @@ save_btn.addEventListener("mousedown", () => {
 
 load_btn.addEventListener("mousedown", () => {
   Snackbar.show("Loaded!");
+});
+
+export_btn.addEventListener("mousedown", () => {
+  const jsonString = JSON.stringify(maze.state, null, 2);
+  const blob = new Blob([jsonString], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "maze.json";
+
+  document.body.appendChild(a);
+  a.click();
+
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
 });
 
 // handle key presses
