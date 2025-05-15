@@ -42,6 +42,27 @@ export_btn.addEventListener("mousedown", () => {
   URL.revokeObjectURL(url);
 });
 
+import_btn.addEventListener("mousedown", () => {
+  const input = document.createElement("input");
+  input.type = "file";
+
+  input.multiple = false;
+  input.accept = ".json";
+
+  input.onchange = (event) => {
+    const file = (event.target as any).files[0];
+    const reader = new FileReader();
+
+    reader.onload = (e) => {
+      const target = e.target as any;
+      maze.state = JSON.parse(target.result);
+    };
+    reader.readAsText(file);
+  };
+
+  input.click();
+});
+
 // handle key presses
 document.addEventListener("keydown", function (e) {
   switch (e.key) {
