@@ -10,7 +10,7 @@ export default class Maze {
   container: HTMLDivElement;
 
   get state(): MazeState {
-    const _state = new MazeState(10, 10);
+    const _state = new MazeState(this.rows, this.cols);
 
     for (let i = 0; i < this.rows; i++) {
       for (let j = 0; j < this.cols; j++) {
