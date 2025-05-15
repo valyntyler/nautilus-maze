@@ -39,7 +39,7 @@ trash_btn.addEventListener("mousedown", () => {
 });
 
 export_btn.addEventListener("mousedown", () => {
-  const jsonString = JSON.stringify(editor.state);
+  const jsonString = JSON.stringify(editor.state, null, 2);
   const blob = new Blob([jsonString], { type: "application/json" });
   const url = URL.createObjectURL(blob);
 
