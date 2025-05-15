@@ -42,7 +42,7 @@ export default class Toolbar {
   }
 
   constructor() {
-    this.tools = document.querySelectorAll(".tool");
+    this.tools = document.querySelectorAll(".toolbar img");
     this.tools.forEach((tool) =>
       tool.addEventListener(
         "mousedown",
