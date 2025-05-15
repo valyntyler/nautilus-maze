@@ -1,34 +1,5 @@
 import Tool from "./tool";
 
-function toolId(tool: Tool): string {
-  switch (tool) {
-    case Tool.Pencil:
-      return "pencil";
-
-    case Tool.Eraser:
-      return "eraser";
-
-    case Tool.Finger:
-      return "finger";
-  }
-}
-
-function parseTool(id: string): Tool | null {
-  switch (id) {
-    case "pencil":
-      return Tool.Pencil;
-
-    case "eraser":
-      return Tool.Eraser;
-
-    case "finger":
-      return Tool.Finger;
-
-    default:
-      return null;
-  }
-}
-
 export default class Toolbar {
   tools: NodeListOf<HTMLImageElement>;
   _selected: Tool = Tool.Pencil;
@@ -42,7 +13,7 @@ export default class Toolbar {
     this.tools.forEach((tool) => {
       tool.classList.remove("selected");
     });
-    const tool = document.getElementById(toolId(this.selected))!;
+    const tool = document.getElementById(Tool.id(this.selected))!;
     tool.classList.add("selected");
     localStorage.setItem("tool-selected", JSON.stringify(this.selected));
   }
@@ -52,7 +23,7 @@ export default class Toolbar {
     this.tools.forEach((tool) =>
       tool.addEventListener(
         "mousedown",
-        () => (this.selected = parseTool(tool.id)!),
+        () => (this.selected = Tool.parse(tool.id)!),
       ),
     );
 
