@@ -50,6 +50,10 @@ body {
   transition: background-color 0.1s;
 }
 
+.bar img:hover {
+  opacity: 0.4;
+}
+
 .menubar {
   display: flex;
   flex-direction: row;
@@ -90,12 +94,9 @@ body {
   opacity: 1;
 }
 
-.toolbar img {
-  transition: background 0.1s;
-}
-
 .toolbar img.selected {
   background: skyblue;
+  opacity: 1;
 }
 
 .maze-container {
