@@ -21,6 +21,8 @@ const editor = new Editor(toolbar);
 const local = localStorage.getItem("editor-state");
 const state: State = local ? JSON.parse(local) : new State();
 
+editor.state = state;
+
 save_btn.addEventListener("mousedown", () => {
   Snackbar.show("Saved!");
 });
