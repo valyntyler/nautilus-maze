@@ -2,13 +2,12 @@ import Direction from "./direction";
 import Player from "./player";
 
 export default class MazeState {
-  grid: number[][] = [];
+  readonly grid: number[][] = [];
 
   constructor(
-    // FIX: changing size doesn't resize `grid`
-    public rows: number,
-    public cols: number,
-    public start: Player,
+    readonly rows: number,
+    readonly cols: number,
+    readonly start: Player,
   ) {
     return {
       rows,
