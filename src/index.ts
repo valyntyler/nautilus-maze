@@ -119,14 +119,17 @@ document.addEventListener("keydown", function (e) {
   switch (e.key) {
     case "b":
       toolbar.selected = Tool.Pencil;
+      menubar.open = false;
       break;
 
     case "e":
       toolbar.selected = Tool.Eraser;
+      menubar.open = false;
       break;
 
     case "c":
       toolbar.selected = Tool.Finger;
+      menubar.open = false;
       break;
 
     case "Escape":
