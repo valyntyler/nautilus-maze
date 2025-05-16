@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
           while (true) {
             await delay(200);
 
-            const move = Rotation.step(Rotation.South);
+            const move = Rotation.step(Rotation.Down);
 
             const new_x = runner.robot.x + move.x;
             const new_y = runner.robot.y + move.y;
