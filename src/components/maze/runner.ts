@@ -13,8 +13,7 @@ export default class MazeRunner {
 
     for (let i = 0; i < value.rows; i++) {
       for (let j = 0; j < value.cols; j++) {
-        const cell = this.container.children[value.cols * i + j];
-
+        const cell = this.cell(j, i);
         value.grid[i][j] = cell.classList.contains("black") ? 1 : 0;
       }
     }
@@ -68,9 +67,8 @@ export default class MazeRunner {
   }
 
   set start(value: Player) {
-    const cell = this.container.children[this.cols * value.y + value.x];
-
-    this.place(cell as HTMLDivElement, value.dir);
+    const cell = this.cell(value.x, value.y);
+    this.place(cell, value.dir);
   }
 
   constructor() {
@@ -94,5 +92,9 @@ export default class MazeRunner {
 
   private save() {
     localStorage.setItem("editor-state", JSON.stringify(this.state));
+  }
+
+  private cell(x: number, y: number): HTMLDivElement {
+    return this.container.children[this.cols * y + x] as HTMLDivElement;
   }
 }
