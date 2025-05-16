@@ -1,13 +1,10 @@
-import State from "./model/state";
-import Tool from "./model/tool";
+import State from "../model/state";
+import Tool from "../model/tool";
 
-import Editor from "./views/editor";
-import Toolbar from "./views/toolbar";
-import Menubar from "./views/menubar";
-import Snackbar from "./views/snackbar";
-
-const save_btn = document.getElementById("save")!;
-const load_btn = document.getElementById("load")!;
+import Editor from "../views/editor";
+import Toolbar from "../views/toolbar";
+import Menubar from "../views/menubar";
+import Snackbar from "../views/snackbar";
 
 const menu_btn = document.getElementById("menu")!;
 const trash_btn = document.getElementById("trash")!;
@@ -22,14 +19,6 @@ const local = localStorage.getItem("editor-state");
 const state: State = local ? JSON.parse(local) : new State();
 
 editor.state = state;
-
-save_btn.addEventListener("mousedown", () => {
-  Snackbar.show("Saved!");
-});
-
-load_btn.addEventListener("mousedown", () => {
-  Snackbar.show("Loaded!");
-});
 
 menu_btn.addEventListener("mousedown", () => {
   menubar.open = !menubar.open;
