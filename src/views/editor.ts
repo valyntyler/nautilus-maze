@@ -95,7 +95,7 @@ export default class Editor {
     const img = document.createElement("img");
     const id = Direction.id(dir);
 
-    img.src = `./assets/bx-caret-${id}.svg`;
+    img.src = `../assets/bx-caret-${id}.svg`;
     img.id = id;
 
     for (let k = 0; k < this.container.children.length; k++) {
