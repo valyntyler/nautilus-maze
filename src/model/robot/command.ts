@@ -28,6 +28,10 @@ namespace Command {
         return null;
     }
   }
+
+  export function process(v: Array<string>): Array<Command> {
+    return v.map((s) => parse(s)).filter((c) => c !== null);
+  }
 }
 
 export default Command;
