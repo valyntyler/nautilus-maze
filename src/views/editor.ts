@@ -19,6 +19,8 @@ export default class Editor {
         const cell = document.createElement("div");
         cell.className = "maze-cell";
 
+        cell.addEventListener("contextmenu", (e) => e.preventDefault());
+
         this.container.appendChild(cell);
       }
     }
