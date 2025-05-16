@@ -6,6 +6,15 @@ body {
   margin: 20px;
 }
 
+textarea {
+  position: absolute;
+  bottom: 5vh;
+  top: 5vh;
+  right: 2.5vw;
+  width: 25vw;
+  resize: none;
+}
+
 .controls {
   margin: 20px 0;
 }
