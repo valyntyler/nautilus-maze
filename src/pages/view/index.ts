@@ -105,12 +105,16 @@ document.addEventListener("DOMContentLoaded", () => {
             if (new_y >= runner.state.rows || new_y < 0) break;
 
             if (runner.cell(new_x, new_y).classList.contains("black")) break;
-            if (
-              !runner
-                .cell(runner.robot.x - 1, runner.robot.y)
-                .classList.contains("black")
-            )
-              break;
+            {
+              const rot = Rotation.turn(runner.robot.dir);
+              const pos = Rotation.step(rot);
+              const cell = runner.cell(
+                runner.robot.x + pos.x,
+                runner.robot.y + pos.y,
+              );
+
+              if (!cell.classList.contains("black")) break;
+            }
 
             runner.robot = new Player(new_x, new_y, runner.robot.dir);
           }
