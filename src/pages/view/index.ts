@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const edit_btn = document.getElementById("edit")!;
   const back_btn = document.getElementById("back")!;
 
+  const play_btn = document.getElementById("play")!;
   const import_btn = document.getElementById("import")!;
 
   const runner = new MazeRunner();
@@ -25,6 +26,10 @@ document.addEventListener("DOMContentLoaded", () => {
     "click",
     () => (window.location.href = "../../index.html"),
   );
+
+  play_btn.addEventListener("mousedown", () => {
+    console.log("pressed!");
+  });
 
   import_btn.addEventListener("mousedown", () => {
     const input = document.createElement("input");
