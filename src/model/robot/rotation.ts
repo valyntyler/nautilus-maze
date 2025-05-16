@@ -8,18 +8,18 @@ enum Rotation {
 }
 
 namespace Rotation {
-  export function move(rotation: Rotation): Position {
+  export function step(rotation: Rotation): Position {
     switch (rotation) {
       case Rotation.North:
         return {
           x: 0,
-          y: 1,
+          y: -1,
         };
 
       case Rotation.South:
         return {
           x: 0,
-          y: -1,
+          y: 1,
         };
 
       case Rotation.East:
@@ -41,13 +41,13 @@ namespace Rotation {
       case Rotation.North:
         return {
           x: 0,
-          y: -1,
+          y: 1,
         };
 
       case Rotation.South:
         return {
           x: 0,
-          y: 1,
+          y: -1,
         };
 
       case Rotation.East:
