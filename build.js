@@ -1,7 +1,7 @@
 import * as esbuild from "esbuild";
 
 const args = {
-  entryPoints: ["./src/pages/index.ts"],
+  entryPoints: ["./src/pages/index.ts", "./src/pages/editor/index.ts"],
   bundle: true,
   minify: false,
   sourcemap: true,
