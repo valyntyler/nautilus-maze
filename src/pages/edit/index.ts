@@ -1,10 +1,10 @@
 import Maze from "../../model/maze";
 import Tool from "../../model/tool";
 
-import Editor from "../../components/editor";
 import Toolbar from "../../components/toolbar";
 import Menubar from "../../components/menubar";
 import Snackbar from "../../components/snackbar";
+import MazeEditor from "../../components/maze/editor";
 
 document.addEventListener("DOMContentLoaded", () => {
   const view_btn = document.getElementById("view")!;
@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const menubar = new Menubar();
   const toolbar = new Toolbar();
-  const editor = new Editor(toolbar);
+  const editor = new MazeEditor(toolbar);
 
   const local = localStorage.getItem("editor-state");
   const state: Maze = local ? JSON.parse(local) : new Maze();

@@ -1,6 +1,7 @@
 import Maze from "../../model/maze";
-import Runner from "../../components/runner";
+
 import Snackbar from "../../components/snackbar";
+import MazeRunner from "../../components/maze/runner";
 
 document.addEventListener("DOMContentLoaded", () => {
   const edit_btn = document.getElementById("edit")!;
@@ -8,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const import_btn = document.getElementById("import")!;
 
-  const runner = new Runner();
+  const runner = new MazeRunner();
 
   const local = localStorage.getItem("editor-state");
   const state: Maze = local ? JSON.parse(local) : new Maze();

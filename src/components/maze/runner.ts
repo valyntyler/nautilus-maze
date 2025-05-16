@@ -1,8 +1,8 @@
-import Direction from "../model/direction";
-import Player from "../model/player";
-import Maze from "../model/maze";
+import Direction from "../../model/direction";
+import Player from "../../model/player";
+import Maze from "../../model/maze";
 
-export default class Runner {
+export default class MazeRunner {
   private container: HTMLDivElement;
 
   private rows: number = 0;

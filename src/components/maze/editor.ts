@@ -1,12 +1,12 @@
-import Direction from "../model/direction";
-import MouseAction from "../model/mouse/action";
-import MouseButton from "../model/mouse/button";
-import Player from "../model/player";
-import Maze from "../model/maze";
-import Tool from "../model/tool";
-import Toolbar from "./toolbar";
+import Direction from "../../model/direction";
+import MouseAction from "../../model/mouse/action";
+import MouseButton from "../../model/mouse/button";
+import Player from "../../model/player";
+import Maze from "../../model/maze";
+import Tool from "../../model/tool";
+import Toolbar from "../toolbar";
 
-export default class Editor {
+export default class MazeEditor {
   private container: HTMLDivElement;
   private toolbar: Toolbar;
 
