@@ -41,6 +41,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
     for (const cmd of commands) {
       switch (cmd) {
+        case Command.Step:
+          await delay(200);
+
+          const move = Rotation.step(runner.robot.dir);
+
+          const new_x = runner.robot.x + move.x;
+          const new_y = runner.robot.y + move.y;
+
+          if (new_x >= runner.state.rows || new_x < 0) break;
+          if (new_y >= runner.state.rows || new_y < 0) break;
+
+          if (runner.cell(new_x, new_y).classList.contains("black")) break;
+
+          runner.robot = new Player(new_x, new_y, runner.robot.dir);
+          break;
+
         case Command.Move:
           while (true) {
             await delay(200);
