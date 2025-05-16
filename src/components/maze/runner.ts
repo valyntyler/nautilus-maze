@@ -94,7 +94,7 @@ export default class MazeRunner {
     localStorage.setItem("editor-state", JSON.stringify(this.state));
   }
 
-  private cell(x: number, y: number): HTMLDivElement {
+  cell(x: number, y: number): HTMLDivElement {
     return this.container.children[this.cols * y + x] as HTMLDivElement;
   }
 }
