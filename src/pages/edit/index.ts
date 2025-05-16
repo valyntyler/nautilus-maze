@@ -1,10 +1,10 @@
-import State from "../../model/state";
+import Maze from "../../model/maze";
 import Tool from "../../model/tool";
 
-import Editor from "../../views/editor";
-import Toolbar from "../../views/toolbar";
-import Menubar from "../../views/menubar";
-import Snackbar from "../../views/snackbar";
+import Editor from "../../components/editor";
+import Toolbar from "../../components/toolbar";
+import Menubar from "../../components/menubar";
+import Snackbar from "../../components/snackbar";
 
 const run_btn = document.getElementById("run")!;
 const back_btn = document.getElementById("back")!;
@@ -19,7 +19,7 @@ const toolbar = new Toolbar();
 const editor = new Editor(toolbar);
 
 const local = localStorage.getItem("editor-state");
-const state: State = local ? JSON.parse(local) : new State();
+const state: Maze = local ? JSON.parse(local) : new Maze();
 
 editor.state = state;
 
@@ -35,7 +35,7 @@ menu_btn.addEventListener("click", () => {
 });
 
 trash_btn.addEventListener("mousedown", () => {
-  editor.state = new State();
+  editor.state = new Maze();
   Snackbar.show("Cleared!");
 });
 

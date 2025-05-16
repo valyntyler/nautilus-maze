@@ -1,6 +1,6 @@
 import Player from "./player";
 
-export default class State {
+export default class Maze {
   constructor(
     readonly rows: number = 14,
     readonly cols: number = 15,

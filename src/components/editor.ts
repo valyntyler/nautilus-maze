@@ -2,7 +2,7 @@ import Direction from "../model/direction";
 import MouseAction from "../model/mouse_action";
 import MouseButton from "../model/mouse_button";
 import Player from "../model/player";
-import State from "../model/state";
+import Maze from "../model/maze";
 import Tool from "../model/tool";
 import Toolbar from "./toolbar";
 
@@ -13,8 +13,8 @@ export default class Editor {
   private rows: number = 0;
   private cols: number = 0;
 
-  get state(): State {
-    const value = new State(this.rows, this.cols, [], this.start);
+  get state(): Maze {
+    const value = new Maze(this.rows, this.cols, [], this.start);
 
     for (let i = 0; i < value.rows; i++) {
       for (let j = 0; j < value.cols; j++) {
@@ -27,7 +27,7 @@ export default class Editor {
     return value;
   }
 
-  set state(value: State) {
+  set state(value: Maze) {
     this.container.innerHTML = "";
     this.container.style.gridTemplateColumns = `repeat(${value.cols}, 32px)`;
     this.container.style.gridTemplateRows = `repeat(${value.rows}, 32px)`;
