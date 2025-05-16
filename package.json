@@ -2,10 +2,11 @@
   "name": "nautilus-maze",
   "version": "1.0.0",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "build": "npx tsc",
-    "serve": "npx http-server .",
-    "watch": "npx esbuild src/index.ts --outfile=dist/bundle.js --bundle --watch"
+    "build": "node build.js",
+    "watch": "node build.js --watch",
+    "serve": "npx http-server ."
   },
   "repository": {
     "type": "git",
