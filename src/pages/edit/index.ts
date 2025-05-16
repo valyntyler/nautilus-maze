@@ -7,7 +7,7 @@ import Menubar from "../../components/menubar";
 import Snackbar from "../../components/snackbar";
 
 document.addEventListener("DOMContentLoaded", () => {
-  const run_btn = document.getElementById("run")!;
+  const view_btn = document.getElementById("view")!;
   const back_btn = document.getElementById("back")!;
 
   const menu_btn = document.getElementById("menu")!;
@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   editor.state = state;
 
-  run_btn.addEventListener("click", () => {});
+  view_btn.addEventListener("click", () => {});
 
   back_btn.addEventListener(
     "mousedown",
