@@ -131,23 +131,24 @@ export default class Editor {
         break;
 
       case Tool.Finger:
-        if (
-          (buttons.includes(MouseButton.Left) ||
-            buttons.includes(MouseButton.Right)) &&
-          action === MouseAction.Down &&
-          !cell.classList.contains("black")
-        ) {
-          if (
-            cell ===
-            this.container.children[this.cols * this.start.y + this.start.x]
-          ) {
-            this.place(cell, Direction.rotate(this.start.dir));
-          } else {
-            this.place(cell, Direction.Up);
-          }
+        if (cell.classList.contains("black")) break;
+        if (action !== MouseAction.Down) break;
 
-          this.save();
+        const index = this.cols * this.start.y + this.start.x;
+        const is_cursor = cell === this.container.children[index];
+
+        if (is_cursor) {
+          if (buttons.includes(MouseButton.Left)) {
+            this.place(cell, Direction.rotate(this.start.dir, false));
+          }
+          if (buttons.includes(MouseButton.Right)) {
+            this.place(cell, Direction.rotate(this.start.dir, true));
+          }
+        } else {
+          this.place(cell, Direction.Up);
         }
+
+        this.save();
         break;
     }
   }
