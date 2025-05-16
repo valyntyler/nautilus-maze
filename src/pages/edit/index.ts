@@ -24,10 +24,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   editor.state = state;
 
-  view_btn.addEventListener("click", () => {});
+  view_btn.addEventListener(
+    "click",
+    () => (window.location.href = "./view.html"),
+  );
 
   back_btn.addEventListener(
-    "mousedown",
+    "click",
     () => (window.location.href = "../../index.html"),
   );
 
