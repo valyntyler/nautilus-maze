@@ -1,9 +1,9 @@
-import Direction from "./direction";
+import Rotation from "./robot/rotation";
 
 export default class Player {
   constructor(
     public x: number = 0,
     public y: number = 0,
-    public dir: Direction = Direction.Up,
+    public dir: Rotation = Rotation.Up,
   ) {}
 }

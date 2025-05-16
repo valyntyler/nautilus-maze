@@ -1,4 +1,4 @@
-import Direction from "../../model/direction";
+import Rotation from "../../model/robot/rotation";
 import Player from "../../model/player";
 import Maze from "../../model/maze";
 
@@ -57,7 +57,7 @@ export default class MazeRunner {
         const x = k % this.cols;
 
         const id = cell.children[0].id;
-        const dir = Direction.parse(id)!;
+        const dir = Rotation.parse(id)!;
 
         return new Player(x, y, dir);
       }
@@ -75,9 +75,9 @@ export default class MazeRunner {
     this.container = document.getElementById("maze")! as HTMLDivElement;
   }
 
-  private place(cell: HTMLDivElement, dir: Direction) {
+  private place(cell: HTMLDivElement, dir: Rotation) {
     const img = document.createElement("img");
-    const id = Direction.id(dir);
+    const id = Rotation.id(dir);
 
     img.src = `../assets/bx-caret-${id}.svg`;
     img.id = id;

@@ -1,8 +1,11 @@
+import Command from "../../model/robot/command";
+import Rotation from "../../model/robot/rotation";
+import Player from "../../model/player";
 import Maze from "../../model/maze";
 
 import Snackbar from "../../components/snackbar";
 import MazeRunner from "../../components/maze/runner";
-import Player from "../../model/player";
+import Direction from "../../model/robot/rotation";
 
 function delay(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -14,12 +17,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const play_btn = document.getElementById("play")!;
   const import_btn = document.getElementById("import")!;
-
-  const runner = new MazeRunner();
+  const cmd_txt = document.getElementById("commands")! as HTMLTextAreaElement;
 
   const local = localStorage.getItem("editor-state");
   const state: Maze = local ? JSON.parse(local) : new Maze();
 
+  const runner = new MazeRunner();
   runner.state = state;
 
   edit_btn.addEventListener(
@@ -33,19 +36,38 @@ document.addEventListener("DOMContentLoaded", () => {
   );
 
   play_btn.addEventListener("mousedown", async () => {
-    while (true) {
-      await delay(25);
+    const cmd_strings = cmd_txt.value.split(/\s+/);
+    const commands = Command.process(cmd_strings);
 
-      const new_x = runner.robot.x;
-      const new_y = runner.robot.y - 1;
+    commands.forEach(async (cmd) => {
+      switch (cmd) {
+        case Command.Move:
+          while (true) {
+            await delay(200);
 
-      if (new_x >= runner.state.rows || new_x < 0) return;
-      if (new_y >= runner.state.rows || new_y < 0) return;
+            const move = Rotation.step(Rotation.Down);
 
-      if (runner.cell(new_x, new_y).classList.contains("black")) return;
+            const new_x = runner.robot.x + move.x;
+            const new_y = runner.robot.y + move.y;
 
-      runner.robot = new Player(new_x, new_y);
-    }
+            if (new_x >= runner.state.rows || new_x < 0) break;
+            if (new_y >= runner.state.rows || new_y < 0) break;
+
+            if (runner.cell(new_x, new_y).classList.contains("black")) return;
+
+            runner.robot = new Player(new_x, new_y, runner.robot.dir);
+          }
+          break;
+
+        case Command.Turn:
+          runner.robot = new Player(
+            runner.robot.x,
+            runner.robot.y,
+            Rotation.turn(runner.robot.dir),
+          );
+          break;
+      }
+    });
   });
 
   import_btn.addEventListener("mousedown", () => {

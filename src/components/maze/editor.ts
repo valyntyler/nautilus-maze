@@ -1,4 +1,4 @@
-import Direction from "../../model/direction";
+import Rotation from "../../model/robot/rotation";
 import MouseAction from "../../model/mouse/action";
 import MouseButton from "../../model/mouse/button";
 import Player from "../../model/player";
@@ -71,7 +71,7 @@ export default class MazeEditor {
         const x = k % this.cols;
 
         const id = cell.children[0].id;
-        const dir = Direction.parse(id)!;
+        const dir = Rotation.parse(id)!;
 
         return new Player(x, y, dir);
       }
@@ -91,9 +91,9 @@ export default class MazeEditor {
     this.container = document.getElementById("maze")! as HTMLDivElement;
   }
 
-  private place(cell: HTMLDivElement, dir: Direction) {
+  private place(cell: HTMLDivElement, dir: Rotation) {
     const img = document.createElement("img");
-    const id = Direction.id(dir);
+    const id = Rotation.id(dir);
 
     img.src = `../assets/bx-caret-${id}.svg`;
     img.id = id;
@@ -138,14 +138,11 @@ export default class MazeEditor {
         const is_cursor = cell === this.container.children[index];
 
         if (is_cursor) {
-          if (buttons.includes(MouseButton.Left)) {
-            this.place(cell, Direction.rotate(this.start.dir, false));
-          }
           if (buttons.includes(MouseButton.Right)) {
-            this.place(cell, Direction.rotate(this.start.dir, true));
+            this.place(cell, Rotation.turn(this.start.dir));
           }
         } else {
-          this.place(cell, Direction.Up);
+          this.place(cell, Rotation.Up);
         }
 
         this.save();
