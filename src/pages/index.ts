@@ -5,5 +5,5 @@ view_btn.addEventListener("mousedown", () => {});
 
 edit_btn.addEventListener(
   "mousedown",
-  () => (window.location.href = "./public/editor.html"),
+  () => (window.location.href = "./public/edit.html"),
 );
