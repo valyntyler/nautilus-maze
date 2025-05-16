@@ -33,6 +33,22 @@ namespace Direction {
         return null;
     }
   }
+
+  export function rotate(dir: Direction) {
+    switch (dir) {
+      case Direction.Up:
+        return Direction.Left;
+
+      case Direction.Left:
+        return Direction.Down;
+
+      case Direction.Down:
+        return Direction.Right;
+
+      case Direction.Right:
+        return Direction.Up;
+    }
+  }
 }
 
 export default Direction;
