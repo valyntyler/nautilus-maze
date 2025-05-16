@@ -93,16 +93,19 @@ document.addEventListener("mousedown", (e) => {
 document.addEventListener("keydown", function (e) {
   switch (e.key) {
     case "b":
+    case "1":
       toolbar.selected = Tool.Pencil;
       menubar.open = false;
       break;
 
     case "e":
+    case "2":
       toolbar.selected = Tool.Eraser;
       menubar.open = false;
       break;
 
     case "c":
+    case "3":
       toolbar.selected = Tool.Finger;
       menubar.open = false;
       break;
