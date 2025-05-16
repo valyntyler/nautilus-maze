@@ -1,4 +1,4 @@
-import Maze from "../../model/maze";
+import Save from "../../model/save";
 import Tool from "../../model/tool";
 
 import Toolbar from "../../components/toolbar";
@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const editor = new MazeEditor(toolbar);
 
   const local = localStorage.getItem("editor-state");
-  const state: Maze = local ? JSON.parse(local) : new Maze();
+  const state: Save = local ? JSON.parse(local) : new Save();
 
   editor.state = state;
 
@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   trash_btn.addEventListener("mousedown", () => {
-    editor.state = new Maze();
+    editor.state = new Save();
     Snackbar.show("Cleared!");
   });
 

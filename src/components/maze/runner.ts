@@ -1,6 +1,6 @@
 import Direction from "../../model/direction";
 import Player from "../../model/player";
-import Maze from "../../model/maze";
+import Save from "../../model/save";
 
 export default class MazeRunner {
   private container: HTMLDivElement;
@@ -8,8 +8,8 @@ export default class MazeRunner {
   private rows: number = 0;
   private cols: number = 0;
 
-  get state(): Maze {
-    const value = new Maze(this.rows, this.cols, [], this.robot);
+  get state(): Save {
+    const value = new Save(this.rows, this.cols, [], this.robot);
 
     for (let i = 0; i < value.rows; i++) {
       for (let j = 0; j < value.cols; j++) {
@@ -21,7 +21,7 @@ export default class MazeRunner {
     return value;
   }
 
-  set state(value: Maze) {
+  set state(value: Save) {
     this.container.innerHTML = "";
     this.container.style.gridTemplateColumns = `repeat(${value.cols}, 32px)`;
     this.container.style.gridTemplateRows = `repeat(${value.rows}, 32px)`;
