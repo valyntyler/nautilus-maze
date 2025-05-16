@@ -1,10 +1,10 @@
-import State from "../model/state";
-import Tool from "../model/tool";
+import State from "../../model/state";
+import Tool from "../../model/tool";
 
-import Editor from "../views/editor";
-import Toolbar from "../views/toolbar";
-import Menubar from "../views/menubar";
-import Snackbar from "../views/snackbar";
+import Editor from "../../views/editor";
+import Toolbar from "../../views/toolbar";
+import Menubar from "../../views/menubar";
+import Snackbar from "../../views/snackbar";
 
 const menu_btn = document.getElementById("menu")!;
 const trash_btn = document.getElementById("trash")!;
