@@ -34,19 +34,35 @@ namespace Direction {
     }
   }
 
-  export function rotate(dir: Direction) {
-    switch (dir) {
-      case Direction.Up:
-        return Direction.Left;
+  export function rotate(dir: Direction, clockwise = false): Direction {
+    if (clockwise) {
+      switch (dir) {
+        case Direction.Up:
+          return Direction.Right;
 
-      case Direction.Left:
-        return Direction.Down;
+        case Direction.Right:
+          return Direction.Down;
 
-      case Direction.Down:
-        return Direction.Right;
+        case Direction.Down:
+          return Direction.Left;
 
-      case Direction.Right:
-        return Direction.Up;
+        case Direction.Left:
+          return Direction.Up;
+      }
+    } else {
+      switch (dir) {
+        case Direction.Up:
+          return Direction.Left;
+
+        case Direction.Left:
+          return Direction.Down;
+
+        case Direction.Down:
+          return Direction.Right;
+
+        case Direction.Right:
+          return Direction.Up;
+      }
     }
   }
 }
