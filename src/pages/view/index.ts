@@ -41,6 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const handle_command = async (cmd: Command) => {
+    await delay(200);
     switch (cmd) {
       case Command.Step: {
         const move = Rotation.step(runner.robot.dir);
@@ -77,13 +78,33 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (legal(pos)) {
           runner.robot = new Player(pos.x, pos.y, runner.robot.dir);
-          await delay(200);
           await handle_command(Command.Move);
         }
         break;
       }
 
       case Command.Left: {
+        const move = Rotation.step(runner.robot.dir);
+        const pos = {
+          x: runner.robot.x + move.x,
+          y: runner.robot.y + move.y,
+        };
+
+        if (legal(pos)) {
+          const left_dir = Rotation.turn(runner.robot.dir);
+          const left_pos = Rotation.step(left_dir);
+
+          const left = {
+            x: runner.robot.x + left_pos.x,
+            y: runner.robot.y + left_pos.y,
+          };
+          const cell = runner.cell(left.x, left.y);
+
+          if (cell.classList.contains("black")) {
+            runner.robot = new Player(pos.x, pos.y, runner.robot.dir);
+            await handle_command(Command.Left);
+          }
+        }
         break;
       }
 
@@ -96,7 +117,6 @@ document.addEventListener("DOMContentLoaded", () => {
         break;
       }
     }
-    await delay(200);
   };
 
   edit_btn.addEventListener(
