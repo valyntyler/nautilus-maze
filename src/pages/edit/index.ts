@@ -6,7 +6,7 @@ import Toolbar from "../../views/toolbar";
 import Menubar from "../../views/menubar";
 import Snackbar from "../../views/snackbar";
 
-const view_btn = document.getElementById("view")!;
+const run_btn = document.getElementById("run")!;
 const back_btn = document.getElementById("back")!;
 
 const menu_btn = document.getElementById("menu")!;
@@ -23,14 +23,14 @@ const state: State = local ? JSON.parse(local) : new State();
 
 editor.state = state;
 
-view_btn.addEventListener("mousedown", () => {});
+run_btn.addEventListener("click", () => {});
 
 back_btn.addEventListener(
   "mousedown",
   () => (window.location.href = "../../index.html"),
 );
 
-menu_btn.addEventListener("mousedown", () => {
+menu_btn.addEventListener("click", () => {
   menubar.open = !menubar.open;
 });
 
