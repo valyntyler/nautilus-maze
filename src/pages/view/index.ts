@@ -2,6 +2,11 @@ import Maze from "../../model/maze";
 
 import Snackbar from "../../components/snackbar";
 import MazeRunner from "../../components/maze/runner";
+import Player from "../../model/player";
+
+function delay(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
 
 document.addEventListener("DOMContentLoaded", () => {
   const edit_btn = document.getElementById("edit")!;
@@ -27,8 +32,20 @@ document.addEventListener("DOMContentLoaded", () => {
     () => (window.location.href = "../../index.html"),
   );
 
-  play_btn.addEventListener("mousedown", () => {
-    console.log("pressed!");
+  play_btn.addEventListener("mousedown", async () => {
+    while (true) {
+      await delay(25);
+
+      const new_x = runner.robot.x;
+      const new_y = runner.robot.y - 1;
+
+      if (new_x >= runner.state.rows || new_x < 0) return;
+      if (new_y >= runner.state.rows || new_y < 0) return;
+
+      if (runner.cell(new_x, new_y).classList.contains("black")) return;
+
+      runner.robot = new Player(new_x, new_y);
+    }
   });
 
   import_btn.addEventListener("mousedown", () => {
