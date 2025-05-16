@@ -18,6 +18,21 @@ namespace Direction {
         return "right";
     }
   }
+
+  export function parse(id: string): Direction | null {
+    switch (id) {
+      case "up":
+        return Direction.Up;
+      case "down":
+        return Direction.Down;
+      case "left":
+        return Direction.Left;
+      case "right":
+        return Direction.Right;
+      default:
+        return null;
+    }
+  }
 }
 
 export default Direction;
