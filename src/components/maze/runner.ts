@@ -9,7 +9,7 @@ export default class MazeRunner {
   private cols: number = 0;
 
   get state(): Maze {
-    const value = new Maze(this.rows, this.cols, [], this.start);
+    const value = new Maze(this.rows, this.cols, [], this.robot);
 
     for (let i = 0; i < value.rows; i++) {
       for (let j = 0; j < value.cols; j++) {
@@ -43,12 +43,12 @@ export default class MazeRunner {
 
     this.rows = value.rows;
     this.cols = value.cols;
-    this.start = value.start;
+    this.robot = value.start;
 
     this.save();
   }
 
-  get start(): Player {
+  get robot(): Player {
     for (let k = 0; k < this.container.children.length; k++) {
       const cell = this.container.children[k];
 
@@ -66,7 +66,7 @@ export default class MazeRunner {
     throw new Error("`start` not found");
   }
 
-  set start(value: Player) {
+  set robot(value: Player) {
     const cell = this.cell(value.x, value.y);
     this.place(cell, value.dir);
   }
