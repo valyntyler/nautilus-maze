@@ -1,14 +1,12 @@
 import Maze from "../../model/maze";
-import Editor from "../../components/editor";
-import Toolbar from "../../components/toolbar";
+import Runner from "../../components/runner";
 
 // const run_btn = document.getElementById("run")!;
 // const back_btn = document.getElementById("back")!;
 
-const toolbar = new Toolbar();
-const editor = new Editor(toolbar);
+const runner = new Runner();
 
 const local = localStorage.getItem("editor-state");
 const state: Maze = local ? JSON.parse(local) : new Maze();
 
-editor.state = state;
+runner.state = state;
