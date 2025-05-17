@@ -1,4 +1,4 @@
-import "../css/style.css";
+import "../../css/style.css";
 
 document.addEventListener("DOMContentLoaded", () => {
   const view_btn = document.getElementById("view")!;

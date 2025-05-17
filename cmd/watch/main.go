@@ -10,9 +10,9 @@ import (
 func main() {
 	ctx, err := api.Context(api.BuildOptions{
 		EntryPoints: []string{
-			"src/pages/index.ts",
-			"src/pages/view/index.ts",
-			"src/pages/edit/index.ts",
+			"src/ts/pages/index.ts",
+			"src/ts/pages/view/index.ts",
+			"src/ts/pages/edit/index.ts",
 		},
 		Outdir: "dist",
 		Bundle: true,
