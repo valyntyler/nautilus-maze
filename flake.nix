@@ -14,7 +14,7 @@
         pkgs = nixpkgs.legacyPackages.${system};
       in {
         devShells.default = pkgs.mkShell {
-          buildInputs = with pkgs; [go nodejs];
+          buildInputs = with pkgs; [go];
         };
 
         packages = let
