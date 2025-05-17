@@ -1,3 +1,5 @@
+import "../css/index.css";
+
 document.addEventListener("DOMContentLoaded", () => {
   const view_btn = document.getElementById("view")!;
   const edit_btn = document.getElementById("edit")!;

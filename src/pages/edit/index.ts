@@ -1,3 +1,5 @@
+import "../../css/index.css";
+
 import Maze from "../../model/maze";
 import Tool from "../../model/tool";
 

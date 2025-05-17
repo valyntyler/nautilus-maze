@@ -1,3 +1,5 @@
+import "../../css/index.css";
+
 import Position from "../../model/robot/position";
 import Rotation from "../../model/robot/rotation";
 import Command from "../../model/robot/command";
