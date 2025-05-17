@@ -6,6 +6,8 @@ import Maze from "../../model/maze";
 
 import Snackbar from "../../components/snackbar";
 import MazeRunner from "../../components/maze/runner";
+import Playback from "../../components/playback";
+import PlaybackEvent from "../../model/playback_event";
 
 function delay(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -15,17 +17,25 @@ document.addEventListener("DOMContentLoaded", () => {
   const edit_btn = document.getElementById("edit")!;
   const back_btn = document.getElementById("back")!;
 
-  const play_btn = document.getElementById("play")! as HTMLImageElement;
   const import_btn = document.getElementById("import")! as HTMLImageElement;
   const cmd_txt = document.getElementById("commands")! as HTMLTextAreaElement;
 
   const local = localStorage.getItem("editor-state");
   const state: Maze = local ? JSON.parse(local) : new Maze();
 
+  const playback = new Playback();
   const runner = new MazeRunner();
   runner.state = state;
 
-  let playing = false;
+  playback.onplaybackevent = async (e) => {
+    switch (e) {
+      case PlaybackEvent.Play: {
+        handle_commands();
+
+        break;
+      }
+    }
+  };
 
   const legal = (pos: Position) => {
     if (pos.x >= runner.state.rows) return false;
@@ -119,6 +129,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
+  const handle_commands = async () => {
+    const cmd_strings = cmd_txt.value.split(/\s+/);
+    const commands = Command.process(cmd_strings);
+
+    for (const cmd of commands) await handle_command(cmd);
+  };
+
   edit_btn.addEventListener(
     "click",
     () => (window.location.href = "./edit.html"),
@@ -128,24 +145,6 @@ document.addEventListener("DOMContentLoaded", () => {
     "click",
     () => (window.location.href = "../../index.html"),
   );
-
-  play_btn.addEventListener("mousedown", async () => {
-    const cmd_strings = cmd_txt.value.split(/\s+/);
-    const commands = Command.process(cmd_strings);
-
-    if (playing) {
-      playing = false;
-      play_btn.src = "../assets/bx-play.svg";
-
-      runner.state = state;
-      return;
-    }
-
-    playing = true;
-    play_btn.src = "../assets/bx-pause.svg";
-
-    for (const cmd of commands) await handle_command(cmd);
-  });
 
   import_btn.addEventListener("mousedown", () => {
     const input = document.createElement("input");
