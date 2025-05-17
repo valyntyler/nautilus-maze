@@ -16,6 +16,24 @@
         devShells.default = pkgs.mkShell {
           buildInputs = with pkgs; [go nodejs];
         };
+
+        packages = let
+          src = ./.;
+          vendorHash = "sha256-urFdCCyMIyyGN2Suuj8l1utLj7unGnk54dMly5+eajY=";
+        in {
+          build = pkgs.buildGoModule {
+            inherit src vendorHash;
+            name = "build";
+          };
+          watch = pkgs.buildGoModule {
+            inherit src vendorHash;
+            name = "watch";
+          };
+          serve = pkgs.buildGoModule {
+            inherit src vendorHash;
+            name = "serve";
+          };
+        };
       }
     );
 }
