@@ -4,9 +4,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "build": "node build.js",
-    "watch": "node build.js --watch",
-    "serve": "npx http-server ."
+    "build": "go run ./cmd/build",
+    "watch": "go run ./cmd/watch",
+    "serve": "go run ./cmd/serve"
   },
   "repository": {
     "type": "git",
