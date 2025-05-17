@@ -1,4 +1,4 @@
-import "../../../css/style.css";
+import "../../../styles/style.css";
 
 import Position from "../../model/robot/position";
 import Rotation from "../../model/robot/rotation";
