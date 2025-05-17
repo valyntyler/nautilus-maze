@@ -1,15 +1,15 @@
-import "../../../styles/style.css";
+import "../styles/style.css";
 
-import Position from "../../model/robot/position";
-import Rotation from "../../model/robot/rotation";
-import Command from "../../model/robot/command";
-import Player from "../../model/player";
-import Maze from "../../model/maze";
+import Position from "./model/robot/position";
+import Rotation from "./model/robot/rotation";
+import Command from "./model/robot/command";
+import Player from "./model/player";
+import Maze from "./model/maze";
 
-import Snackbar from "../../components/snackbar";
-import MazeRunner from "../../components/maze/runner";
-import Playback from "../../components/playback";
-import PlaybackEvent from "../../model/playback_event";
+import Snackbar from "./components/snackbar";
+import MazeRunner from "./components/maze/runner";
+import Playback from "./components/playback";
+import PlaybackEvent from "./model/playback_event";
 
 function delay(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));

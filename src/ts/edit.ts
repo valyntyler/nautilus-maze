@@ -1,12 +1,12 @@
-import "../../../styles/style.css";
+import "../styles/style.css";
 
-import Maze from "../../model/maze";
-import Tool from "../../model/tool";
+import Maze from "./model/maze";
+import Tool from "./model/tool";
 
-import Toolbar from "../../components/toolbar";
-import Menubar from "../../components/menubar";
-import Snackbar from "../../components/snackbar";
-import MazeEditor from "../../components/maze/editor";
+import Toolbar from "./components/toolbar";
+import Menubar from "./components/menubar";
+import Snackbar from "./components/snackbar";
+import MazeEditor from "./components/maze/editor";
 
 document.addEventListener("DOMContentLoaded", () => {
   const view_btn = document.getElementById("view")!;

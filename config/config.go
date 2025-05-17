@@ -5,9 +5,9 @@ import "github.com/evanw/esbuild/pkg/api"
 const outdir = "dist"
 
 var entryPoints = []string{
-	"src/ts/pages/index.ts",
-	"src/ts/pages/view/index.ts",
-	"src/ts/pages/edit/index.ts",
+	"src/ts/index.ts",
+	"src/ts/view.ts",
+	"src/ts/edit.ts",
 }
 
 var Opts = api.BuildOptions{
