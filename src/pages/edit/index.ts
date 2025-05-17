@@ -1,4 +1,4 @@
-import "../../css/index.css";
+import "../../css/style.css";
 
 import Maze from "../../model/maze";
 import Tool from "../../model/tool";
