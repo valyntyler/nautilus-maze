@@ -4,11 +4,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   view_btn.addEventListener(
     "click",
-    () => (window.location.href = "./public/view.html"),
+    () => (window.location.href = "view.html"),
   );
 
   edit_btn.addEventListener(
     "click",
-    () => (window.location.href = "./public/edit.html"),
+    () => (window.location.href = "edit.html"),
   );
 });

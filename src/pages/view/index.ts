@@ -138,12 +138,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   edit_btn.addEventListener(
     "click",
-    () => (window.location.href = "./edit.html"),
+    () => (window.location.href = "edit.html"),
   );
 
   back_btn.addEventListener(
     "click",
-    () => (window.location.href = "../../index.html"),
+    () => (window.location.href = "index.html"),
   );
 
   import_btn.addEventListener("mousedown", () => {

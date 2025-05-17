@@ -26,12 +26,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   view_btn.addEventListener(
     "click",
-    () => (window.location.href = "./view.html"),
+    () => (window.location.href = "view.html"),
   );
 
   back_btn.addEventListener(
     "click",
-    () => (window.location.href = "../../index.html"),
+    () => (window.location.href = "index.html"),
   );
 
   menu_btn.addEventListener("click", () => {
