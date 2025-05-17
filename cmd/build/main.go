@@ -5,19 +5,11 @@ import (
 	"os"
 
 	"github.com/evanw/esbuild/pkg/api"
+	"valyntyler.com/nautilus-maze/config"
 )
 
 func main() {
-	result := api.Build(api.BuildOptions{
-		EntryPoints: []string{
-			"src/ts/pages/index.ts",
-			"src/ts/pages/view/index.ts",
-			"src/ts/pages/edit/index.ts",
-		},
-		Bundle: true,
-		Outdir: "dist",
-		Write:  true,
-	})
+	result := api.Build(config.Opts)
 
 	for _, msg := range result.Warnings {
 		fmt.Print("WARNING: ")

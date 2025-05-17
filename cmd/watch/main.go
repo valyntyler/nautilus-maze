@@ -5,19 +5,12 @@ import (
 	"os"
 
 	"github.com/evanw/esbuild/pkg/api"
+	"valyntyler.com/nautilus-maze/config"
 )
 
 func main() {
-	ctx, err := api.Context(api.BuildOptions{
-		EntryPoints: []string{
-			"src/ts/pages/index.ts",
-			"src/ts/pages/view/index.ts",
-			"src/ts/pages/edit/index.ts",
-		},
-		Outdir: "dist",
-		Bundle: true,
-		Write:  true,
-	})
+	ctx, err := api.Context(config.Opts)
+
 	if err != nil {
 		fmt.Print("ERROR: ")
 		fmt.Println(err)
