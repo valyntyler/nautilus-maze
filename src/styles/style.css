@@ -1,4 +1,5 @@
 @import "common/snackbar.css";
+@import "common/maze.css";
 
 body {
   display: flex;

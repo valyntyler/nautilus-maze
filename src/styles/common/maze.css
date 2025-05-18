@@ -1,0 +1,20 @@
+:root {
+  --grid-rows: 10;
+  --grid-cols: 10;
+  --cell-size: 40px;
+}
+
+.maze-container {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-cols), var(--cell-size));
+  grid-template-rows: repeat(var(--grid-rows), var(--cell-size));
+  gap: 1px;
+  background: lightgrey;
+}
+
+.maze-container div {
+  width: var(--cell-size);
+  height: var(--cell-size);
+  background: white;
+  transition: background-color 0.1s;
+}
