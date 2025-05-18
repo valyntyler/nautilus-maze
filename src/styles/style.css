@@ -1,5 +1,6 @@
-@import "common/snackbar.css";
 @import "common/maze.css";
+@import "common/snackbar.css";
+@import "common/tools.css";
 
 body {
   display: flex;
