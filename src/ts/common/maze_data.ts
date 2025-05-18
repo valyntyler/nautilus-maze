@@ -11,6 +11,12 @@ class MazeData implements Grid {
   get cols() {
     return this.data[0].length;
   }
+
+  constructor(rows: number = 0, cols: number = 0) {
+    this.data = Array(rows)
+      .fill([])
+      .map(() => Array(cols).fill(0));
+  }
 }
 
 export default MazeData;
