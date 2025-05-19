@@ -40,5 +40,25 @@ export default class Tools {
     }
 
     this.selected = Tool.Pencil;
+
+    document.addEventListener("keydown", (e) => {
+      switch (e.key) {
+        case "1":
+        case "b": {
+          this.selected = Tool.Pencil;
+          break;
+        }
+        case "2":
+        case "e": {
+          this.selected = Tool.Eraser;
+          break;
+        }
+        case "3":
+        case "c": {
+          this.selected = Tool.Finger;
+          break;
+        }
+      }
+    });
   }
 }
