@@ -2,7 +2,7 @@ import MazeData from "./maze_data";
 import Robot from "./robot";
 
 export default class MazeComponent {
-  container: HTMLDivElement;
+  private container: HTMLDivElement;
 
   constructor(maze = new MazeData(), robot = new Robot()) {
     this.container = document.getElementById("maze") as HTMLDivElement;
