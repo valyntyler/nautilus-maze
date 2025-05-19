@@ -2,6 +2,7 @@ import Tool from "./tool";
 
 export default class Tools {
   container: HTMLDivElement;
+  selected: Tool;
 
   constructor(tools = [Tool.Pencil, Tool.Eraser, Tool.Finger]) {
     this.container = document.getElementById("tools") as HTMLDivElement;
@@ -31,5 +32,12 @@ export default class Tools {
       div.appendChild(label);
       this.container.appendChild(div);
     }
+
+    this.selected = Tool.Pencil;
+
+    const id = Tool.id(this.selected);
+    const input = document.getElementById(id) as HTMLInputElement;
+
+    input.checked = true;
   }
 }
