@@ -1,8 +1,14 @@
 import Tool from "./tool";
 
 export default class Tools {
-  container: HTMLDivElement;
-  selected: Tool;
+  private container: HTMLDivElement;
+
+  set selected(value: Tool) {
+    const id = Tool.id(value);
+    const input = document.getElementById(id) as HTMLInputElement;
+
+    input.checked = true;
+  }
 
   constructor(tools = [Tool.Pencil, Tool.Eraser, Tool.Finger]) {
     this.container = document.getElementById("tools") as HTMLDivElement;
@@ -34,10 +40,5 @@ export default class Tools {
     }
 
     this.selected = Tool.Pencil;
-
-    const id = Tool.id(this.selected);
-    const input = document.getElementById(id) as HTMLInputElement;
-
-    input.checked = true;
   }
 }
