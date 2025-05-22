@@ -10,11 +10,11 @@ export default class Puzzle {
   container: HTMLDivElement;
 
   onchange = () => {};
-  oncellevent: (
+  oncellevent = (
     cell: HTMLDivElement,
     event: MouseEvent,
     state: MouseState,
-  ) => void;
+  ) => {};
 
   get state(): PuzzleState {
     return {
