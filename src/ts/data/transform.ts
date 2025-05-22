@@ -6,4 +6,16 @@ interface Transform {
   rotation: Rotation;
 }
 
+namespace Transform {
+  export function create(
+    position: Position = Position.create(),
+    rotation: Rotation = Rotation.Up,
+  ): Transform {
+    return {
+      position,
+      rotation,
+    };
+  }
+}
+
 export default Transform;
