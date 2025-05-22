@@ -9,6 +9,7 @@ import PuzzleState from "./puzzle_state";
 export default class Puzzle {
   container: HTMLDivElement;
 
+  onchange = () => {};
   oncellevent: (
     cell: HTMLDivElement,
     event: MouseEvent,
@@ -52,6 +53,8 @@ export default class Puzzle {
   set state(value: PuzzleState) {
     this.maze = value.maze;
     this.robot = value.robot;
+
+    this.onchange();
   }
 
   set robot(value: Transform) {
@@ -90,11 +93,12 @@ export default class Puzzle {
     }
   }
 
-  constructor(maze = Grid.create(14, 15), robot = Transform.create()) {
+  constructor() {
     this.container = document.getElementById("maze") as HTMLDivElement;
-
-    this.maze = maze;
-    this.robot = robot;
+    this.state = {
+      maze: Grid.create(14, 15),
+      robot: Transform.create(),
+    };
   }
 
   cell(x: number, y: number): HTMLDivElement {
