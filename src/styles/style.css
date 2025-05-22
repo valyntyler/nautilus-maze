@@ -5,6 +5,7 @@
 @import "common/tools.css";
 
 body {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -13,4 +14,21 @@ body {
   height: 100vh;
   margin: 0;
   font-family: Arial, sans-serif;
+}
+
+h1 {
+  text-align: center;
+}
+
+.side {
+  height: 100%;
+  width: 280px;
+  margin-left: 40px;
+  margin-right: 40px;
+}
+
+.content-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
