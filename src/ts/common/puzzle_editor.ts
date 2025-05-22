@@ -12,12 +12,18 @@ export default class PuzzleEditor extends Puzzle {
     super();
 
     const tools = document.createElement("div");
+    const img = document.createElement("img");
     const bar = document.getElementById("bar")!;
 
     tools.id = "tools";
     tools.className = "tools-container";
 
+    img.src = "./assets/bx-play.svg";
+    img.id = "done";
+
+    bar.innerHTML = "";
     bar.appendChild(tools);
+    bar.appendChild(img);
 
     this.tools = new Tools();
     this.oncellevent = this.handleCellEvent;

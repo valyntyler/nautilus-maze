@@ -1,0 +1,8 @@
+.bar-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.bar-container img {
+  width: 40px;
+}
