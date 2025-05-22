@@ -59,8 +59,10 @@ export default class Puzzle {
 
   place(cell: HTMLDivElement, rotation: Rotation = Rotation.Up) {
     const img = document.createElement("img");
+    const id = Rotation.id(rotation);
 
-    img.src = `./assets/bx-caret-${Rotation.id(rotation)}.svg`;
+    img.id = id;
+    img.src = `./assets/bx-caret-${id}.svg`;
     img.draggable = false;
 
     for (const row of this.container.children) {
