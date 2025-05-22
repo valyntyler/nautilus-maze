@@ -10,6 +10,7 @@
   grid-template-rows: repeat(var(--grid-rows), var(--cell-size));
   gap: 1px;
   background: lightgrey;
+  user-select: none;
 }
 
 .maze-container div {
