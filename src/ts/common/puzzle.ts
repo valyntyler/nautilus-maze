@@ -3,7 +3,7 @@ import MouseEvent from "./mouse_event";
 import MouseState from "./mouse_state";
 import Robot from "./robot";
 
-export default class MazeComponent {
+export default class Puzzle {
   private container: HTMLDivElement;
 
   oncellevent: (
