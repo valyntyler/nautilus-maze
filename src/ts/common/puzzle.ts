@@ -53,8 +53,6 @@ export default class Puzzle {
   set state(value: PuzzleState) {
     this.maze = value.maze;
     this.robot = value.robot;
-
-    this.onchange();
   }
 
   set robot(value: Transform) {
@@ -94,10 +92,19 @@ export default class Puzzle {
   }
 
   constructor() {
+    const local = localStorage.getItem("puzzle-state");
+    const state: PuzzleState = local
+      ? JSON.parse(local)
+      : {
+          maze: Grid.create(14, 15),
+          robot: Transform.create(),
+        };
+
     this.container = document.getElementById("maze") as HTMLDivElement;
-    this.state = {
-      maze: Grid.create(14, 15),
-      robot: Transform.create(),
+    this.state = state;
+
+    this.onchange = () => {
+      localStorage.setItem("puzzle-state", JSON.stringify(this.state));
     };
   }
 
