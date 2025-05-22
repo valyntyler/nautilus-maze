@@ -20,7 +20,6 @@ export default class PuzzleEditor extends Puzzle {
     event: MouseEvent,
     state: MouseState,
   ) {
-    this.onchange()
     switch (this.tools.selected) {
       case Tool.Pencil: {
         this.usePencil(cell, event, state);
@@ -35,6 +34,7 @@ export default class PuzzleEditor extends Puzzle {
         break;
       }
     }
+    this.onchange();
   }
 
   private usePencil(

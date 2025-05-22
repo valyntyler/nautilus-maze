@@ -30,8 +30,9 @@ export default class Puzzle {
 
     const x = Array.from(row.children).indexOf(div);
     const y = Array.from(row.parentNode!.children).indexOf(row);
+    const r = Rotation.parse(img.className)!;
 
-    return Transform.create(Position.create(x, y));
+    return Transform.create(Position.create(x, y), r);
   }
 
   get maze(): Grid {
@@ -57,7 +58,7 @@ export default class Puzzle {
 
   set robot(value: Transform) {
     const cell = this.cell(value.position.x, value.position.y);
-    this.place(cell);
+    this.place(cell, value.rotation);
   }
 
   set maze(value: Grid) {
