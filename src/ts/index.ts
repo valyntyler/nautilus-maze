@@ -1,11 +1,11 @@
 import "../styles/style.css";
 import Puzzle from "./common/puzzle";
-import MazeData from "./common/maze_data";
 import Tool from "./common/tool";
 import Tools from "./common/tools";
+import Grid from "./data/grid";
 
 document.addEventListener("DOMContentLoaded", () => {
-  const puzzle = new Puzzle(new MazeData(14, 15));
+  const puzzle = new Puzzle(Grid.create());
   const tools = new Tools();
 
   puzzle.oncellevent = (cell, event, state) => {

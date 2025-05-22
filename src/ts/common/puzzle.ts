@@ -1,4 +1,4 @@
-import MazeData from "./maze_data";
+import Grid from "../data/grid";
 import MouseEvent from "./mouse_event";
 import MouseState from "./mouse_state";
 import Robot from "./robot";
@@ -12,14 +12,17 @@ export default class Puzzle {
     state: MouseState,
   ) => void;
 
-  constructor(maze = new MazeData(), robot = new Robot()) {
+  constructor(maze = Grid.create(14, 15), robot = new Robot()) {
     this.container = document.getElementById("maze") as HTMLDivElement;
 
-    document.documentElement.style.setProperty("--grid-rows", `${maze.rows}`);
-    document.documentElement.style.setProperty("--grid-cols", `${maze.cols}`);
+    const rows = Grid.rows(maze);
+    const cols = Grid.cols(maze);
 
-    for (let i = 0; i < maze.rows; i++) {
-      for (let j = 0; j < maze.cols; j++) {
+    document.documentElement.style.setProperty("--grid-rows", `${rows}`);
+    document.documentElement.style.setProperty("--grid-cols", `${cols}`);
+
+    for (let i = 0; i < rows; i++) {
+      for (let j = 0; j < cols; j++) {
         const cell = document.createElement("div");
 
         cell.addEventListener("mousedown", (e) =>
