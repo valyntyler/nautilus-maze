@@ -23,16 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
       case Tool.Finger: {
         if (!cell.classList.contains("black") && state.left) {
-          const img = document.createElement("img");
-
-          img.src = "./assets/bx-caret-down.svg";
-          img.draggable = false;
-
-          for (const cell of puzzle.container.children) {
-            cell.innerHTML = "";
-          }
-
-          cell.appendChild(img);
+          puzzle.place(cell);
         }
         break;
       }

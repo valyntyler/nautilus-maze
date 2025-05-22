@@ -6,14 +6,20 @@
 
 .maze-container {
   display: grid;
-  grid-template-columns: repeat(var(--grid-cols), var(--cell-size));
   grid-template-rows: repeat(var(--grid-rows), var(--cell-size));
   gap: 1px;
   background: lightgrey;
   user-select: none;
 }
 
-.maze-container div {
+.maze-row {
+  display: grid;
+  grid-template-rows: subgrid;
+  grid-template-columns: repeat(var(--grid-cols), var(--cell-size));
+  gap: inherit;
+}
+
+.maze-cell {
   display: flex;
   width: var(--cell-size);
   height: var(--cell-size);
@@ -21,6 +27,6 @@
   transition: background-color 0.1s;
 }
 
-.maze-container div.black {
+.maze-cell.black {
   background: black;
 }
