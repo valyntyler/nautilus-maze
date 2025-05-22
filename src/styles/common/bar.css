@@ -1,10 +1,10 @@
 .bar-container {
   display: flex;
   justify-content: space-between;
+  height: 40px;
 }
 
 .bar-container img {
-  width: 40px;
   user-select: none;
   transition: opacity 0.1s;
 }
