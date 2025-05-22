@@ -25,6 +25,22 @@ export default class Puzzle {
     return Transform.create(Position.create(x, y));
   }
 
+  get maze(): Grid {
+    const rows = this.container.children.length;
+    const cols = this.container.children[0].children.length;
+
+    const value = Grid.create(rows, cols);
+
+    for (let i = 0; i < rows; i++) {
+      for (let j = 0; j < cols; j++) {
+        const cell = this.cell(j, i);
+        value[i][j] = cell.classList.contains("black") ? 1 : 0;
+      }
+    }
+
+    return value;
+  }
+
   set robot(value: Transform) {
     const cell = this.cell(value.position.x, value.position.y);
     this.place(cell);
