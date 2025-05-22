@@ -3,6 +3,13 @@ import Tool from "./tool";
 export default class Tools {
   private container: HTMLDivElement;
 
+  get selected(): Tool {
+    const el = document.querySelector(".tool input:checked")!;
+    const id = el.id;
+
+    return Tool.parse(id)!;
+  }
+
   set selected(value: Tool) {
     const id = Tool.id(value);
     const input = document.getElementById(id) as HTMLInputElement;
