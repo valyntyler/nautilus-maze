@@ -1,6 +1,9 @@
+import Playback from "./playback";
 import Puzzle from "./puzzle";
 
 export default class PuzzleRunner extends Puzzle {
+  private playback: Playback;
+
   constructor() {
     super();
 
@@ -20,5 +23,7 @@ export default class PuzzleRunner extends Puzzle {
     bar.innerHTML = "";
     bar.appendChild(img);
     bar.appendChild(playback);
+
+    this.playback = new Playback();
   }
 }
