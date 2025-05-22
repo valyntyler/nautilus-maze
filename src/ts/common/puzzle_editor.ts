@@ -4,11 +4,15 @@ import Tool from "./tool";
 import Tools from "./tools";
 
 export default class PuzzleEditor extends Puzzle {
-  constructor(tools: Tools) {
+  private tools: Tools;
+
+  constructor() {
     super();
 
+    this.tools = new Tools();
+
     this.oncellevent = (cell, event, state) => {
-      switch (tools.selected) {
+      switch (this.tools.selected) {
         case Tool.Pencil: {
           if (state.left && cell.children.length === 0) {
             cell.classList.add("black");
