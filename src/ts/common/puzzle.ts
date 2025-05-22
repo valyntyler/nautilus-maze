@@ -4,6 +4,7 @@ import Rotation from "../data/rotation";
 import Transform from "../data/transform";
 import MouseEvent from "./mouse_event";
 import MouseState from "./mouse_state";
+import PuzzleState from "./puzzle_state";
 
 export default class Puzzle {
   container: HTMLDivElement;
@@ -13,6 +14,13 @@ export default class Puzzle {
     event: MouseEvent,
     state: MouseState,
   ) => void;
+
+  get state(): PuzzleState {
+    return {
+      robot: this.robot,
+      maze: this.maze,
+    };
+  }
 
   get robot(): Transform {
     const img = document.getElementById("robot")!;
