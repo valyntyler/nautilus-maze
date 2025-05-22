@@ -49,6 +49,11 @@ export default class Puzzle {
     return value;
   }
 
+  set state(value: PuzzleState) {
+    this.maze = value.maze;
+    this.robot = value.robot;
+  }
+
   set robot(value: Transform) {
     const cell = this.cell(value.position.x, value.position.y);
     this.place(cell);
