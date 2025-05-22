@@ -15,6 +15,7 @@ export default class Tools {
     const input = document.getElementById(id) as HTMLInputElement;
 
     input.checked = true;
+    localStorage.setItem("selected-tool", JSON.stringify(this.selected));
   }
 
   constructor(tools = [Tool.Pencil, Tool.Eraser, Tool.Finger]) {
@@ -46,7 +47,8 @@ export default class Tools {
       this.container.appendChild(div);
     }
 
-    this.selected = Tool.Pencil;
+    const local = localStorage.getItem("selected-tool");
+    this.selected = local ? JSON.parse(local) : Tool.Pencil;
 
     document.addEventListener("keydown", (e) => {
       switch (e.key) {
