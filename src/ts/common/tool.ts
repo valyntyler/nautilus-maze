@@ -36,6 +36,26 @@ namespace Tool {
       }
     }
   }
+
+  export function parse(id: string): Tool | null {
+    switch (id) {
+      case "pencil": {
+        return Tool.Pencil;
+      }
+
+      case "eraser": {
+        return Tool.Eraser;
+      }
+
+      case "finger": {
+        return Tool.Finger;
+      }
+
+      default: {
+        return null;
+      }
+    }
+  }
 }
 
 export default Tool;
