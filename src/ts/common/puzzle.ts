@@ -7,22 +7,20 @@ import MouseState from "./mouse_state";
 export default class Puzzle {
   container: HTMLDivElement;
 
-  set robot(value: Transform) {
-    const cell = this.cell(value.position.x, value.position.y);
-    this.place(cell);
-  }
-
   oncellevent: (
     cell: HTMLDivElement,
     event: MouseEvent,
     state: MouseState,
   ) => void;
 
-  constructor(maze = Grid.create(14, 15), robot = Transform.create()) {
-    this.container = document.getElementById("maze") as HTMLDivElement;
+  set robot(value: Transform) {
+    const cell = this.cell(value.position.x, value.position.y);
+    this.place(cell);
+  }
 
-    const rows = Grid.rows(maze);
-    const cols = Grid.cols(maze);
+  set maze(value: Grid) {
+    const rows = Grid.rows(value);
+    const cols = Grid.cols(value);
 
     document.documentElement.style.setProperty("--grid-rows", `${rows}`);
     document.documentElement.style.setProperty("--grid-cols", `${cols}`);
@@ -49,7 +47,12 @@ export default class Puzzle {
 
       this.container.appendChild(row);
     }
+  }
 
+  constructor(maze = Grid.create(14, 15), robot = Transform.create()) {
+    this.container = document.getElementById("maze") as HTMLDivElement;
+
+    this.maze = maze;
     this.robot = robot;
   }
 
