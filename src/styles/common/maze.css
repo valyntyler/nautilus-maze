@@ -19,3 +19,7 @@
   background: white;
   transition: background-color 0.1s;
 }
+
+.maze-container div.black {
+  background: black;
+}
