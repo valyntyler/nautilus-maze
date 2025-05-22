@@ -9,6 +9,8 @@ import PuzzleState from "./puzzle_state";
 export default class Puzzle {
   container: HTMLDivElement;
 
+  onview = () => {};
+  onedit = () => {};
   onchange = () => {};
   oncellevent = (
     cell: HTMLDivElement,

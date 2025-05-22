@@ -4,8 +4,22 @@ import PuzzleRunner from "./common/puzzle_runner";
 import PuzzleEditor from "./common/puzzle_editor";
 
 document.addEventListener("DOMContentLoaded", () => {
-  let puzzle: Puzzle;
+  let puzzle: Puzzle = new PuzzleEditor();
 
-  puzzle = new PuzzleRunner();
-  puzzle = new PuzzleEditor();
+  const onview = () => {
+    puzzle = new PuzzleRunner();
+
+    puzzle.onview = onview;
+    puzzle.onedit = onedit;
+  };
+
+  const onedit = () => {
+    puzzle = new PuzzleEditor();
+
+    puzzle.onview = onview;
+    puzzle.onedit = onedit;
+  };
+
+  puzzle.onview = onview;
+  puzzle.onedit = onedit;
 });

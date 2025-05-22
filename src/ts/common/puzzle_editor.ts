@@ -20,9 +20,7 @@ export default class PuzzleEditor extends Puzzle {
 
     img.src = "./assets/bx-check.svg";
     img.id = "done";
-    img.onclick = () => {
-      console.log("done!");
-    };
+    img.onclick = () => this.onview();
 
     bar.innerHTML = "";
     bar.appendChild(tools);
