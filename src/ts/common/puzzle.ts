@@ -1,4 +1,5 @@
 import Grid from "../data/grid";
+import Position from "../data/position";
 import Rotation from "../data/rotation";
 import Transform from "../data/transform";
 import MouseEvent from "./mouse_event";
@@ -12,6 +13,17 @@ export default class Puzzle {
     event: MouseEvent,
     state: MouseState,
   ) => void;
+
+  get robot(): Transform {
+    const img = document.getElementById("robot")!;
+    const div = img.parentNode! as HTMLDivElement;
+    const row = div.parentNode! as HTMLDivElement;
+
+    const x = Array.from(row.children).indexOf(div);
+    const y = Array.from(row.parentNode!.children).indexOf(row);
+
+    return Transform.create(Position.create(x, y));
+  }
 
   set robot(value: Transform) {
     const cell = this.cell(value.position.x, value.position.y);
@@ -64,7 +76,8 @@ export default class Puzzle {
     const img = document.createElement("img");
     const id = Rotation.id(rotation);
 
-    img.id = id;
+    img.id = "robot";
+    img.className = id;
     img.src = `./assets/bx-caret-${id}.svg`;
     img.draggable = false;
 
