@@ -76,6 +76,10 @@ export default class Puzzle {
         const cell = document.createElement("div");
         cell.classList.add("maze-cell");
 
+        if (value[i][j] === 1) {
+          cell.classList.add("black");
+        }
+
         cell.addEventListener("mousedown", (e) =>
           this.oncellevent(cell, MouseEvent.Down, MouseState.parse(e.buttons)),
         );
