@@ -1,6 +1,6 @@
 import "../styles/style.css";
-import PuzzleEditor from "./common/puzzle_editor";
+import PuzzleRunner from "./common/puzzle_runner";
 
 document.addEventListener("DOMContentLoaded", () => {
-  new PuzzleEditor();
+  new PuzzleRunner();
 });
