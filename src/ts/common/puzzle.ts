@@ -1,7 +1,7 @@
 import Grid from "../data/grid";
+import Transform from "../data/transform";
 import MouseEvent from "./mouse_event";
 import MouseState from "./mouse_state";
-import Robot from "./robot";
 
 export default class Puzzle {
   private container: HTMLDivElement;
@@ -12,7 +12,7 @@ export default class Puzzle {
     state: MouseState,
   ) => void;
 
-  constructor(maze = Grid.create(14, 15), robot = new Robot()) {
+  constructor(maze = Grid.create(14, 15), robot = Transform.create()) {
     this.container = document.getElementById("maze") as HTMLDivElement;
 
     const rows = Grid.rows(maze);
