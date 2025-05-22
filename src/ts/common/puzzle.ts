@@ -1,6 +1,6 @@
 import Grid from "../data/grid";
+import Rotation from "../data/rotation";
 import Transform from "../data/transform";
-import Rotation from "../model/robot/rotation";
 import MouseEvent from "./mouse_event";
 import MouseState from "./mouse_state";
 
