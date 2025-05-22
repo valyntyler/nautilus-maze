@@ -28,26 +28,9 @@ export default class PuzzleEditor extends Puzzle {
               this.place(cell);
             } else if (state.right && length !== 0) {
               const id = cell.children[0].id;
-              const rotation = Rotation.parse(id)!;
+              const r = Rotation.parse(id)!;
 
-              switch (rotation) {
-                case Rotation.Up: {
-                  this.place(cell, Rotation.Left);
-                  break;
-                }
-                case Rotation.Left: {
-                  this.place(cell, Rotation.Down);
-                  break;
-                }
-                case Rotation.Down: {
-                  this.place(cell, Rotation.Right);
-                  break;
-                }
-                case Rotation.Right: {
-                  this.place(cell, Rotation.Up);
-                  break;
-                }
-              }
+              this.place(cell, Rotation.turn(r));
             }
           }
           break;
