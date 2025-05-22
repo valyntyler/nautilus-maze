@@ -37,5 +37,18 @@ export default class Puzzle {
         this.container.appendChild(cell);
       }
     }
+
+    const index = cols * robot.position.y + robot.position.x;
+    const cell = this.container.children[index];
+
+    const img = document.createElement("img");
+    img.src = "./assets/bx-caret-down.svg";
+    img.draggable = false;
+
+    for (const cell of this.container.children) {
+      cell.innerHTML = "";
+    }
+
+    cell.appendChild(img);
   }
 }
