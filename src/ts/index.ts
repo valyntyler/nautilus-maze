@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
   puzzle.oncellevent = (cell, event, state) => {
     switch (tools.selected) {
       case Tool.Pencil: {
-        if (state.left) {
+        if (state.left && cell.children.length === 0) {
           cell.classList.add("black");
         }
         break;
@@ -22,7 +22,17 @@ document.addEventListener("DOMContentLoaded", () => {
         break;
       }
       case Tool.Finger: {
-        if (!cell.classList.contains("black")) {
+        if (!cell.classList.contains("black") && state.left) {
+          const img = document.createElement("img");
+
+          img.src = "./assets/bx-caret-down.svg";
+          img.draggable = false;
+
+          for (const cell of puzzle.container.children) {
+            cell.innerHTML = "";
+          }
+
+          cell.appendChild(img);
         }
         break;
       }

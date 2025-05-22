@@ -4,7 +4,7 @@ import MouseEvent from "./mouse_event";
 import MouseState from "./mouse_state";
 
 export default class Puzzle {
-  private container: HTMLDivElement;
+  container: HTMLDivElement;
 
   oncellevent: (
     cell: HTMLDivElement,
