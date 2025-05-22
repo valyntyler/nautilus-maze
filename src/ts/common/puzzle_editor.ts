@@ -18,7 +18,7 @@ export default class PuzzleEditor extends Puzzle {
     tools.id = "tools";
     tools.className = "tools-container";
 
-    img.src = "./assets/bx-play.svg";
+    img.src = "./assets/bx-check.svg";
     img.id = "done";
     img.onclick = () => {
       console.log("done!");

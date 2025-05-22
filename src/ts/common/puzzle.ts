@@ -106,6 +106,7 @@ export default class Puzzle {
         };
 
     this.container = document.getElementById("maze") as HTMLDivElement;
+    this.container.innerHTML = "";
     this.state = state;
 
     this.onchange = () => {
