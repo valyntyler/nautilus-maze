@@ -11,6 +11,14 @@ export default class PuzzleEditor extends Puzzle {
   constructor() {
     super();
 
+    const tools = document.createElement("div");
+    const bar = document.getElementById("bar")!;
+
+    tools.id = "tools";
+    tools.className = "tools-container";
+
+    bar.appendChild(tools);
+
     this.tools = new Tools();
     this.oncellevent = this.handleCellEvent;
   }
