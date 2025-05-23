@@ -1,5 +1,9 @@
+import PlaybackEvent from "./playback_event";
+
 export default class Playback {
   private container: HTMLDivElement;
+
+  onplaybackevent = () => {};
 
   constructor() {
     this.container = document.getElementById("playback") as HTMLDivElement;
@@ -16,6 +20,7 @@ export default class Playback {
       image.src = item.src;
       image.alt = item.alt;
       image.draggable = false;
+      image.onclick = () => this.onplaybackevent();
 
       this.container.appendChild(image);
     }

@@ -3,6 +3,7 @@ import Puzzle from "./puzzle";
 
 export default class PuzzleRunner extends Puzzle {
   private playback: Playback;
+  private command_queue: HTMLTextAreaElement;
 
   constructor() {
     super();
@@ -22,6 +23,16 @@ export default class PuzzleRunner extends Puzzle {
     bar.appendChild(img);
     bar.appendChild(playback);
 
+    this.command_queue = document.getElementById(
+      "command-queue",
+    ) as HTMLTextAreaElement;
+
     this.playback = new Playback();
+    this.playback.onplaybackevent = () => {
+      const value = this.command_queue.value;
+      const queue = value.trim().split(/\s+/);
+
+      console.log(queue);
+    };
   }
 }
