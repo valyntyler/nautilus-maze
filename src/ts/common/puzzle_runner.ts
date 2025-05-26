@@ -1,4 +1,5 @@
 import Command from "../data/command";
+import Grid from "../data/grid";
 import Transform from "../data/transform";
 import Playback from "./playback";
 import Puzzle from "./puzzle";
@@ -39,7 +40,10 @@ export default class PuzzleRunner extends Puzzle {
     await new Promise((resolve) => setTimeout(resolve, 50));
     switch (cmd) {
       case Command.Step: {
-        this.robot = Transform.step(this.robot);
+        const robot = Transform.step(this.robot);
+        if (Grid.isGridCoord(robot.position, this.maze)) {
+          this.robot = robot;
+        }
         break;
       }
       case Command.Back: {
