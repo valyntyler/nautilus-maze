@@ -38,6 +38,35 @@ namespace Position {
       }
     }
   }
+
+  export function back(pos: Position, r: Rotation): Position {
+    switch (r) {
+      case Rotation.Up: {
+        return {
+          x: pos.x,
+          y: pos.y + 1,
+        };
+      }
+      case Rotation.Down: {
+        return {
+          x: pos.x,
+          y: pos.y - 1,
+        };
+      }
+      case Rotation.Left: {
+        return {
+          x: pos.x + 1,
+          y: pos.y,
+        };
+      }
+      case Rotation.Right: {
+        return {
+          x: pos.x - 1,
+          y: pos.y,
+        };
+      }
+    }
+  }
 }
 
 export default Position;

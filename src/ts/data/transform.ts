@@ -24,6 +24,13 @@ namespace Transform {
     };
   }
 
+  export function back(t: Transform): Transform {
+    return {
+      position: Position.back(t.position, t.rotation),
+      rotation: t.rotation,
+    };
+  }
+
   export function turn(t: Transform): Transform {
     return {
       position: t.position,
