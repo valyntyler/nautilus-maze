@@ -1,3 +1,5 @@
+import Command from "../data/command";
+import Transform from "../data/transform";
 import Playback from "./playback";
 import Puzzle from "./puzzle";
 import Queue from "./queue";
@@ -26,8 +28,34 @@ export default class PuzzleRunner extends Puzzle {
 
     this.queue = new Queue();
     this.playback = new Playback();
-    this.playback.onplaybackevent = () => {
-      console.log(this.queue.commands);
+    this.playback.onplaybackevent = async () => {
+      for (const cmd of this.queue.commands) {
+        await this.execute(cmd);
+      }
     };
+  }
+
+  async execute(cmd: Command) {
+    await new Promise((resolve) => setTimeout(resolve, 50));
+    switch (cmd) {
+      case Command.Step: {
+        this.robot = Transform.step(this.robot);
+        break;
+      }
+      case Command.Back: {
+        this.robot = Transform.back(this.robot);
+        break;
+      }
+      case Command.Move: {
+        break;
+      }
+      case Command.Left: {
+        break;
+      }
+      case Command.Turn: {
+        this.robot = Transform.turn(this.robot);
+        break;
+      }
+    }
   }
 }
