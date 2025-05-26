@@ -1,9 +1,10 @@
 import Playback from "./playback";
 import Puzzle from "./puzzle";
+import Queue from "./queue";
 
 export default class PuzzleRunner extends Puzzle {
   private playback: Playback;
-  private command_queue: HTMLTextAreaElement;
+  private queue: Queue;
 
   constructor() {
     super();
@@ -23,16 +24,10 @@ export default class PuzzleRunner extends Puzzle {
     bar.appendChild(img);
     bar.appendChild(playback);
 
-    this.command_queue = document.getElementById(
-      "command-queue",
-    ) as HTMLTextAreaElement;
-
+    this.queue = new Queue();
     this.playback = new Playback();
     this.playback.onplaybackevent = () => {
-      const value = this.command_queue.value;
-      const queue = value.trim().split(/\s+/);
-
-      console.log(queue);
+      console.log(this.queue.commands);
     };
   }
 }
