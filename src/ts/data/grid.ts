@@ -1,4 +1,5 @@
 import Cell from "./cell";
+import Position from "./position";
 
 interface Grid extends Array<Array<Cell>> {}
 
@@ -15,6 +16,19 @@ namespace Grid {
 
   export function cols(grid: Grid): number {
     return grid[0].length;
+  }
+
+  export function isGridCoord(coord: Position, grid: Grid): boolean {
+    const rows = Grid.rows(grid);
+    const cols = Grid.cols(grid);
+
+    if (coord.x < 0) return false;
+    if (coord.x >= cols) return false;
+
+    if (coord.y < 0) return false;
+    if (coord.y >= rows) return false;
+
+    return true;
   }
 }
 
