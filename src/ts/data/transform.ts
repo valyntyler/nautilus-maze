@@ -16,6 +16,13 @@ namespace Transform {
       rotation,
     };
   }
+
+  export function turn(t: Transform): Transform {
+    return {
+      position: t.position,
+      rotation: Rotation.turn(t.rotation),
+    };
+  }
 }
 
 export default Transform;
