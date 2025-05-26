@@ -17,6 +17,13 @@ namespace Transform {
     };
   }
 
+  export function step(t: Transform): Transform {
+    return {
+      position: Position.step(t.position, t.rotation),
+      rotation: t.rotation,
+    };
+  }
+
   export function turn(t: Transform): Transform {
     return {
       position: t.position,
