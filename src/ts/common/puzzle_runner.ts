@@ -47,13 +47,26 @@ export default class PuzzleRunner extends Puzzle {
         break;
       }
       case Command.Back: {
-        this.robot = Transform.back(this.robot);
+        const robot = Transform.back(this.robot);
+        if (Grid.isGridCoord(robot.position, this.maze)) {
+          this.robot = robot;
+        }
         break;
       }
       case Command.Move: {
+        const robot = Transform.step(this.robot);
+        if (Grid.isGridCoord(robot.position, this.maze)) {
+          this.robot = robot;
+          this.execute(Command.Move);
+        }
         break;
       }
       case Command.Left: {
+        const robot = Transform.step(this.robot);
+        if (Grid.isGridCoord(robot.position, this.maze)) {
+          this.robot = robot;
+          this.execute(Command.Move);
+        }
         break;
       }
       case Command.Turn: {
