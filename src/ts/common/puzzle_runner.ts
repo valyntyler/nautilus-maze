@@ -57,7 +57,7 @@ export default class PuzzleRunner extends Puzzle {
         const robot = Transform.step(this.robot);
         if (Grid.isGridCoord(robot.position, this.maze)) {
           this.robot = robot;
-          this.execute(Command.Move);
+          await this.execute(Command.Move);
         }
         break;
       }
@@ -65,7 +65,7 @@ export default class PuzzleRunner extends Puzzle {
         const robot = Transform.step(this.robot);
         if (Grid.isGridCoord(robot.position, this.maze)) {
           this.robot = robot;
-          this.execute(Command.Move);
+          await this.execute(Command.Move);
         }
         break;
       }
