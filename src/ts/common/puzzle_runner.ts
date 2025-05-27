@@ -36,6 +36,7 @@ export default class PuzzleRunner extends Puzzle {
       for (const cmd of this.queue.commands) {
         await this.execute(cmd);
       }
+      this.playback.state = PlaybackState.Ended;
     };
   }
 

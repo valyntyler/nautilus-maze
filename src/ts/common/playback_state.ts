@@ -13,10 +13,10 @@ namespace PlaybackState {
         return [PlaybackButton.Prev, PlaybackButton.Next, PlaybackButton.Play];
       }
       case PlaybackState.Running: {
-        return [];
+        return [PlaybackButton.Pause];
       }
       case PlaybackState.Ended: {
-        return [];
+        return [PlaybackButton.Reset];
       }
     }
   }
