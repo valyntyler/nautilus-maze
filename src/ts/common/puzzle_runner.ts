@@ -2,6 +2,7 @@ import Command from "../data/command";
 import Grid from "../data/grid";
 import Transform from "../data/transform";
 import Playback from "./playback";
+import PlaybackState from "./playback_state";
 import Puzzle from "./puzzle";
 import Queue from "./queue";
 
@@ -29,7 +30,9 @@ export default class PuzzleRunner extends Puzzle {
 
     this.queue = new Queue();
     this.playback = new Playback();
+
     this.playback.onplaybackevent = async () => {
+      this.playback.state = PlaybackState.Running;
       for (const cmd of this.queue.commands) {
         await this.execute(cmd);
       }

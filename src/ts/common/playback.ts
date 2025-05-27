@@ -12,6 +12,7 @@ export default class Playback {
   set state(value: PlaybackState) {
     this._state = value;
 
+    this.container.innerHTML = "";
     for (const btn of PlaybackState.controls(this.state)) {
       const image = document.createElement("img");
 
