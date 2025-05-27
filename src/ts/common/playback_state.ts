@@ -2,7 +2,7 @@ import PlaybackButton from "./playback_button";
 
 enum PlaybackState {
   Ready,
-  Playing,
+  Running,
   Ended,
 }
 
@@ -12,7 +12,7 @@ namespace PlaybackState {
       case PlaybackState.Ready: {
         return [PlaybackButton.Prev, PlaybackButton.Next, PlaybackButton.Play];
       }
-      case PlaybackState.Playing: {
+      case PlaybackState.Running: {
         return [];
       }
       case PlaybackState.Ended: {
