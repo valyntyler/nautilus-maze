@@ -13,21 +13,7 @@ export default class PuzzleRunner extends Puzzle {
 
   constructor() {
     super();
-
-    const playback = document.createElement("div");
-    const img = document.createElement("img");
-    const bar = document.getElementById("bar")!;
-
-    playback.id = "playback";
-    playback.className = "playback-container";
-
-    img.src = "./assets/bx-edit-alt.svg";
-    img.id = "edit";
-    img.onclick = () => this.onedit();
-
-    bar.innerHTML = "";
-    bar.appendChild(img);
-    bar.appendChild(playback);
+    this.html();
 
     this.queue = new Queue();
     this.playback = new Playback();
@@ -96,5 +82,22 @@ export default class PuzzleRunner extends Puzzle {
         break;
       }
     }
+  }
+
+  html() {
+    const playback = document.createElement("div");
+    const img = document.createElement("img");
+    const bar = document.getElementById("bar")!;
+
+    playback.id = "playback";
+    playback.className = "playback-container";
+
+    img.src = "./assets/bx-edit-alt.svg";
+    img.id = "edit";
+    img.onclick = () => this.onedit();
+
+    bar.innerHTML = "";
+    bar.appendChild(img);
+    bar.appendChild(playback);
   }
 }
