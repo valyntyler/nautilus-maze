@@ -74,6 +74,8 @@ export default class Puzzle {
   }
 
   set maze(value: Grid) {
+    this.container.innerHTML = "";
+
     const rows = Grid.rows(value);
     const cols = Grid.cols(value);
 
@@ -110,7 +112,6 @@ export default class Puzzle {
 
   constructor() {
     this.container = document.getElementById("maze") as HTMLDivElement;
-    this.container.innerHTML = "";
     this.state = this.local;
 
     this.onchange = () => {

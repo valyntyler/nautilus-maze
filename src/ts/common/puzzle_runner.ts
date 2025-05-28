@@ -38,6 +38,8 @@ export default class PuzzleRunner extends Puzzle {
           break;
         }
         case PlaybackButton.Reset: {
+          this.state = this.local;
+          this.playback.state = PlaybackState.Ready;
           break;
         }
       }
