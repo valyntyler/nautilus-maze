@@ -17,12 +17,15 @@ export default class Queue {
     return this._index;
   }
 
+  get current(): Command {
+    return this.queue[this.index];
+  }
+
   get next(): Command | null {
-    if (this.index >= this.queue.length) {
+    if (this.index >= this.queue.length - 1) {
       return null;
     }
-
-    return this.queue[this.index++];
+    return this.queue[++this.index];
   }
 
   get prev(): Command | null {
@@ -30,7 +33,7 @@ export default class Queue {
       return null;
     }
 
-    return this.queue[this.index--];
+    return this.queue[--this.index];
   }
 
   private set index(value: number) {
