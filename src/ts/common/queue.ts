@@ -22,7 +22,7 @@ export default class Queue {
   }
 
   get next(): Command | null {
-    if (this.index >= this.queue.length - 1) {
+    if (this.index >= this.queue.length) {
       return null;
     }
     return this.queue[this.index + 1];
