@@ -2,12 +2,19 @@ import Command from "../data/command";
 import Grid from "../data/grid";
 import Transform from "../data/transform";
 import Playback from "./playback";
+import PlaybackButton from "./playback_button";
+import PlaybackState from "./playback_state";
 import Puzzle from "./puzzle";
 import Queue from "./queue";
 
 export default class PuzzleRunner extends Puzzle {
   private playback: Playback;
   private queue: Queue;
+  private index: number = 0;
+
+  private get stages(): Array<Transform> {
+    return Command.bake(this.queue.commands, this.local.robot, this.local.maze);
+  }
 
   constructor() {
     super();
@@ -16,11 +23,32 @@ export default class PuzzleRunner extends Puzzle {
     this.playback = new Playback();
     this.queue = new Queue();
 
-    this.playback.onplaybackclick = async (_) => {
-      const stages = Command.bake(this.queue.commands, this.robot, this.maze);
-      for (const stage of stages) {
-        await new Promise((resolve) => setTimeout(resolve, 200));
-        this.robot = stage;
+    this.playback.onplaybackclick = async (b) => {
+      switch (b) {
+        case PlaybackButton.Prev: {
+          break;
+        }
+        case PlaybackButton.Next: {
+          break;
+        }
+        case PlaybackButton.Play: {
+          this.playback.state = PlaybackState.Running;
+          for (this.index; this.index < this.stages.length; this.index++) {
+            this.robot = this.stages[this.index];
+            await new Promise((resolve) => setTimeout(resolve, 500));
+          }
+          this.playback.state = PlaybackState.Ended;
+          break;
+        }
+        case PlaybackButton.Pause: {
+          break;
+        }
+        case PlaybackButton.Reset: {
+          this.state = this.local;
+          this.index = 0;
+          this.playback.state = PlaybackState.Ready;
+          break;
+        }
       }
     };
   }
