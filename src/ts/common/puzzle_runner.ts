@@ -26,14 +26,19 @@ export default class PuzzleRunner extends Puzzle {
     this.playback.onplaybackclick = async (b) => {
       switch (b) {
         case PlaybackButton.Prev: {
+          this.robot = this.stages[--this.index];
           break;
         }
         case PlaybackButton.Next: {
+          this.robot = this.stages[++this.index];
           break;
         }
         case PlaybackButton.Play: {
           this.playback.state = PlaybackState.Running;
           for (this.index; this.index < this.stages.length; this.index++) {
+            if (this.playback.state !== PlaybackState.Running) {
+              return;
+            }
             this.robot = this.stages[this.index];
             await new Promise((resolve) => setTimeout(resolve, 500));
           }
@@ -41,6 +46,7 @@ export default class PuzzleRunner extends Puzzle {
           break;
         }
         case PlaybackButton.Pause: {
+          this.playback.state = PlaybackState.Ready;
           break;
         }
         case PlaybackButton.Reset: {
