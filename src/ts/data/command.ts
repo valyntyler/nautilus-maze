@@ -37,28 +37,40 @@ namespace Command {
     switch (cmd) {
       case Command.Step: {
         const result = Transform.step(robot);
-        if (Grid.contains(result.position, maze)) {
+        if (
+          Grid.contains(result.position, maze) &&
+          !Grid.isWall(result.position, maze)
+        ) {
           return result;
         }
         return robot;
       }
       case Command.Back: {
         const result = Transform.back(robot);
-        if (Grid.contains(result.position, maze)) {
+        if (
+          Grid.contains(result.position, maze) &&
+          !Grid.isWall(result.position, maze)
+        ) {
           return result;
         }
         return robot;
       }
       case Command.Move: {
         const result = Transform.step(robot);
-        if (Grid.contains(result.position, maze)) {
+        if (
+          Grid.contains(result.position, maze) &&
+          !Grid.isWall(result.position, maze)
+        ) {
           return Command.run(cmd, result, maze);
         }
         return robot;
       }
       case Command.Left: {
         const result = Transform.step(robot);
-        if (Grid.contains(result.position, maze)) {
+        if (
+          Grid.contains(result.position, maze) &&
+          !Grid.isWall(result.position, maze)
+        ) {
           return Command.run(cmd, result, maze);
         }
         return robot;
