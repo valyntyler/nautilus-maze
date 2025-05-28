@@ -30,6 +30,10 @@ namespace Grid {
 
     return true;
   }
+
+  export function isWall(coord: Position, grid: Grid) {
+    return grid[coord.y][coord.x] === 1;
+  }
 }
 
 export default Grid;
