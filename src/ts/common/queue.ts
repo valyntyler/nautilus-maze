@@ -1,7 +1,7 @@
 import Command from "../data/command";
 
 export default class Queue {
-  container: HTMLTextAreaElement;
+  private container: HTMLTextAreaElement;
 
   get commands(): Array<Command> {
     const value = this.container.value;
