@@ -35,10 +35,10 @@ export default class PuzzleRunner extends Puzzle {
         case PlaybackButton.Play: {
           this.playback.state = PlaybackState.Running;
           while (this.stages.peek_next() !== null) {
+            await new Promise((resolve) => setTimeout(resolve, 500));
             if (this.playback.state !== PlaybackState.Running) {
               return;
             }
-            await new Promise((resolve) => setTimeout(resolve, 500));
             this.robot = this.stages.next()!;
           }
           this.playback.state = PlaybackState.Ended;
