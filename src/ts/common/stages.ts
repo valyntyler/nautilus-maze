@@ -21,9 +21,14 @@ export default class Stages {
   }
 
   constructor(commands: Array<Command>, start: Transform, maze: Grid) {
+    let current = start;
     this.array = [
       start,
-      ...commands.map((cmd) => Command.run(cmd, start, maze)),
+      ...commands.map((cmd) => {
+        current = Command.run(cmd, current, maze);
+        return current;
+      }),
     ];
+    console.log(this.array);
   }
 }
