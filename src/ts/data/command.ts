@@ -50,11 +50,17 @@ namespace Command {
         return robot;
       }
       case Command.Move: {
-        // TODO:
+        const result = Transform.step(robot);
+        if (Grid.contains(result.position, maze)) {
+          return Command.run(cmd, result, maze);
+        }
         return robot;
       }
       case Command.Left: {
-        // TODO:
+        const result = Transform.step(robot);
+        if (Grid.contains(result.position, maze)) {
+          return Command.run(cmd, result, maze);
+        }
         return robot;
       }
       case Command.Turn: {
