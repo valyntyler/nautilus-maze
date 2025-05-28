@@ -4,7 +4,7 @@ export default class Queue {
   private container: HTMLTextAreaElement;
   private _index = 0;
 
-  private get queue(): Array<Command> {
+  private get array(): Array<Command> {
     const value = this.container.value;
     const queue = value.trim().split(/\s+/);
 
@@ -18,22 +18,15 @@ export default class Queue {
   }
 
   get current(): Command {
-    return this.queue[this.index];
+    return this.array[this.index];
   }
 
-  get next(): Command | null {
-    if (this.index >= this.queue.length) {
-      return null;
+  get rest(): Array<Command> {
+    let v: Array<Command> = [];
+    for (let k = this.index; k < this.array.length; k++) {
+      v.push(this.array[k]);
     }
-    return this.queue[this.index + 1];
-  }
-
-  get prev(): Command | null {
-    if (this.index <= 0) {
-      return null;
-    }
-
-    return this.queue[this.index - 1];
+    return v;
   }
 
   set index(value: number) {
