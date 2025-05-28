@@ -68,21 +68,6 @@ namespace Command {
       }
     }
   }
-
-  export function bake(
-    commands: Array<Command>,
-    robot: Transform,
-    maze: Grid,
-  ): Array<Transform> {
-    const out: Array<Transform> = [robot];
-
-    for (const cmd of commands) {
-      robot = Command.run(cmd, robot, maze);
-      out.push(robot);
-    }
-
-    return out;
-  }
 }
 
 export default Command;
