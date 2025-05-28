@@ -1,20 +1,14 @@
-import Command from "../data/command";
-import Grid from "../data/grid";
-import Transform from "../data/transform";
 import Playback from "./playback";
 import PlaybackButton from "./playback_button";
 import PlaybackState from "./playback_state";
 import Puzzle from "./puzzle";
 import Queue from "./queue";
+import Stages from "./stages";
 
 export default class PuzzleRunner extends Puzzle {
   private playback: Playback;
   private queue: Queue;
-  private index: number = 0;
-
-  private get stages(): Array<Transform> {
-    return Command.bake(this.queue.commands, this.local.robot, this.local.maze);
-  }
+  private stages: Stages;
 
   constructor() {
     super();
@@ -22,29 +16,30 @@ export default class PuzzleRunner extends Puzzle {
 
     this.playback = new Playback();
     this.queue = new Queue();
+    this.stages = new Stages(this.queue.commands, this.robot, this.maze);
 
     this.playback.onplaybackclick = async (b) => {
       switch (b) {
         case PlaybackButton.Prev: {
-          if (this.index > 0) {
-            this.robot = this.stages[--this.index];
+          if (this.stages.peek_prev() !== null) {
+            this.robot = this.stages.prev()!;
           }
           break;
         }
         case PlaybackButton.Next: {
-          if (this.index < this.stages.length - 1) {
-            this.robot = this.stages[++this.index];
+          if (this.stages.peek_next() !== null) {
+            this.robot = this.stages.next()!;
           }
           break;
         }
         case PlaybackButton.Play: {
           this.playback.state = PlaybackState.Running;
-          for (this.index; this.index < this.stages.length; this.index++) {
+          while (this.stages.peek_next() !== null) {
             if (this.playback.state !== PlaybackState.Running) {
               return;
             }
-            this.robot = this.stages[this.index];
             await new Promise((resolve) => setTimeout(resolve, 500));
+            this.robot = this.stages.next()!;
           }
           this.playback.state = PlaybackState.Ended;
           break;
@@ -54,9 +49,8 @@ export default class PuzzleRunner extends Puzzle {
           break;
         }
         case PlaybackButton.Reset: {
-          this.state = this.local;
-          this.index = 0;
           this.playback.state = PlaybackState.Ready;
+          this.robot = this.stages.origin();
           break;
         }
       }
