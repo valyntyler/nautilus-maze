@@ -18,7 +18,7 @@ namespace Grid {
     return grid[0].length;
   }
 
-  export function isGridCoord(coord: Position, grid: Grid): boolean {
+  export function contains(coord: Position, grid: Grid): boolean {
     const rows = Grid.rows(grid);
     const cols = Grid.cols(grid);
 
