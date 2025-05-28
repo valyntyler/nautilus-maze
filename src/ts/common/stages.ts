@@ -21,6 +21,9 @@ export default class Stages {
   }
 
   constructor(commands: Array<Command>, start: Transform, maze: Grid) {
-    this.array = commands.map((cmd) => Command.run(cmd, start, maze));
+    this.array = [
+      start,
+      ...commands.map((cmd) => Command.run(cmd, start, maze)),
+    ];
   }
 }
