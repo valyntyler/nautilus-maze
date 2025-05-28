@@ -15,7 +15,6 @@ export default class Stages {
         return current;
       }),
     ];
-    console.log(this.array);
   }
 
   prev(): Transform | null {
