@@ -67,9 +67,11 @@ namespace Command {
       }
       case Command.Left: {
         const result = Transform.step(robot);
+        const left = Transform.step(Transform.turn(robot));
         if (
           Grid.contains(result.position, maze) &&
-          !Grid.isWall(result.position, maze)
+          !Grid.isWall(result.position, maze) &&
+          Grid.isWall(left.position, maze)
         ) {
           return Command.run(cmd, result, maze);
         }
