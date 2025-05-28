@@ -25,7 +25,7 @@ export default class Queue {
     if (this.index >= this.queue.length - 1) {
       return null;
     }
-    return this.queue[++this.index];
+    return this.queue[this.index + 1];
   }
 
   get prev(): Command | null {
@@ -33,10 +33,10 @@ export default class Queue {
       return null;
     }
 
-    return this.queue[--this.index];
+    return this.queue[this.index - 1];
   }
 
-  private set index(value: number) {
+  set index(value: number) {
     this._index = value;
   }
 
