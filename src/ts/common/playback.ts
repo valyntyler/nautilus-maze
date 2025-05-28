@@ -19,13 +19,13 @@ export default class Playback {
       image.src = PlaybackButton.source(btn);
       image.alt = PlaybackButton.name(btn);
       image.draggable = false;
-      image.onclick = () => this.onplaybackevent();
+      image.onclick = () => this.onplaybackclick(btn);
 
       this.container.appendChild(image);
     }
   }
 
-  onplaybackevent = () => {};
+  onplaybackclick = (btn: PlaybackButton) => {};
 
   constructor() {
     this.container = document.getElementById("playback") as HTMLDivElement;

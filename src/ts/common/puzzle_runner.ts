@@ -2,6 +2,7 @@ import Command from "../data/command";
 import Grid from "../data/grid";
 import Transform from "../data/transform";
 import Playback from "./playback";
+import PlaybackButton from "./playback_button";
 import PlaybackState from "./playback_state";
 import Puzzle from "./puzzle";
 import Queue from "./queue";
@@ -31,12 +32,29 @@ export default class PuzzleRunner extends Puzzle {
     this.queue = new Queue();
     this.playback = new Playback();
 
-    this.playback.onplaybackevent = async () => {
-      this.playback.state = PlaybackState.Running;
-      for (const cmd of this.queue.commands) {
-        await this.execute(cmd);
+    this.playback.onplaybackclick = async (btn) => {
+      switch (btn) {
+        case PlaybackButton.Prev: {
+          break;
+        }
+        case PlaybackButton.Next: {
+          break;
+        }
+        case PlaybackButton.Play: {
+          this.playback.state = PlaybackState.Running;
+          for (const cmd of this.queue.commands) {
+            await this.execute(cmd);
+          }
+          this.playback.state = PlaybackState.Ended;
+          break;
+        }
+        case PlaybackButton.Pause: {
+          break;
+        }
+        case PlaybackButton.Reset: {
+          break;
+        }
       }
-      this.playback.state = PlaybackState.Ended;
     };
   }
 
