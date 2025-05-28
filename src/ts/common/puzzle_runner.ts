@@ -26,11 +26,15 @@ export default class PuzzleRunner extends Puzzle {
     this.playback.onplaybackclick = async (b) => {
       switch (b) {
         case PlaybackButton.Prev: {
-          this.robot = this.stages[--this.index];
+          if (this.index > 0) {
+            this.robot = this.stages[--this.index];
+          }
           break;
         }
         case PlaybackButton.Next: {
-          this.robot = this.stages[++this.index];
+          if (this.index < this.stages.length - 1) {
+            this.robot = this.stages[++this.index];
+          }
           break;
         }
         case PlaybackButton.Play: {
