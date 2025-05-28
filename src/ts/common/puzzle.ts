@@ -18,6 +18,16 @@ export default class Puzzle {
     state: MouseState,
   ) => {};
 
+  get local(): PuzzleState {
+    const string = localStorage.getItem("puzzle-state");
+    return string
+      ? JSON.parse(string)
+      : {
+          maze: Grid.create(14, 15),
+          robot: Transform.create(),
+        };
+  }
+
   get state(): PuzzleState {
     return {
       robot: this.robot,
@@ -99,17 +109,9 @@ export default class Puzzle {
   }
 
   constructor() {
-    const local = localStorage.getItem("puzzle-state");
-    const state: PuzzleState = local
-      ? JSON.parse(local)
-      : {
-          maze: Grid.create(14, 15),
-          robot: Transform.create(),
-        };
-
     this.container = document.getElementById("maze") as HTMLDivElement;
     this.container.innerHTML = "";
-    this.state = state;
+    this.state = this.local;
 
     this.onchange = () => {
       localStorage.setItem("puzzle-state", JSON.stringify(this.state));
