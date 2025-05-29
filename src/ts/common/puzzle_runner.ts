@@ -17,10 +17,7 @@ export default class PuzzleRunner extends Puzzle {
     this.playback = new Playback();
     this.queue = new Queue();
     this.stages = new Stages(this.queue.commands, this.robot, this.maze.grid);
-
-    this.playback.onclick = (btn) => {
-      this.handlePlayback(btn);
-    };
+    this.playback.onclick = (btn) => this.handlePlayback(btn);
   }
 
   private async handlePlayback(button: PlaybackButton) {
