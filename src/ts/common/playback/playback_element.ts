@@ -1,34 +1,24 @@
 import PlaybackButton from "./playback_button";
-import PlaybackState from "./playback_state";
+import PlaybackEventBus from "./playback_event_bus";
 
 export default class PlaybackElement {
   private container: HTMLDivElement;
-  private _state: PlaybackState;
 
-  public onclick = (btn: PlaybackButton) => {};
-
-  get state(): PlaybackState {
-    return this._state;
-  }
-
-  set state(value: PlaybackState) {
-    this._state = value;
-
+  constructor(bus: PlaybackEventBus, controls: Array<PlaybackButton>) {
+    this.container = document.getElementById("playback") as HTMLDivElement;
     this.container.innerHTML = "";
-    for (const btn of PlaybackState.controls(this.state)) {
+
+    for (const btn of controls) {
       const image = document.createElement("img");
 
-      image.src = PlaybackButton.source(btn);
-      image.alt = PlaybackButton.name(btn);
+      image.alt = btn.name;
+      image.src = btn.source;
       image.draggable = false;
-      image.onclick = () => this.onclick(btn);
+      image.onclick = () => {
+        if (bus.onevent) bus.onevent(btn.event);
+      };
 
       this.container.appendChild(image);
     }
-  }
-
-  constructor() {
-    this.container = document.getElementById("playback") as HTMLDivElement;
-    this.state = PlaybackState.Ready;
   }
 }
