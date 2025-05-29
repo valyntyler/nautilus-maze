@@ -9,12 +9,12 @@
   border: 1px solid black;
 }
 
-.command-container {
+form {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.command-container input {
+form input {
   flex: 1;
 }
