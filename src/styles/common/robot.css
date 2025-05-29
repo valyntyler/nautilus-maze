@@ -1,0 +1,34 @@
+:root {
+  --robot-x: 0;
+  --robot-y: 0;
+}
+
+.robot {
+  background: #ff000055;
+  width: var(--cell-size);
+  height: var(--cell-size);
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  top: calc(var(--robot-y) * calc(var(--cell-size) + 1px));
+  left: calc(var(--robot-x) * calc(var(--cell-size) + 1px));
+
+  transition:
+    top 200ms,
+    left 200ms,
+    transform 200ms;
+}
+
+.robot[data-rotation="down"] {
+  transform: rotate(180deg);
+}
+
+.robot[data-rotation="left"] {
+  transform: rotate(-90deg);
+}
+
+.robot[data-rotation="right"] {
+  transform: rotate(90deg);
+}
