@@ -10,6 +10,26 @@ enum Command {
 }
 
 namespace Command {
+  export function name(cmd: Command): string {
+    switch (cmd) {
+      case Command.Step: {
+        return "step";
+      }
+      case Command.Back: {
+        return "back";
+      }
+      case Command.Move: {
+        return "move";
+      }
+      case Command.Left: {
+        return "left";
+      }
+      case Command.Turn: {
+        return "turn";
+      }
+    }
+  }
+
   export function parse(s: string): Command | null {
     switch (s.toLowerCase()) {
       case "step": {
