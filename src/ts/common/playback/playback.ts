@@ -2,6 +2,7 @@ import PlaybackButton from "./playback_button";
 import PlaybackEvent from "./playback_event";
 import PlaybackState from "./playback_state";
 import Transform from "../../data/transform";
+import Robot from "../robot";
 
 export default class Playback {
   private container: HTMLDivElement;
@@ -25,6 +26,15 @@ export default class Playback {
 
   private set index(value: number) {
     this._index = value;
+    Object.assign(this.robot, this.steps[value]);
+  }
+
+  private get steps(): Array<Transform> {
+    return this._steps;
+  }
+
+  private set steps(value: Array<Transform>) {
+    this._steps = value;
   }
 
   private html() {
@@ -81,7 +91,7 @@ export default class Playback {
 
       case PlaybackEvent.Play: {
         this.state = PlaybackState.Running;
-        for (this.index; this.index < 10; this.index++) {
+        for (this.index; this.index < this.steps.length; this.index++) {
           console.log(this.index);
           if (await this.signal(500)) return;
         }
@@ -129,8 +139,13 @@ export default class Playback {
     return false;
   }
 
-  constructor() {
+  constructor(
+    steps: Array<Transform>,
+    private robot: Robot,
+  ) {
     this.html();
     this.hookup();
+
+    this.steps = steps;
   }
 }
