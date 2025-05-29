@@ -10,7 +10,7 @@ export default class PuzzleRunner extends Puzzle {
     super();
     this.html();
 
-    this.commands = new Commands(this.robot, this.maze.grid);
+    this.commands = new Commands(this.robot.transform, this.maze.grid);
     this.playback = new PlaybackElement(this.commands.steps, this.robot);
   }
 
