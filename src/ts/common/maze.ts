@@ -55,8 +55,6 @@ export default class Maze {
 
       this.container.appendChild(row);
     }
-
-    this.save();
   }
 
   constructor() {
