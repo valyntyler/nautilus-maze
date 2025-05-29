@@ -62,15 +62,16 @@ export default class PuzzleEditor extends Puzzle {
     event: MouseEvent,
     state: MouseState,
   ) {
-    const length = cell.children.length;
     if (!cell.classList.contains("black")) {
-      if (state.left && length === 0) {
-        // this.place(cell);
-      } else if (state.right && length !== 0) {
-        // const id = cell.children[0].className;
-        // const r = Rotation.parse(id)!;
-        //
-        // this.place(cell, Rotation.turn(r));
+      if (state.left) {
+        const parent = cell.parentElement!;
+        const row = Array.from(parent.children);
+        const col = Array.from(parent.parentElement!.children);
+
+        const x = row.indexOf(cell);
+        const y = col.indexOf(parent);
+
+        this.robot.position = { x, y };
       }
     }
   }

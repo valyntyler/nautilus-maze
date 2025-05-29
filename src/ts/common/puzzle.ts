@@ -8,7 +8,7 @@ export default class Puzzle {
   private container: HTMLDivElement;
 
   protected maze: Maze;
-  private robot: Robot;
+  protected robot: Robot;
 
   onview = () => {};
   onedit = () => {};
