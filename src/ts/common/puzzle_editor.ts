@@ -1,4 +1,5 @@
 import Rotation from "../data/rotation";
+import Transform from "../data/transform";
 import MouseEvent from "./mouse_event";
 import MouseState from "./mouse_state";
 import Puzzle from "./puzzle";
@@ -63,15 +64,23 @@ export default class PuzzleEditor extends Puzzle {
     state: MouseState,
   ) {
     if (!cell.classList.contains("black")) {
+      const parent = cell.parentElement!;
+      const row = Array.from(parent.children);
+      const col = Array.from(parent.parentElement!.children);
+
+      const x = row.indexOf(cell);
+      const y = col.indexOf(parent);
+
       if (state.left) {
-        const parent = cell.parentElement!;
-        const row = Array.from(parent.children);
-        const col = Array.from(parent.parentElement!.children);
-
-        const x = row.indexOf(cell);
-        const y = col.indexOf(parent);
-
         this.robot.position = { x, y };
+        this.robot.save();
+      }
+      if (
+        state.right &&
+        x === this.robot.position.x &&
+        y === this.robot.position.y
+      ) {
+        this.robot.rotation = Rotation.turn(this.robot.rotation);
       }
     }
   }
