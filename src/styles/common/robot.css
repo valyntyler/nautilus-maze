@@ -11,6 +11,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  user-select: none;
 
   top: calc(var(--robot-y) * calc(var(--cell-size) + 1px));
   left: calc(var(--robot-x) * calc(var(--cell-size) + 1px));
