@@ -33,9 +33,15 @@ export default class Commands {
       const div = document.createElement("div");
       div.className = "command";
       div.textContent = input.value;
-      this.container.appendChild(div);
 
-      input.value = "";
+      if (
+        Command.values()
+          .map((cmd) => Command.name(cmd))
+          .includes(input.value)
+      ) {
+        this.container.appendChild(div);
+        input.value = "";
+      }
     });
   }
 }
