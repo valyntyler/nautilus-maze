@@ -23,67 +23,47 @@ export default class PuzzleRunner extends Puzzle {
     };
   }
 
-  public prev() {
-    if (this.stages.peek_prev() !== null) {
-      const prev = this.stages.prev()!;
-      this.robot.position = prev.position;
-      this.robot.rotation = prev.rotation;
-    }
-  }
-
-  public next() {
-    if (this.stages.peek_next() !== null) {
-      const next = this.stages.next()!;
-      this.robot.position = next.position;
-      this.robot.rotation = next.rotation;
-    }
-  }
-
-  public async play() {
-    this.playback.state = PlaybackState.Running;
-    while (this.stages.peek_next() !== null) {
-      await new Promise((resolve) => setTimeout(resolve, 500));
-      if (this.playback.state !== PlaybackState.Running) {
-        return;
-      }
-      const next = this.stages.next()!;
-      this.robot.position = next.position;
-      this.robot.rotation = next.rotation;
-    }
-    this.playback.state = PlaybackState.Ended;
-  }
-
-  public pause() {
-    this.playback.state = PlaybackState.Ready;
-  }
-
-  public reset() {
-    this.playback.state = PlaybackState.Ready;
-    const origin = this.stages.origin()!;
-    this.robot.position = origin.position;
-    this.robot.rotation = origin.rotation;
-  }
-
   private async handlePlayback(button: PlaybackButton) {
     switch (button) {
       case PlaybackButton.Prev: {
-        this.prev();
+        if (this.stages.peek_prev() !== null) {
+          const prev = this.stages.prev()!;
+          this.robot.position = prev.position;
+          this.robot.rotation = prev.rotation;
+        }
         break;
       }
       case PlaybackButton.Next: {
-        this.next();
+        if (this.stages.peek_next() !== null) {
+          const next = this.stages.next()!;
+          this.robot.position = next.position;
+          this.robot.rotation = next.rotation;
+        }
         break;
       }
       case PlaybackButton.Play: {
-        await this.play();
+        this.playback.state = PlaybackState.Running;
+        while (this.stages.peek_next() !== null) {
+          await new Promise((resolve) => setTimeout(resolve, 500));
+          if (this.playback.state !== PlaybackState.Running) {
+            return;
+          }
+          const next = this.stages.next()!;
+          this.robot.position = next.position;
+          this.robot.rotation = next.rotation;
+        }
+        this.playback.state = PlaybackState.Ended;
         break;
       }
       case PlaybackButton.Pause: {
-        this.pause();
+        this.playback.state = PlaybackState.Ready;
         break;
       }
       case PlaybackButton.Reset: {
-        this.reset();
+        this.playback.state = PlaybackState.Ready;
+        const origin = this.stages.origin()!;
+        this.robot.position = origin.position;
+        this.robot.rotation = origin.rotation;
         break;
       }
     }
