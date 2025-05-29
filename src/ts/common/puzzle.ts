@@ -5,6 +5,7 @@ import Maze from "./maze";
 import MouseEvent from "./mouse_event";
 import MouseState from "./mouse_state";
 import PuzzleState from "./puzzle_state";
+import Robot from "./robot";
 
 export default class Puzzle {
   protected maze: Maze;
@@ -64,15 +65,9 @@ export default class Puzzle {
     this.container = document.getElementById("puzzle") as HTMLDivElement;
     this.container.innerHTML = "";
 
+    const asdf = new Robot();
+
     this.maze = new Maze();
-
-    //
-
-    // this.state = this.local;
-
-    this.onchange = () => {
-      localStorage.setItem("puzzle-state", JSON.stringify(this.state));
-    };
   }
 
   cell(x: number, y: number): HTMLDivElement {

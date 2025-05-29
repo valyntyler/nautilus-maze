@@ -2,9 +2,6 @@ import Rotation from "../data/rotation";
 import Transform from "../data/transform";
 
 export default class Robot {
-  private container: HTMLDivElement;
-  private element: HTMLImageElement;
-
   private _transform: Transform;
 
   get transform(): Transform {
@@ -23,15 +20,19 @@ export default class Robot {
   }
 
   constructor() {
-    this.container = document.getElementById("maze") as HTMLDivElement;
-    this.element = document.createElement("img");
+    this.html();
+  }
 
-    this.element.id = "robot";
-    this.element.className = "robot";
-    this.element.src = "./assets/bx-caret-up.svg";
-    this.element.draggable = false;
-    this.element.dataset.rotation = Rotation.id(Rotation.Left);
+  private html() {
+    const puzzle = document.getElementById("puzzle") as HTMLDivElement;
+    const robot = document.createElement("img");
 
-    this.container.appendChild(this.element);
+    robot.id = "robot";
+    robot.className = "robot";
+    robot.src = "./assets/bx-caret-up.svg";
+    robot.draggable = false;
+    robot.dataset.rotation = Rotation.id(Rotation.Left);
+
+    puzzle.appendChild(robot);
   }
 }
