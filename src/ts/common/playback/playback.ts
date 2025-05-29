@@ -35,7 +35,7 @@ export default class Playback {
           if (e.ctrlKey) this.onevent(PlaybackEvent.Stop);
           break;
         }
-        case "Space": {
+        case " ": {
           this.onevent(PlaybackEvent.Toggle);
           break;
         }
