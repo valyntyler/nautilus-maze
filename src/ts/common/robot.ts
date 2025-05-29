@@ -1,22 +1,34 @@
+import Position from "../data/position";
 import Rotation from "../data/rotation";
 import Transform from "../data/transform";
 
-export default class Robot {
-  private _transform: Transform;
+export default class Robot implements Transform {
+  private element: HTMLImageElement;
 
-  get transform(): Transform {
-    return this._transform;
+  private _position: Position;
+  private _rotation: Rotation;
+
+  get position(): Position {
+    return this._position;
   }
 
-  set transform(value: Transform) {
-    this._transform = value;
-    this.element.dataset.rotation = Rotation.id(value.rotation);
+  get rotation(): Rotation {
+    return this._rotation;
+  }
 
-    const x = { property: "--robot-x", value: `${value.position.x}` };
-    const y = { property: "--robot-y", value: `${value.position.y}` };
+  set position(value: Position) {
+    this._position = value;
+
+    const x = { property: "--robot-x", value: `${value.x}` };
+    const y = { property: "--robot-y", value: `${value.y}` };
 
     document.documentElement.style.setProperty(x.property, x.value);
     document.documentElement.style.setProperty(y.property, y.value);
+  }
+
+  set rotation(value: Rotation) {
+    this._rotation = value;
+    this.element.dataset.rotation = Rotation.id(value);
   }
 
   constructor() {
@@ -34,5 +46,6 @@ export default class Robot {
     robot.dataset.rotation = Rotation.id(Rotation.Left);
 
     puzzle.appendChild(robot);
+    this.element = robot;
   }
 }
