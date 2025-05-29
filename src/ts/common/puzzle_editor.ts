@@ -11,45 +11,29 @@ export default class PuzzleEditor extends Puzzle {
   constructor() {
     super();
 
-    const tools = document.createElement("div");
-    const img = document.createElement("img");
-    const bar = document.getElementById("bar")!;
-
-    tools.id = "tools";
-    tools.className = "tools-container";
-
-    img.src = "./assets/bx-check.svg";
-    img.id = "done";
-    img.onclick = () => this.onview();
-
-    bar.innerHTML = "";
-    bar.appendChild(tools);
-    bar.appendChild(img);
-
+    this.html();
     this.tools = new Tools();
-    this.oncellevent = this.handleCellEvent;
-  }
-
-  private handleCellEvent(
-    cell: HTMLDivElement,
-    event: MouseEvent,
-    state: MouseState,
-  ) {
-    switch (this.tools.selected) {
-      case Tool.Pencil: {
-        this.usePencil(cell, event, state);
-        break;
+    this.maze.onevent = (
+      cell: HTMLDivElement,
+      event: MouseEvent,
+      state: MouseState,
+    ) => {
+      switch (this.tools.selected) {
+        case Tool.Pencil: {
+          this.usePencil(cell, event, state);
+          break;
+        }
+        case Tool.Eraser: {
+          this.useEraser(cell, event, state);
+          break;
+        }
+        case Tool.Finger: {
+          this.useFinger(cell, event, state);
+          break;
+        }
       }
-      case Tool.Eraser: {
-        this.useEraser(cell, event, state);
-        break;
-      }
-      case Tool.Finger: {
-        this.useFinger(cell, event, state);
-        break;
-      }
-    }
-    this.onchange();
+      this.onchange();
+    };
   }
 
   private usePencil(
@@ -88,5 +72,22 @@ export default class PuzzleEditor extends Puzzle {
         this.place(cell, Rotation.turn(r));
       }
     }
+  }
+
+  private html() {
+    const tools = document.createElement("div");
+    const img = document.createElement("img");
+    const bar = document.getElementById("bar")!;
+
+    tools.id = "tools";
+    tools.className = "tools-container";
+
+    img.src = "./assets/bx-check.svg";
+    img.id = "done";
+    img.onclick = () => this.onview();
+
+    bar.innerHTML = "";
+    bar.appendChild(tools);
+    bar.appendChild(img);
   }
 }
