@@ -1,7 +1,7 @@
 import Cell from "../data/cell";
 import Grid from "../data/grid";
-import MouseEvent from "./mouse_event";
-import MouseState from "./mouse_state";
+import MouseEvent from "../data/mouse_event";
+import MouseState from "../data/mouse_state";
 
 export default class Maze {
   private container: HTMLDivElement;
