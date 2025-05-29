@@ -21,14 +21,6 @@ body {
 h1 {
   text-align: center;
 }
-
-.side {
-  height: 100%;
-  width: 280px;
-  margin-left: 40px;
-  margin-right: 40px;
-}
-
 .content-container {
   display: flex;
   flex-direction: row;
