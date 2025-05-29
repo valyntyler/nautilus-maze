@@ -1,17 +1,17 @@
 import Commands from "./commands/commands";
-import PlaybackElement from "./playback/playback";
+import Playback from "./playback/playback";
 import Puzzle from "./puzzle";
 
 export default class PuzzleRunner extends Puzzle {
   private commands: Commands;
-  private playback: PlaybackElement;
+  private playback: Playback;
 
   constructor() {
     super();
     this.html();
 
     this.commands = new Commands(this.robot.transform, this.maze.grid);
-    this.playback = new PlaybackElement(this.commands.steps, this.robot);
+    this.playback = new Playback(this.commands.steps, this.robot);
   }
 
   private html() {
