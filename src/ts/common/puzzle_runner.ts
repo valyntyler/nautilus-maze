@@ -3,12 +3,12 @@ import PlaybackButton from "./playback_button";
 import PlaybackState from "./playback_state";
 import Puzzle from "./puzzle";
 import Queue from "./queue";
-import Stages from "./stages";
+import Steps from "./steps";
 
 export default class PuzzleRunner extends Puzzle {
   private playback: Playback;
   private queue: Queue;
-  private stages: Stages;
+  private steps: Steps;
 
   constructor() {
     super();
@@ -16,23 +16,23 @@ export default class PuzzleRunner extends Puzzle {
 
     this.playback = new Playback();
     this.queue = new Queue();
-    this.stages = new Stages(this.queue.commands, this.robot, this.maze.grid);
+    this.steps = new Steps(this.queue.commands, this.robot, this.maze.grid);
     this.playback.onclick = (btn) => this.handlePlayback(btn);
   }
 
   private async handlePlayback(button: PlaybackButton) {
     switch (button) {
       case PlaybackButton.Prev: {
-        if (this.stages.peek_prev() !== null) {
-          const prev = this.stages.prev()!;
+        if (this.steps.peek_prev() !== null) {
+          const prev = this.steps.prev()!;
           this.robot.position = prev.position;
           this.robot.rotation = prev.rotation;
         }
         break;
       }
       case PlaybackButton.Next: {
-        if (this.stages.peek_next() !== null) {
-          const next = this.stages.next()!;
+        if (this.steps.peek_next() !== null) {
+          const next = this.steps.next()!;
           this.robot.position = next.position;
           this.robot.rotation = next.rotation;
         }
@@ -40,12 +40,12 @@ export default class PuzzleRunner extends Puzzle {
       }
       case PlaybackButton.Play: {
         this.playback.state = PlaybackState.Running;
-        while (this.stages.peek_next() !== null) {
+        while (this.steps.peek_next() !== null) {
           await new Promise((resolve) => setTimeout(resolve, 500));
           if (this.playback.state !== PlaybackState.Running) {
             return;
           }
-          const next = this.stages.next()!;
+          const next = this.steps.next()!;
           this.robot.position = next.position;
           this.robot.rotation = next.rotation;
         }
@@ -58,7 +58,7 @@ export default class PuzzleRunner extends Puzzle {
       }
       case PlaybackButton.Reset: {
         this.playback.state = PlaybackState.Ready;
-        const origin = this.stages.origin()!;
+        const origin = this.steps.origin()!;
         this.robot.position = origin.position;
         this.robot.rotation = origin.rotation;
         break;
