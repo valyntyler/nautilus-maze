@@ -45,7 +45,7 @@ export default class Playback {
   }
 
   private onevent(e: PlaybackEvent) {
-    console.log(e.name);
+    console.log(PlaybackEvent.object(e).name);
   }
 
   constructor() {
