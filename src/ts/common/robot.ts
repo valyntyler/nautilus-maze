@@ -5,8 +5,8 @@ import Transform from "../data/transform";
 export default class Robot implements Transform {
   private element: HTMLImageElement;
 
-  private _position: Position = Position.create();
-  private _rotation: Rotation = Rotation.Up;
+  private _position: Position;
+  private _rotation: Rotation;
 
   get position(): Position {
     return this._position;
@@ -48,7 +48,7 @@ export default class Robot implements Transform {
     const t = local ? JSON.parse(local) : Transform.create();
 
     this.position = t.position;
-    // this.rotation = t.rotation;
+    this.rotation = t.rotation;
   }
 
   private html() {
@@ -59,7 +59,7 @@ export default class Robot implements Transform {
     robot.className = "robot";
     robot.src = "./assets/bx-caret-up.svg";
     robot.draggable = false;
-    robot.dataset.rotation = Rotation.id(Rotation.Left);
+    robot.dataset.rotation = Rotation.id(this.rotation);
     robot.addEventListener("contextmenu", (e) => e.preventDefault());
 
     puzzle.appendChild(robot);

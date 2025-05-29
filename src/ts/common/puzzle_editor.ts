@@ -84,13 +84,13 @@ export default class PuzzleEditor extends Puzzle {
       if (state.left) {
         this.robot.position = { x, y };
         this.robot.save();
-      }
-      if (
+      } else if (
         state.right &&
         x === this.robot.position.x &&
         y === this.robot.position.y
       ) {
         this.robot.rotation = Rotation.turn(this.robot.rotation);
+        this.robot.save();
       }
     }
   }
