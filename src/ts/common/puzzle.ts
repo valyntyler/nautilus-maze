@@ -1,12 +1,14 @@
 import Grid from "../data/grid";
-import Position from "../data/position";
 import Rotation from "../data/rotation";
 import Transform from "../data/transform";
+import Maze from "./maze";
 import MouseEvent from "./mouse_event";
 import MouseState from "./mouse_state";
 import PuzzleState from "./puzzle_state";
 
 export default class Puzzle {
+  protected maze: Maze;
+
   container: HTMLDivElement;
 
   onview = () => {};
@@ -30,89 +32,47 @@ export default class Puzzle {
 
   get state(): PuzzleState {
     return {
-      robot: this.robot,
-      maze: this.maze,
+      // robot: this.robot,
+      // maze: this.maze.grid,
+
+      robot: Transform.create(),
+      maze: Grid.create(),
     };
   }
 
   get robot(): Transform {
-    const img = document.getElementById("robot")!;
-    const div = img.parentNode! as HTMLDivElement;
-    const row = div.parentNode! as HTMLDivElement;
-
-    const x = Array.from(row.children).indexOf(div);
-    const y = Array.from(row.parentNode!.children).indexOf(row);
-    const r = Rotation.parse(img.className)!;
-
-    return Transform.create(Position.create(x, y), r);
-  }
-
-  get maze(): Grid {
-    const rows = this.container.children.length;
-    const cols = this.container.children[0].children.length;
-
-    const value = Grid.create(rows, cols);
-
-    for (let i = 0; i < rows; i++) {
-      for (let j = 0; j < cols; j++) {
-        const cell = this.cell(j, i);
-        value[i][j] = cell.classList.contains("black") ? 1 : 0;
-      }
-    }
-
-    return value;
+    // const img = document.getElementById("robot")!;
+    // const div = img.parentNode! as HTMLDivElement;
+    // const row = div.parentNode! as HTMLDivElement;
+    //
+    // const x = Array.from(row.children).indexOf(div);
+    // const y = Array.from(row.parentNode!.children).indexOf(row);
+    // const r = Rotation.parse(img.className)!;
+    //
+    // return Transform.create(Position.create(x, y), r);
+    return Transform.create();
   }
 
   set state(value: PuzzleState) {
-    this.maze = value.maze;
-    this.robot = value.robot;
+    this.maze.grid = value.maze;
+    // this.robot = value.robot;
   }
 
   set robot(value: Transform) {
-    const cell = this.cell(value.position.x, value.position.y);
-    this.place(cell, value.rotation);
-  }
-
-  set maze(value: Grid) {
-    this.container.innerHTML = "";
-
-    const rows = Grid.rows(value);
-    const cols = Grid.cols(value);
-
-    document.documentElement.style.setProperty("--grid-rows", `${rows}`);
-    document.documentElement.style.setProperty("--grid-cols", `${cols}`);
-
-    for (let i = 0; i < rows; i++) {
-      const row = document.createElement("div");
-      row.classList.add("maze-row");
-
-      for (let j = 0; j < cols; j++) {
-        const cell = document.createElement("div");
-        cell.classList.add("maze-cell");
-
-        if (value[i][j] === 1) {
-          cell.classList.add("black");
-        }
-
-        cell.addEventListener("mousedown", (e) =>
-          this.oncellevent(cell, MouseEvent.Down, MouseState.parse(e.buttons)),
-        );
-        cell.addEventListener("mouseenter", (e) =>
-          this.oncellevent(cell, MouseEvent.Enter, MouseState.parse(e.buttons)),
-        );
-
-        cell.addEventListener("contextmenu", (e) => e.preventDefault());
-
-        row.appendChild(cell);
-      }
-
-      this.container.appendChild(row);
-    }
+    // const cell = this.cell(value.position.x, value.position.y);
+    // this.place(cell, value.rotation);
   }
 
   constructor() {
-    this.container = document.getElementById("maze") as HTMLDivElement;
-    this.state = this.local;
+    this.container = document.getElementById("puzzle") as HTMLDivElement;
+    this.container.innerHTML = "";
+
+    this.maze = new Maze();
+    this.maze.grid = this.local.maze;
+
+    //
+
+    // this.state = this.local;
 
     this.onchange = () => {
       localStorage.setItem("puzzle-state", JSON.stringify(this.state));

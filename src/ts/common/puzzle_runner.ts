@@ -14,10 +14,11 @@ export default class PuzzleRunner extends Puzzle {
     super();
     this.html();
 
-    this.playback = new Playback();
-    this.queue = new Queue();
-    this.stages = new Stages(this.queue.commands, this.robot, this.maze);
+    // this.playback = new Playback();
+    // this.queue = new Queue();
+    // this.stages = new Stages(this.queue.commands, this.robot, this.maze.grid);
 
+    return;
     this.playback.onplaybackclick = async (b) => {
       switch (b) {
         case PlaybackButton.Prev: {
