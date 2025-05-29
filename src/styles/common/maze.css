@@ -5,7 +5,6 @@
 }
 
 .maze-container {
-  position: relative;
   display: grid;
   grid-template-rows: repeat(var(--grid-rows), var(--cell-size));
   gap: 1px;
