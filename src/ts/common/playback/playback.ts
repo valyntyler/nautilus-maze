@@ -25,6 +25,9 @@ export default class Playback {
   }
 
   private set index(value: number) {
+    if (value < 0) return;
+    if (value >= this.steps.length) return;
+
     this._index = value;
     Object.assign(this.robot, this.steps[value]);
   }
