@@ -1,8 +1,6 @@
 import Command from "../data/command";
 import Transform from "../data/transform";
-import PlaybackElement from "./playback/playback_element";
-import PlaybackButton from "./playback/playback_button";
-import PlaybackState from "./playback/playback_state";
+import PlaybackElement from "./playback/playback";
 import Puzzle from "./puzzle";
 import Queue from "./queue";
 
@@ -42,7 +40,7 @@ export default class PuzzleRunner extends Puzzle {
     ];
     this.index = 0;
 
-    this.playback.onclick = (btn) => this.handlePlayback(btn);
+    // this.playback.onclick = (btn) => this.handlePlayback(btn);
   }
 
   private async handlePlayback(button: PlaybackButton) {
