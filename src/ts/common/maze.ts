@@ -37,7 +37,7 @@ export default class Maze {
         const cell = document.createElement("div");
         cell.classList.add("maze-cell");
 
-        if (value[i][j] === 1) {
+        if (value[i][j] === Cell.Black) {
           cell.classList.add("black");
         }
 
