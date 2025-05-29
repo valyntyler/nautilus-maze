@@ -4,7 +4,6 @@ enum PlaybackEvent {
   Play,
   Stop,
   Pause,
-  Resume,
   Toggle,
 }
 
@@ -25,9 +24,6 @@ namespace PlaybackEvent {
       }
       case PlaybackEvent.Pause: {
         return { name: "pause" };
-      }
-      case PlaybackEvent.Resume: {
-        return { name: "resume" };
       }
       case PlaybackEvent.Toggle: {
         return { name: "toggle" };
