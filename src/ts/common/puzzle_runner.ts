@@ -14,51 +14,82 @@ export default class PuzzleRunner extends Puzzle {
     super();
     this.html();
 
-    // this.playback = new Playback();
-    // this.queue = new Queue();
-    // this.stages = new Stages(this.queue.commands, this.robot, this.maze.grid);
+    this.playback = new Playback();
+    this.queue = new Queue();
+    this.stages = new Stages(this.queue.commands, this.robot, this.maze.grid);
 
-    return;
-    this.playback.onplaybackclick = async (b) => {
-      switch (b) {
-        case PlaybackButton.Prev: {
-          if (this.stages.peek_prev() !== null) {
-            this.robot = this.stages.prev()!;
-          }
-          break;
-        }
-        case PlaybackButton.Next: {
-          if (this.stages.peek_next() !== null) {
-            this.robot = this.stages.next()!;
-          }
-          break;
-        }
-        case PlaybackButton.Play: {
-          this.playback.state = PlaybackState.Running;
-          while (this.stages.peek_next() !== null) {
-            await new Promise((resolve) => setTimeout(resolve, 500));
-            if (this.playback.state !== PlaybackState.Running) {
-              return;
-            }
-            this.robot = this.stages.next()!;
-          }
-          this.playback.state = PlaybackState.Ended;
-          break;
-        }
-        case PlaybackButton.Pause: {
-          this.playback.state = PlaybackState.Ready;
-          break;
-        }
-        case PlaybackButton.Reset: {
-          this.playback.state = PlaybackState.Ready;
-          this.robot = this.stages.origin();
-          break;
-        }
-      }
+    this.playback.onclick = (btn) => {
+      this.handlePlayback(btn);
     };
   }
 
-  html() {
+  public prev() {
+    if (this.stages.peek_prev() !== null) {
+      const prev = this.stages.prev()!;
+      this.robot.position = prev.position;
+      this.robot.rotation = prev.rotation;
+    }
+  }
+
+  public next() {
+    if (this.stages.peek_next() !== null) {
+      const next = this.stages.next()!;
+      this.robot.position = next.position;
+      this.robot.rotation = next.rotation;
+    }
+  }
+
+  public async play() {
+    this.playback.state = PlaybackState.Running;
+    while (this.stages.peek_next() !== null) {
+      await new Promise((resolve) => setTimeout(resolve, 500));
+      if (this.playback.state !== PlaybackState.Running) {
+        return;
+      }
+      const next = this.stages.next()!;
+      this.robot.position = next.position;
+      this.robot.rotation = next.rotation;
+    }
+    this.playback.state = PlaybackState.Ended;
+  }
+
+  public pause() {
+    this.playback.state = PlaybackState.Ready;
+  }
+
+  public reset() {
+    this.playback.state = PlaybackState.Ready;
+    const origin = this.stages.origin()!;
+    this.robot.position = origin.position;
+    this.robot.rotation = origin.rotation;
+  }
+
+  private async handlePlayback(button: PlaybackButton) {
+    switch (button) {
+      case PlaybackButton.Prev: {
+        this.prev();
+        break;
+      }
+      case PlaybackButton.Next: {
+        this.next();
+        break;
+      }
+      case PlaybackButton.Play: {
+        await this.play();
+        break;
+      }
+      case PlaybackButton.Pause: {
+        this.pause();
+        break;
+      }
+      case PlaybackButton.Reset: {
+        this.reset();
+        break;
+      }
+    }
+  }
+
+  private html() {
     const playback = document.createElement("div");
     const img = document.createElement("img");
     const bar = document.getElementById("bar")!;

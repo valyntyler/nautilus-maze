@@ -4,7 +4,7 @@ import PuzzleRunner from "./common/puzzle_runner";
 import PuzzleEditor from "./common/puzzle_editor";
 
 document.addEventListener("DOMContentLoaded", () => {
-  let puzzle: Puzzle = new PuzzleEditor();
+  let puzzle: Puzzle = new PuzzleRunner();
 
   const onview = () => {
     puzzle = new PuzzleRunner();
