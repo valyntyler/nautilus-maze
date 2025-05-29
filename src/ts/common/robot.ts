@@ -8,6 +8,13 @@ export default class Robot implements Transform {
   private _position: Position;
   private _rotation: Rotation;
 
+  get transform(): Transform {
+    return {
+      position: this.position,
+      rotation: this.rotation,
+    };
+  }
+
   get position(): Position {
     return this._position;
   }
