@@ -1,14 +1,15 @@
 import PlaybackEvent from "./playback_event";
-import PlaybackButton from "./playback_button";
+import PlaybackState from "./playback_state";
 
 export default class Playback {
   private container: HTMLDivElement;
+  private state: PlaybackState = PlaybackState.Waiting;
 
-  private html(controls: Array<PlaybackButton>) {
+  private html() {
     this.container = document.getElementById("playback") as HTMLDivElement;
     this.container.innerHTML = "";
 
-    for (const btn of controls) {
+    for (const btn of PlaybackState.controls(this.state)) {
       const image = document.createElement("img");
 
       image.alt = btn.name;
@@ -48,7 +49,7 @@ export default class Playback {
   }
 
   constructor() {
-    this.html([]);
+    this.html();
     this.hookup();
   }
 }
