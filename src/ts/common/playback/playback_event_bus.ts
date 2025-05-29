@@ -1,4 +1,4 @@
-import PlaybackEvent from "./playback_event";
+import PlaybackEvent from "./data/playback_event";
 
 export default class PlaybackEventBus {
   public onevent?: (e: PlaybackEvent) => void;
