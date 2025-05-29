@@ -4,7 +4,7 @@ import Transform from "../../data/transform";
 
 export default class Commands {
   private container: HTMLTextAreaElement;
-  private steps: Array<Transform>;
+  public steps: Array<Transform>;
 
   constructor(t: Transform, grid: Grid) {
     this.container = document.getElementById("commands") as HTMLTextAreaElement;
