@@ -27,7 +27,7 @@
 }
 
 .robot[data-rotation="left"] {
-  transform: rotate(-90deg);
+  transform: rotate(270deg);
 }
 
 .robot[data-rotation="right"] {
