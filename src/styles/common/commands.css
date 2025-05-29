@@ -4,3 +4,17 @@
   margin-left: 40px;
   margin-right: 40px;
 }
+
+.side:last-of-type {
+  border: 1px solid black;
+}
+
+.command-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.command-container input {
+  flex: 1;
+}
