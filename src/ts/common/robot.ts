@@ -27,6 +27,20 @@ export default class Robot implements Transform {
   }
 
   set rotation(value: Rotation) {
+    if (value === Rotation.Up) {
+      const rotations = parseInt(
+        getComputedStyle(document.documentElement).getPropertyValue(
+          "--rotations",
+        ),
+        10,
+      );
+
+      document.documentElement.style.setProperty(
+        "--rotations",
+        `${rotations + 1}`,
+      );
+    }
+
     this._rotation = value;
     this.element.dataset.rotation = Rotation.id(value);
   }

@@ -89,20 +89,6 @@ export default class PuzzleEditor extends Puzzle {
         x === this.robot.position.x &&
         y === this.robot.position.y
       ) {
-        if (this.robot.rotation === Rotation.Right) {
-          const rotations = parseInt(
-            getComputedStyle(document.documentElement).getPropertyValue(
-              "--rotations",
-            ),
-            10,
-          );
-
-          document.documentElement.style.setProperty(
-            "--rotations",
-            `${rotations + 1}`,
-          );
-        }
-
         this.robot.rotation = Rotation.turn(this.robot.rotation);
         this.robot.save();
       }
