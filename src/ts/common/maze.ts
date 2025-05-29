@@ -70,7 +70,7 @@ export default class Maze {
 
   public load() {
     const local = localStorage.getItem("grid");
-    this.grid = local ? JSON.parse(local) : Grid.create(14, 15);
+    this.grid = local ? JSON.parse(local) : Grid.create();
   }
 
   private html() {
