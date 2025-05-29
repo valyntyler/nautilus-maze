@@ -84,11 +84,17 @@ export default class Playback {
     switch (e) {
       case PlaybackEvent.Prev: {
         this.index--;
+        this.state = PlaybackState.Waiting;
         break;
       }
 
       case PlaybackEvent.Next: {
         this.index++;
+        if (this.index === this.steps.length - 1) {
+          this.state = PlaybackState.Finished;
+        } else {
+          this.state = PlaybackState.Waiting;
+        }
         break;
       }
 
