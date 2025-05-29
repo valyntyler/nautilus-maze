@@ -1,13 +1,13 @@
 import Command from "../data/command";
 import Transform from "../data/transform";
-import Playback from "./playback";
-import PlaybackButton from "./playback_button";
-import PlaybackState from "./playback_state";
+import PlaybackElement from "./playback/playback_element";
+import PlaybackButton from "./playback/playback_button";
+import PlaybackState from "./playback/playback_state";
 import Puzzle from "./puzzle";
 import Queue from "./queue";
 
 export default class PuzzleRunner extends Puzzle {
-  private playback: Playback;
+  private playback: PlaybackElement;
   private queue: Queue;
 
   private _states: Array<Transform>;
@@ -21,8 +21,6 @@ export default class PuzzleRunner extends Puzzle {
     if (value >= this._states.length) return;
     if (value < 0) return;
 
-    console.log(value);
-
     this._index = value;
     Object.assign(this.robot, this._states[value]);
   }
@@ -31,10 +29,9 @@ export default class PuzzleRunner extends Puzzle {
     super();
     this.html();
 
-    this.playback = new Playback();
+    this.playback = new PlaybackElement();
     this.queue = new Queue();
 
-    console.log(Object.create(this.robot));
     let current: Transform = this.robot;
     this._states = [
       this.robot.transform,

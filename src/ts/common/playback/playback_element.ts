@@ -1,7 +1,7 @@
 import PlaybackButton from "./playback_button";
 import PlaybackState from "./playback_state";
 
-export default class Playback {
+export default class PlaybackElement {
   private container: HTMLDivElement;
   private _state: PlaybackState;
 
