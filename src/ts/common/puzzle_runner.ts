@@ -1,14 +1,31 @@
+import Command from "../data/command";
+import Transform from "../data/transform";
 import Playback from "./playback";
 import PlaybackButton from "./playback_button";
 import PlaybackState from "./playback_state";
 import Puzzle from "./puzzle";
 import Queue from "./queue";
-import Steps from "./steps";
 
 export default class PuzzleRunner extends Puzzle {
   private playback: Playback;
   private queue: Queue;
-  private steps: Steps;
+
+  private _states: Array<Transform>;
+  private _index: number = 0;
+
+  get index(): number {
+    return this._index;
+  }
+
+  set index(value: number) {
+    if (value >= this._states.length) return;
+    if (value < 0) return;
+
+    console.log(value);
+
+    this._index = value;
+    Object.assign(this.robot, this._states[value]);
+  }
 
   constructor() {
     super();
@@ -16,38 +33,36 @@ export default class PuzzleRunner extends Puzzle {
 
     this.playback = new Playback();
     this.queue = new Queue();
-    this.steps = new Steps(this.queue.commands, this.robot, this.maze.grid);
+
+    console.log(Object.create(this.robot));
+    let current: Transform = this.robot;
+    this._states = [
+      this.robot.transform,
+      ...this.queue.commands.map((cmd) => {
+        current = Command.run(cmd, current, this.maze.grid);
+        return current;
+      }),
+    ];
+    this.index = 0;
+
     this.playback.onclick = (btn) => this.handlePlayback(btn);
   }
 
   private async handlePlayback(button: PlaybackButton) {
     switch (button) {
       case PlaybackButton.Prev: {
-        if (this.steps.peek_prev() !== null) {
-          const prev = this.steps.prev()!;
-          this.robot.position = prev.position;
-          this.robot.rotation = prev.rotation;
-        }
+        this.index--;
         break;
       }
       case PlaybackButton.Next: {
-        if (this.steps.peek_next() !== null) {
-          const next = this.steps.next()!;
-          this.robot.position = next.position;
-          this.robot.rotation = next.rotation;
-        }
+        this.index++;
         break;
       }
       case PlaybackButton.Play: {
         this.playback.state = PlaybackState.Running;
-        while (this.steps.peek_next() !== null) {
+        for (this.index; this.index < this._states.length - 1; this.index++) {
           await new Promise((resolve) => setTimeout(resolve, 500));
-          if (this.playback.state !== PlaybackState.Running) {
-            return;
-          }
-          const next = this.steps.next()!;
-          this.robot.position = next.position;
-          this.robot.rotation = next.rotation;
+          if (this.playback.state !== PlaybackState.Running) return;
         }
         this.playback.state = PlaybackState.Ended;
         break;
@@ -58,9 +73,7 @@ export default class PuzzleRunner extends Puzzle {
       }
       case PlaybackButton.Reset: {
         this.playback.state = PlaybackState.Ready;
-        const origin = this.steps.origin()!;
-        this.robot.position = origin.position;
-        this.robot.rotation = origin.rotation;
+        this.index = 0;
         break;
       }
     }
