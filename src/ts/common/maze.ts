@@ -1,7 +1,15 @@
 import Grid from "../data/grid";
+import MouseEvent from "./mouse_event";
+import MouseState from "./mouse_state";
 
 export default class Maze {
   private container: HTMLDivElement;
+
+  public onevent = (
+    cell: HTMLDivElement,
+    event: MouseEvent,
+    state: MouseState,
+  ) => {};
 
   set grid(value: Grid) {
     this.container.innerHTML = "";
@@ -24,12 +32,12 @@ export default class Maze {
           cell.classList.add("black");
         }
 
-        // cell.addEventListener("mousedown", (e) =>
-        //   this.oncellevent(cell, MouseEvent.Down, MouseState.parse(e.buttons)),
-        // );
-        // cell.addEventListener("mouseenter", (e) =>
-        //   this.oncellevent(cell, MouseEvent.Enter, MouseState.parse(e.buttons)),
-        // );
+        cell.addEventListener("mousedown", (e) =>
+          this.onevent(cell, MouseEvent.Down, MouseState.parse(e.buttons)),
+        );
+        cell.addEventListener("mouseenter", (e) =>
+          this.onevent(cell, MouseEvent.Enter, MouseState.parse(e.buttons)),
+        );
 
         cell.addEventListener("contextmenu", (e) => e.preventDefault());
 
