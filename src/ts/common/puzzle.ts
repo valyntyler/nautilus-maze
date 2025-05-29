@@ -1,9 +1,6 @@
 import Grid from "../data/grid";
-import Rotation from "../data/rotation";
 import Transform from "../data/transform";
 import Maze from "./maze";
-import MouseEvent from "./mouse_event";
-import MouseState from "./mouse_state";
 import PuzzleState from "./puzzle_state";
 import Robot from "./robot";
 
@@ -14,12 +11,6 @@ export default class Puzzle {
 
   onview = () => {};
   onedit = () => {};
-  onchange = () => {};
-  oncellevent = (
-    cell: HTMLDivElement,
-    event: MouseEvent,
-    state: MouseState,
-  ) => {};
 
   get local(): PuzzleState {
     const string = localStorage.getItem("puzzle-state");
