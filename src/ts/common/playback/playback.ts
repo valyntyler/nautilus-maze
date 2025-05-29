@@ -94,7 +94,8 @@ export default class Playback {
 
       case PlaybackEvent.Play: {
         this.state = PlaybackState.Running;
-        for (this.index; this.index < this.steps.length; this.index++) {
+        while (this.index < this.steps.length - 1) {
+          this.index++;
           console.log(this.index);
           if (await this.signal(500)) return;
         }
