@@ -69,26 +69,4 @@ export default class Puzzle {
 
     this.maze = new Maze();
   }
-
-  cell(x: number, y: number): HTMLDivElement {
-    return this.container.children[y].children[x] as HTMLDivElement;
-  }
-
-  place(cell: HTMLDivElement, rotation: Rotation = Rotation.Up) {
-    const img = document.createElement("img");
-    const id = Rotation.id(rotation);
-
-    img.id = "robot";
-    img.className = id;
-    img.src = `./assets/bx-caret-${id}.svg`;
-    img.draggable = false;
-
-    for (const row of this.container.children) {
-      for (const cell of row.children) {
-        cell.innerHTML = "";
-      }
-    }
-
-    cell.appendChild(img);
-  }
 }

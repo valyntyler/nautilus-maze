@@ -65,12 +65,12 @@ export default class PuzzleEditor extends Puzzle {
     const length = cell.children.length;
     if (!cell.classList.contains("black")) {
       if (state.left && length === 0) {
-        this.place(cell);
+        // this.place(cell);
       } else if (state.right && length !== 0) {
-        const id = cell.children[0].className;
-        const r = Rotation.parse(id)!;
-
-        this.place(cell, Rotation.turn(r));
+        // const id = cell.children[0].className;
+        // const r = Rotation.parse(id)!;
+        //
+        // this.place(cell, Rotation.turn(r));
       }
     }
   }
