@@ -5,6 +5,8 @@ export default class PlaybackElement {
   private container: HTMLDivElement;
   private _state: PlaybackState;
 
+  public onclick = (btn: PlaybackButton) => {};
+
   get state(): PlaybackState {
     return this._state;
   }
@@ -24,8 +26,6 @@ export default class PlaybackElement {
       this.container.appendChild(image);
     }
   }
-
-  onclick = (btn: PlaybackButton) => {};
 
   constructor() {
     this.container = document.getElementById("playback") as HTMLDivElement;
