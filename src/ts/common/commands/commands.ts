@@ -7,18 +7,26 @@ export default class Commands {
   public steps: Array<Transform>;
 
   constructor(t: Transform, grid: Grid) {
-    this.container = document.getElementById("commands") as HTMLTextAreaElement;
-    this.steps = [
-      t,
-      ...this.container.value
-        .trim()
-        .split(/\s+/)
-        .map((string) => Command.parse(string))
-        .filter((command) => command !== null)
-        .map((cmd) => {
-          t = Command.run(cmd, t, grid);
-          return t;
-        }),
-    ];
+    // this.container = document.getElementById("commands") as HTMLTextAreaElement;
+    // this.steps = [
+    //   t,
+    //   ...this.container.value
+    //     .trim()
+    //     .split(/\s+/)
+    //     .map((string) => Command.parse(string))
+    //     .filter((command) => command !== null)
+    //     .map((cmd) => {
+    //       t = Command.run(cmd, t, grid);
+    //       return t;
+    //     }),
+    // ];
+    //
+    // console.log(this.steps);
+
+    const form = document.getElementById("command-prompt")!;
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      console.log("YAY");
+    });
   }
 }
