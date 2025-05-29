@@ -5,9 +5,10 @@ import PuzzleState from "./puzzle_state";
 import Robot from "./robot";
 
 export default class Puzzle {
-  protected maze: Maze;
+  private container: HTMLDivElement;
 
-  container: HTMLDivElement;
+  protected maze: Maze;
+  private robot: Robot;
 
   onview = () => {};
   onedit = () => {};
@@ -32,32 +33,13 @@ export default class Puzzle {
     };
   }
 
-  get robot(): Transform {
-    // const img = document.getElementById("robot")!;
-    // const div = img.parentNode! as HTMLDivElement;
-    // const row = div.parentNode! as HTMLDivElement;
-    //
-    // const x = Array.from(row.children).indexOf(div);
-    // const y = Array.from(row.parentNode!.children).indexOf(row);
-    // const r = Rotation.parse(img.className)!;
-    //
-    // return Transform.create(Position.create(x, y), r);
-    return Transform.create();
-  }
-
   set state(value: PuzzleState) {}
-
-  set robot(value: Transform) {
-    // const cell = this.cell(value.position.x, value.position.y);
-    // this.place(cell, value.rotation);
-  }
 
   constructor() {
     this.container = document.getElementById("puzzle") as HTMLDivElement;
     this.container.innerHTML = "";
 
-    const asdf = new Robot();
-
     this.maze = new Maze();
+    this.robot = new Robot();
   }
 }
