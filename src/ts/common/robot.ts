@@ -27,7 +27,7 @@ export default class Robot implements Transform {
   }
 
   set rotation(value: Rotation) {
-    if (value === Rotation.Up) {
+    if (value === Rotation.Up && this.rotation === Rotation.Right) {
       const rotations = parseInt(
         getComputedStyle(document.documentElement).getPropertyValue(
           "--rotations",
