@@ -1,6 +1,6 @@
 enum Cell {
-  Black,
   White,
+  Black,
 }
 
 export default Cell;
