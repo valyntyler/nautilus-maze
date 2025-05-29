@@ -1,7 +1,7 @@
 import PlaybackEvent from "./playback_event";
 
 export default class PlaybackEventBus {
-  private onevent?: (e: PlaybackEvent) => void;
+  public onevent?: (e: PlaybackEvent) => void;
 
   constructor() {
     document.addEventListener("keydown", (e) => {
