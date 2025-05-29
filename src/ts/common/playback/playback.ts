@@ -1,3 +1,4 @@
+import PlaybackButton from "./playback_button";
 import PlaybackEvent from "./playback_event";
 import PlaybackState from "./playback_state";
 
@@ -9,7 +10,8 @@ export default class Playback {
     this.container = document.getElementById("playback") as HTMLDivElement;
     this.container.innerHTML = "";
 
-    for (const btn of PlaybackState.controls(this.state)) {
+    for (const b of PlaybackState.controls(this.state)) {
+      const btn = PlaybackButton.object(b);
       const image = document.createElement("img");
 
       image.alt = btn.name;
