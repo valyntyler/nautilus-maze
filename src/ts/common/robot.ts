@@ -60,7 +60,6 @@ export default class Robot implements Transform {
     robot.src = "./assets/bx-caret-up.svg";
     robot.draggable = false;
     robot.dataset.rotation = Rotation.id(this.rotation);
-    robot.addEventListener("contextmenu", (e) => e.preventDefault());
 
     puzzle.appendChild(robot);
     this.element = robot;
