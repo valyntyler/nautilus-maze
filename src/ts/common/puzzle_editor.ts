@@ -32,7 +32,6 @@ export default class PuzzleEditor extends Puzzle {
           break;
         }
       }
-      this.onchange();
     };
   }
 
@@ -43,6 +42,7 @@ export default class PuzzleEditor extends Puzzle {
   ) {
     if (state.left && cell.children.length === 0) {
       cell.classList.add("black");
+      this.maze.save();
     }
   }
 
@@ -53,6 +53,7 @@ export default class PuzzleEditor extends Puzzle {
   ) {
     if (state.left) {
       cell.classList.remove("black");
+      this.maze.save();
     }
   }
 

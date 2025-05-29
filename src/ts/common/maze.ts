@@ -1,3 +1,4 @@
+import Cell from "../data/cell";
 import Grid from "../data/grid";
 import MouseEvent from "./mouse_event";
 import MouseState from "./mouse_state";
@@ -10,6 +11,14 @@ export default class Maze {
     event: MouseEvent,
     state: MouseState,
   ) => {};
+
+  get grid(): Grid {
+    return Array.from(this.container.children).map((row) =>
+      Array.from(row.children).map((cell) =>
+        cell.classList.contains("black") ? Cell.Black : Cell.White,
+      ),
+    );
+  }
 
   set grid(value: Grid) {
     this.container.innerHTML = "";
@@ -46,9 +55,25 @@ export default class Maze {
 
       this.container.appendChild(row);
     }
+
+    this.save();
   }
 
   constructor() {
+    this.html();
+    this.load();
+  }
+
+  public save() {
+    localStorage.setItem("grid", JSON.stringify(this.grid));
+  }
+
+  public load() {
+    const local = localStorage.getItem("grid");
+    this.grid = local ? JSON.parse(local) : Grid.create(14, 15);
+  }
+
+  private html() {
     const puzzle_element = document.getElementById("puzzle") as HTMLDivElement;
     const maze_element = document.createElement("div");
 

@@ -53,10 +53,7 @@ export default class Puzzle {
     return Transform.create();
   }
 
-  set state(value: PuzzleState) {
-    this.maze.grid = value.maze;
-    // this.robot = value.robot;
-  }
+  set state(value: PuzzleState) {}
 
   set robot(value: Transform) {
     // const cell = this.cell(value.position.x, value.position.y);
@@ -68,7 +65,6 @@ export default class Puzzle {
     this.container.innerHTML = "";
 
     this.maze = new Maze();
-    this.maze.grid = this.local.maze;
 
     //
 
