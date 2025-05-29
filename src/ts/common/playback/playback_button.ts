@@ -2,6 +2,7 @@ enum PlaybackButton {
   Prev,
   Next,
   Play,
+  Stop,
   Pause,
   Reset,
 }
@@ -17,6 +18,9 @@ namespace PlaybackButton {
       }
       case PlaybackButton.Play: {
         return "play";
+      }
+      case PlaybackButton.Stop: {
+        return "stop";
       }
       case PlaybackButton.Pause: {
         return "pause";
@@ -37,6 +41,9 @@ namespace PlaybackButton {
       }
       case PlaybackButton.Play: {
         return "./assets/bx-play.svg";
+      }
+      case PlaybackButton.Stop: {
+        return "./assets/bx-stop.svg";
       }
       case PlaybackButton.Pause: {
         return "./assets/bx-pause.svg";

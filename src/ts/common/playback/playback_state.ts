@@ -10,13 +10,13 @@ namespace PlaybackState {
   export function controls(state: PlaybackState): Array<PlaybackButton> {
     switch (state) {
       case PlaybackState.Ready: {
-        return [PlaybackButton.Prev, PlaybackButton.Next, PlaybackButton.Play];
+        return [PlaybackButton.Prev, PlaybackButton.Play, PlaybackButton.Next];
       }
       case PlaybackState.Running: {
-        return [PlaybackButton.Pause];
+        return [PlaybackButton.Pause, PlaybackButton.Stop];
       }
       case PlaybackState.Ended: {
-        return [PlaybackButton.Reset];
+        return [PlaybackButton.Prev, PlaybackButton.Reset, PlaybackButton.Play];
       }
     }
   }
