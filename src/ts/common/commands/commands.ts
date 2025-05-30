@@ -5,14 +5,39 @@ import Transform from "../../data/transform";
 export default class Commands {
   private container: HTMLDivElement;
 
-  public steps: Array<Transform>;
+  private get state(): Array<Command> {
+    return Array.from(this.container.children)
+      .map((elem) => Command.parse(elem.children[1].textContent!))
+      .filter((command) => command !== null);
+  }
+
+  public getSteps(transform: Transform, grid: Grid): Array<Transform> {
+    let current = transform;
+    return [
+      transform,
+      ...this.state.map((cmd) => {
+        current = Command.run(cmd, current, grid);
+        return current;
+      }),
+    ];
+  }
 
   private appendCommand(cmd: Command) {
+    const row = document.createElement("div");
     const div = document.createElement("div");
-    div.className = "command";
-    div.textContent = Command.name(cmd);
+    const btn = document.createElement("button");
 
-    this.container.appendChild(div);
+    row.className = "command";
+    div.textContent = Command.name(cmd);
+    btn.textContent = "-";
+    btn.onclick = () => {
+      row.remove();
+      localStorage.setItem("commands", JSON.stringify(this.state));
+    };
+
+    row.appendChild(btn);
+    row.appendChild(div);
+    this.container.appendChild(row);
   }
 
   private html() {
@@ -29,14 +54,7 @@ export default class Commands {
         this.appendCommand(cmd);
         input.value = "";
 
-        localStorage.setItem(
-          "commands",
-          JSON.stringify(
-            Array.from(this.container.children).map((elem) =>
-              Command.parse(elem.textContent!),
-            ),
-          ),
-        );
+        localStorage.setItem("commands", JSON.stringify(this.state));
       }
     });
   }
@@ -50,20 +68,8 @@ export default class Commands {
     }
   }
 
-  constructor(transform: Transform, grid: Grid) {
+  constructor() {
     this.html();
     this.revive();
-
-    let current = transform;
-    this.steps = [
-      transform,
-      ...Array.from(this.container.children)
-        .map((elem) => Command.parse(elem.textContent!))
-        .filter((command) => command !== null)
-        .map((cmd) => {
-          current = Command.run(cmd, current, grid);
-          return current;
-        }),
-    ];
   }
 }

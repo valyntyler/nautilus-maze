@@ -9,6 +9,12 @@
   border: 1px solid black;
 }
 
+.command {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
 form {
   display: flex;
   justify-content: space-between;
