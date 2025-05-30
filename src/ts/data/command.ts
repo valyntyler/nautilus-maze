@@ -102,16 +102,6 @@ namespace Command {
       }
     }
   }
-
-  export function values(): Array<Command> {
-    return [
-      Command.Step,
-      Command.Back,
-      Command.Move,
-      Command.Left,
-      Command.Turn,
-    ];
-  }
 }
 
 export default Command;
