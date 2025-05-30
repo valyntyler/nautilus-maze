@@ -11,6 +11,10 @@ export default class Commands {
       .filter((command) => command !== null);
   }
 
+  private set state(value: Array<Command>) {
+    localStorage.setItem("commands", JSON.stringify(value));
+  }
+
   public getSteps(transform: Transform, grid: Grid): Array<Transform> {
     let current = transform;
     return [
@@ -32,7 +36,7 @@ export default class Commands {
     btn.textContent = "-";
     btn.onclick = () => {
       row.remove();
-      localStorage.setItem("commands", JSON.stringify(this.state));
+      this.state = this.state;
     };
 
     row.appendChild(btn);
@@ -53,8 +57,7 @@ export default class Commands {
       if (cmd !== null) {
         this.appendCommand(cmd);
         input.value = "";
-
-        localStorage.setItem("commands", JSON.stringify(this.state));
+        this.state = this.state;
       }
     });
   }
