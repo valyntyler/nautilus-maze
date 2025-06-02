@@ -16,7 +16,14 @@ export default class PuzzleRunner extends Puzzle {
       this.commands.getSteps(this.robot.state, this.maze.state),
     );
 
-    this.playback.onstepchange = (value) => Object.assign(this.robot, value);
+    this.playback.onstepchange = (index, value) => {
+      Object.assign(this.robot, value);
+      if (index === 0) {
+        this.commands.selected = null;
+      } else {
+        this.commands.selected = index - 1;
+      }
+    };
   }
 
   private html() {

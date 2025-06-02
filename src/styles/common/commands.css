@@ -12,6 +12,11 @@
   gap: 10px;
 }
 
+.command.selected {
+  background: lightgray;
+  font-weight: bold;
+}
+
 .commands-container {
   display: flex;
   flex-direction: column;

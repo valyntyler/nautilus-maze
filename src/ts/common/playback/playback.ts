@@ -4,7 +4,7 @@ import PlaybackState from "./playback_state";
 import Transform from "../../data/transform";
 
 export default class Playback {
-  public onstepchange = (_: Transform) => {};
+  public onstepchange: (index: number, step: Transform) => void = () => {};
 
   private container: HTMLDivElement;
 
@@ -30,7 +30,7 @@ export default class Playback {
     if (value >= this.steps.length) return;
 
     this._index = value;
-    this.onstepchange(this.steps[value]);
+    this.onstepchange(value, this.steps[value]);
   }
 
   private get steps(): Array<Transform> {

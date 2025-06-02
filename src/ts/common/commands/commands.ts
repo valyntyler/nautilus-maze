@@ -4,11 +4,14 @@ import Transform from "../../data/transform";
 import Storage from "../storage/storage";
 
 export default class Commands {
-  public set selected(value: number) {
+  public set selected(value: number | null) {
     Array.from(this.container.children).forEach((elem) =>
       elem.classList.remove("selected"),
     );
-    this.container.children[value].classList.add("selected");
+
+    if (value !== null) {
+      this.container.children[value].classList.add("selected");
+    }
   }
 
   private container: HTMLDivElement;
