@@ -1,4 +1,5 @@
 import Grid from "../data/grid";
+import Transform from "../data/transform";
 import Maze from "./maze";
 import Robot from "./robot";
 
@@ -16,6 +17,6 @@ export default class Puzzle {
     this.container.innerHTML = "";
 
     this.maze = new Maze(Grid.create());
-    this.robot = new Robot();
+    this.robot = new Robot(Transform.create());
   }
 }

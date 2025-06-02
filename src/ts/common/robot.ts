@@ -2,28 +2,33 @@ import Position from "../data/position";
 import Rotation from "../data/rotation";
 import Transform from "../data/transform";
 
-export default class Robot implements Transform {
-  private element: HTMLImageElement;
-
-  private _position: Position;
-  private _rotation: Rotation;
-
-  get transform(): Transform {
+export default class Robot {
+  public get state(): Transform {
     return {
       position: this.position,
       rotation: this.rotation,
     };
   }
 
-  get position(): Position {
+  public set state(value: Transform) {
+    this.position = value.position;
+    this.rotation = value.rotation;
+  }
+
+  private element: HTMLImageElement;
+
+  private _position: Position;
+  private _rotation: Rotation;
+
+  private get position(): Position {
     return this._position;
   }
 
-  get rotation(): Rotation {
+  private get rotation(): Rotation {
     return this._rotation;
   }
 
-  set position(value: Position) {
+  private set position(value: Position) {
     this._position = value;
 
     const x = { property: "--robot-x", value: `${value.x}` };
@@ -33,7 +38,7 @@ export default class Robot implements Transform {
     document.documentElement.style.setProperty(y.property, y.value);
   }
 
-  set rotation(value: Rotation) {
+  private set rotation(value: Rotation) {
     if (value === Rotation.Up && this.rotation === Rotation.Right) {
       const rotations = parseInt(
         getComputedStyle(document.documentElement).getPropertyValue(
@@ -66,26 +71,6 @@ export default class Robot implements Transform {
     this.element.dataset.rotation = Rotation.id(value);
   }
 
-  constructor() {
-    this.html();
-    this.load();
-  }
-
-  public save() {
-    localStorage.setItem(
-      "robot",
-      JSON.stringify({ position: this.position, rotation: this.rotation }),
-    );
-  }
-
-  public load() {
-    const local = localStorage.getItem("robot");
-    const t = local ? JSON.parse(local) : Transform.create();
-
-    this.position = t.position;
-    this.rotation = t.rotation;
-  }
-
   private html() {
     const puzzle = document.getElementById("puzzle") as HTMLDivElement;
     const robot = document.createElement("img");
@@ -98,5 +83,10 @@ export default class Robot implements Transform {
 
     puzzle.appendChild(robot);
     this.element = robot;
+  }
+
+  constructor(value: Transform) {
+    this.html();
+    this.state = value;
   }
 }
