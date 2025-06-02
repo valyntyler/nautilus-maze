@@ -5,10 +5,6 @@
   margin-right: 40px;
 }
 
-.side:last-of-type {
-  border: 1px solid black;
-}
-
 .command {
   display: flex;
   justify-content: left;
@@ -16,6 +12,7 @@
 }
 
 form {
+  border: 1px solid black;
   display: flex;
   justify-content: space-between;
   align-items: center;

@@ -33,5 +33,14 @@ export default class PuzzleRunner extends Puzzle {
     bar.innerHTML = "";
     bar.appendChild(img);
     bar.appendChild(playback);
+
+    // enable sidebar
+    document.getElementById("right")!.innerHTML = `
+      <form id="command-prompt">
+        <input type="text" name="command" maxlength="4" />
+        <button type="submit">+</button>
+      </form>
+      <div class="commands-container" id="commands"></div>
+    `.trim();
   }
 }

@@ -110,5 +110,8 @@ export default class PuzzleEditor extends Puzzle {
     bar.innerHTML = "";
     bar.appendChild(tools);
     bar.appendChild(img);
+
+    // remove sidebar
+    document.getElementById("right")!.innerHTML = "";
   }
 }
