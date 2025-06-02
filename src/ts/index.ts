@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let puzzle: Puzzle = new PuzzleRunner();
 
   const onview = () => {
+    // window.history.pushState({}, "", "/view");
     puzzle = new PuzzleRunner();
 
     puzzle.onview = onview;
@@ -14,6 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const onedit = () => {
+    // window.history.pushState({}, "", "/edit");
     puzzle = new PuzzleEditor();
 
     puzzle.onview = onview;
