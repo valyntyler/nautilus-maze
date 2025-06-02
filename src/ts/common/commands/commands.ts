@@ -46,6 +46,7 @@ export default class Commands {
 
   private html() {
     this.container = document.getElementById("commands") as HTMLDivElement;
+    this.container.innerHTML = "";
 
     const form = document.getElementById("command-prompt") as HTMLFormElement;
     const input = form.elements.namedItem("command") as HTMLInputElement;
