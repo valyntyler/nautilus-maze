@@ -1,4 +1,3 @@
-import Grid from "../data/grid";
 import Maze from "./maze";
 import Robot from "./robot";
 import Storage from "./storage/storage";
