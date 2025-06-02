@@ -1,6 +1,7 @@
 import Command from "../../data/command";
 import Grid from "../../data/grid";
 import Transform from "../../data/transform";
+import Storage from "../storage/storage";
 
 export default class Commands {
   private container: HTMLDivElement;
@@ -12,7 +13,7 @@ export default class Commands {
   }
 
   private set state(value: Array<Command>) {
-    localStorage.setItem("commands", JSON.stringify(value));
+    Storage.set_commands(value);
   }
 
   public getSteps(transform: Transform, grid: Grid): Array<Transform> {
@@ -64,12 +65,7 @@ export default class Commands {
   }
 
   private revive() {
-    const local = localStorage.getItem("commands");
-    if (local) {
-      (JSON.parse(local) as Array<Command>).forEach((cmd) =>
-        this.appendCommand(cmd),
-      );
-    }
+    Storage.get_commands().forEach((cmd) => this.appendCommand(cmd));
   }
 
   constructor() {
