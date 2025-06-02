@@ -1,3 +1,4 @@
+import Storage from "../storage/storage";
 import Tool from "./tool";
 
 export default class Tools {
@@ -15,7 +16,7 @@ export default class Tools {
     const input = document.getElementById(id) as HTMLInputElement;
 
     input.checked = true;
-    localStorage.setItem("selected-tool", JSON.stringify(this.selected));
+    Storage.set_tool(this.selected);
   }
 
   constructor(tools = [Tool.Pencil, Tool.Eraser, Tool.Finger]) {
@@ -47,8 +48,7 @@ export default class Tools {
       this.container.appendChild(div);
     }
 
-    const local = localStorage.getItem("selected-tool");
-    this.selected = local ? JSON.parse(local) : Tool.Pencil;
+    this.selected = Storage.get_tool();
 
     document.addEventListener("keydown", (e) => {
       switch (e.key) {
