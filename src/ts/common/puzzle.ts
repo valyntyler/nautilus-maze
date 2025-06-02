@@ -1,3 +1,4 @@
+import Grid from "../data/grid";
 import Maze from "./maze";
 import Robot from "./robot";
 
@@ -14,7 +15,7 @@ export default class Puzzle {
     this.container = document.getElementById("puzzle") as HTMLDivElement;
     this.container.innerHTML = "";
 
-    this.maze = new Maze();
+    this.maze = new Maze(Grid.create());
     this.robot = new Robot();
   }
 }

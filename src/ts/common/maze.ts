@@ -4,15 +4,13 @@ import MouseEvent from "../data/mouse_event";
 import MouseState from "../data/mouse_state";
 
 export default class Maze {
-  private container: HTMLDivElement;
-
-  public onevent = (
+  public onevent: (
     cell: HTMLDivElement,
     event: MouseEvent,
     state: MouseState,
-  ) => {};
+  ) => void = () => {};
 
-  get grid(): Grid {
+  public get state(): Grid {
     return Array.from(this.container.children).map((row) =>
       Array.from(row.children).map((cell) =>
         cell.classList.contains("black") ? Cell.Black : Cell.White,
@@ -20,7 +18,20 @@ export default class Maze {
     );
   }
 
-  set grid(value: Grid) {
+  private container: HTMLDivElement;
+
+  private html() {
+    const puzzle_element = document.getElementById("puzzle") as HTMLDivElement;
+    const maze_element = document.createElement("div");
+
+    maze_element.id = "maze";
+    maze_element.classList = "maze-container";
+
+    this.container = maze_element;
+    puzzle_element.appendChild(this.container);
+  }
+
+  private grid(value: Grid) {
     this.container.innerHTML = "";
 
     const rows = Grid.rows(value);
@@ -57,28 +68,8 @@ export default class Maze {
     }
   }
 
-  constructor() {
+  constructor(value: Grid) {
     this.html();
-    this.load();
-  }
-
-  public save() {
-    localStorage.setItem("grid", JSON.stringify(this.grid));
-  }
-
-  public load() {
-    const local = localStorage.getItem("grid");
-    this.grid = local ? JSON.parse(local) : Grid.create();
-  }
-
-  private html() {
-    const puzzle_element = document.getElementById("puzzle") as HTMLDivElement;
-    const maze_element = document.createElement("div");
-
-    maze_element.id = "maze";
-    maze_element.classList = "maze-container";
-
-    this.container = maze_element;
-    puzzle_element.appendChild(this.container);
+    this.grid(value);
   }
 }
