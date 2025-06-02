@@ -1,39 +1,29 @@
-import Rotation from "../data/rotation";
 import MouseEvent from "../data/mouse_event";
 import MouseState from "../data/mouse_state";
 import Puzzle from "./puzzle";
+import SideBar from "./sidebar/sidebar";
 import Tool from "./toolbar/tool";
 import Tools from "./toolbar/tools";
-import SideBar from "./sidebar/sidebar";
+import Transform from "../data/transform";
 
 export default class PuzzleEditor extends Puzzle {
   private tools: Tools;
 
-  constructor() {
-    super();
-
-    this.html();
-    this.tools = new Tools();
-    this.maze.onevent = (
-      cell: HTMLDivElement,
-      event: MouseEvent,
-      state: MouseState,
-    ) => {
-      switch (this.tools.selected) {
-        case Tool.Pencil: {
-          this.usePencil(cell, event, state);
-          break;
-        }
-        case Tool.Eraser: {
-          this.useEraser(cell, event, state);
-          break;
-        }
-        case Tool.Finger: {
-          this.useFinger(cell, event, state);
-          break;
-        }
+  private onevent(cell: HTMLDivElement, event: MouseEvent, state: MouseState) {
+    switch (this.tools.selected) {
+      case Tool.Pencil: {
+        this.usePencil(cell, event, state);
+        break;
       }
-    };
+      case Tool.Eraser: {
+        this.useEraser(cell, event, state);
+        break;
+      }
+      case Tool.Finger: {
+        this.useFinger(cell, event, state);
+        break;
+      }
+    }
   }
 
   private usePencil(
@@ -51,7 +41,7 @@ export default class PuzzleEditor extends Puzzle {
     if (
       state.left &&
       cell.children.length === 0 &&
-      (x !== this.robot.position.x || y !== this.robot.position.y)
+      (x !== this.robot.state.position.x || y !== this.robot.state.position.y)
     ) {
       cell.classList.add("black");
       this.maze.save();
@@ -83,14 +73,17 @@ export default class PuzzleEditor extends Puzzle {
       const y = col.indexOf(parent);
 
       if (state.left) {
-        this.robot.position = { x, y };
+        this.robot.state = {
+          position: { x, y },
+          rotation: this.robot.state.rotation,
+        };
         this.robot.save();
       } else if (
         state.right &&
-        x === this.robot.position.x &&
-        y === this.robot.position.y
+        x === this.robot.state.position.x &&
+        y === this.robot.state.position.y
       ) {
-        this.robot.rotation = Rotation.turn(this.robot.rotation);
+        this.robot.state = Transform.turn(this.robot.state);
         this.robot.save();
       }
     }
@@ -113,5 +106,13 @@ export default class PuzzleEditor extends Puzzle {
     bar.appendChild(img);
 
     SideBar.hide();
+  }
+
+  constructor() {
+    super();
+
+    this.html();
+    this.tools = new Tools();
+    this.maze.onevent = this.onevent;
   }
 }
