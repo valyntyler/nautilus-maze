@@ -2,9 +2,10 @@ import PlaybackButton from "./playback_button";
 import PlaybackEvent from "./playback_event";
 import PlaybackState from "./playback_state";
 import Transform from "../../data/transform";
-import Robot from "../robot";
 
 export default class Playback {
+  public onstepchange = (_: Transform) => {};
+
   private container: HTMLDivElement;
 
   private _state: PlaybackState = PlaybackState.Waiting;
@@ -29,7 +30,7 @@ export default class Playback {
     if (value >= this.steps.length) return;
 
     this._index = value;
-    Object.assign(this.robot, this.steps[value]);
+    this.onstepchange(this.steps[value]);
   }
 
   private get steps(): Array<Transform> {
@@ -149,10 +150,7 @@ export default class Playback {
     return false;
   }
 
-  constructor(
-    steps: Array<Transform>,
-    private robot: Robot,
-  ) {
+  constructor(steps: Array<Transform>) {
     this.html();
     this.hookup();
 
