@@ -4,6 +4,7 @@ import MouseState from "../data/mouse_state";
 import Puzzle from "./puzzle";
 import Tool from "./tool";
 import Tools from "./tools";
+import SideBar from "./sidebar/sidebar";
 
 export default class PuzzleEditor extends Puzzle {
   private tools: Tools;
@@ -111,7 +112,6 @@ export default class PuzzleEditor extends Puzzle {
     bar.appendChild(tools);
     bar.appendChild(img);
 
-    // remove sidebar
-    document.getElementById("right")!.innerHTML = "";
+    SideBar.hide();
   }
 }

@@ -1,6 +1,7 @@
 import Commands from "./commands/commands";
 import Playback from "./playback/playback";
 import Puzzle from "./puzzle";
+import SideBar from "./sidebar/sidebar";
 
 export default class PuzzleRunner extends Puzzle {
   private commands: Commands;
@@ -34,13 +35,6 @@ export default class PuzzleRunner extends Puzzle {
     bar.appendChild(img);
     bar.appendChild(playback);
 
-    // enable sidebar
-    document.getElementById("right")!.innerHTML = `
-      <form id="command-prompt">
-        <input type="text" name="command" maxlength="4" />
-        <button type="submit">+</button>
-      </form>
-      <div class="commands-container" id="commands"></div>
-    `.trim();
+    SideBar.show();
   }
 }
