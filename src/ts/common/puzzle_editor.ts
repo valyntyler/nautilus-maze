@@ -2,8 +2,8 @@ import Rotation from "../data/rotation";
 import MouseEvent from "../data/mouse_event";
 import MouseState from "../data/mouse_state";
 import Puzzle from "./puzzle";
-import Tool from "./tool";
-import Tools from "./tools";
+import Tool from "./toolbar/tool";
+import Tools from "./toolbar/tools";
 import SideBar from "./sidebar/sidebar";
 
 export default class PuzzleEditor extends Puzzle {
