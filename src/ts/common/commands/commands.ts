@@ -8,7 +8,7 @@ export default class Commands {
 
   private get state(): Array<Command> {
     return Array.from(this.container.children)
-      .map((elem) => Command.parse(elem.children[1].textContent!))
+      .map((elem) => Command.parse(elem.children[0].textContent!))
       .filter((command) => command !== null);
   }
 
@@ -40,8 +40,8 @@ export default class Commands {
       this.state = this.state;
     };
 
-    row.appendChild(btn);
     row.appendChild(div);
+    row.appendChild(btn);
     this.container.appendChild(row);
   }
 
