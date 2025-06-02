@@ -5,6 +5,7 @@ import SideBar from "./sidebar/sidebar";
 import Tool from "./toolbar/tool";
 import Tools from "./toolbar/tools";
 import Transform from "../data/transform";
+import Storage from "./storage/storage";
 
 export default class PuzzleEditor extends Puzzle {
   private tools: Tools;
@@ -44,7 +45,7 @@ export default class PuzzleEditor extends Puzzle {
       (x !== this.robot.state.position.x || y !== this.robot.state.position.y)
     ) {
       cell.classList.add("black");
-      this.maze.save();
+      Storage.set_maze(this.maze.state);
     }
   }
 
@@ -55,7 +56,7 @@ export default class PuzzleEditor extends Puzzle {
   ) {
     if (state.left) {
       cell.classList.remove("black");
-      this.maze.save();
+      Storage.set_maze(this.maze.state);
     }
   }
 
@@ -77,14 +78,14 @@ export default class PuzzleEditor extends Puzzle {
           position: { x, y },
           rotation: this.robot.state.rotation,
         };
-        this.robot.save();
+        Storage.set_robot(this.robot.state);
       } else if (
         state.right &&
         x === this.robot.state.position.x &&
         y === this.robot.state.position.y
       ) {
         this.robot.state = Transform.turn(this.robot.state);
-        this.robot.save();
+        Storage.set_robot(this.robot.state);
       }
     }
   }
@@ -113,6 +114,7 @@ export default class PuzzleEditor extends Puzzle {
 
     this.html();
     this.tools = new Tools();
-    this.maze.onevent = this.onevent;
+    this.maze.onevent = (cell, event, state) =>
+      this.onevent(cell, event, state);
   }
 }

@@ -1,7 +1,7 @@
 import Grid from "../data/grid";
-import Transform from "../data/transform";
 import Maze from "./maze";
 import Robot from "./robot";
+import Storage from "./storage/storage";
 
 export default class Puzzle {
   private container: HTMLDivElement;
@@ -16,7 +16,7 @@ export default class Puzzle {
     this.container = document.getElementById("puzzle") as HTMLDivElement;
     this.container.innerHTML = "";
 
-    this.maze = new Maze(Grid.create());
-    this.robot = new Robot(Transform.create());
+    this.maze = new Maze(Storage.get_maze());
+    this.robot = new Robot(Storage.get_robot());
   }
 }
