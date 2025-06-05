@@ -10,7 +10,6 @@ import (
 
 func main() {
 	ctx, err := api.Context(config.Opts)
-
 	if err != nil {
 		fmt.Print("ERROR: ")
 		fmt.Println(err)
@@ -25,8 +24,5 @@ func main() {
 	}
 
 	fmt.Println("watching...")
-
-	// Returning from main() exits immediately in Go.
-	// Block forever so we keep watching and don't exit.
 	<-make(chan struct{})
 }
