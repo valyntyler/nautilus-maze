@@ -11,4 +11,5 @@ var Opts = api.BuildOptions{
 	Outdir:      outdir,
 	Bundle:      true,
 	Write:       true,
+	LogLevel:    api.LogLevelInfo,
 }
