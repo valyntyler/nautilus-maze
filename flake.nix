@@ -25,10 +25,6 @@
             inherit src vendorHash;
             name = "build";
           };
-          watch = pkgs.buildGoModule {
-            inherit src vendorHash;
-            name = "watch";
-          };
           serve = pkgs.buildGoModule {
             inherit src vendorHash;
             name = "serve";
