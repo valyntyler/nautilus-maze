@@ -6,15 +6,26 @@ import (
 	"os"
 
 	"github.com/evanw/esbuild/pkg/api"
-	"valyntyler.com/nautilus-maze/config"
 )
 
 func main() {
 	watch := flag.Bool("watch", false, "Watch for changes")
 	flag.Parse()
 
+	var opts = api.BuildOptions{
+		EntryPoints: []string{"src/ts/index.ts"},
+		Outdir:      "dist",
+		Bundle:      true,
+		Write:       true,
+		LogLevel:    api.LogLevelInfo,
+
+		MinifyWhitespace:  true,
+		MinifyIdentifiers: true,
+		MinifySyntax:      true,
+	}
+
 	if *watch {
-		ctx, err := api.Context(config.Opts)
+		ctx, err := api.Context(opts)
 		if err != nil {
 			fmt.Print("ERROR: ")
 			fmt.Println(err)
@@ -30,7 +41,7 @@ func main() {
 
 		<-make(chan struct{})
 	} else {
-		result := api.Build(config.Opts)
+		result := api.Build(opts)
 		for _, msg := range result.Warnings {
 			fmt.Print("WARNING: ")
 			fmt.Println(msg.Text)
