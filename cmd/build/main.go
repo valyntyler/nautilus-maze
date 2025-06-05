@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"os"
 
@@ -9,21 +10,38 @@ import (
 )
 
 func main() {
-	result := api.Build(config.Opts)
+	watch := flag.Bool("watch", false, "Watch for changes")
+	flag.Parse()
 
-	for _, msg := range result.Warnings {
-		fmt.Print("WARNING: ")
-		fmt.Println(msg.Text)
-	}
+	if *watch {
+		ctx, err := api.Context(config.Opts)
+		if err != nil {
+			fmt.Print("ERROR: ")
+			fmt.Println(err)
+			os.Exit(1)
+		}
 
-	for _, msg := range result.Errors {
-		fmt.Print("ERROR: ")
-		fmt.Println(msg.Text)
-	}
+		err2 := ctx.Watch(api.WatchOptions{})
+		if err2 != nil {
+			fmt.Print("ERROR: ")
+			fmt.Println(err)
+			os.Exit(1)
+		}
 
-	if len(result.Errors) != 0 {
-		os.Exit(1)
+		<-make(chan struct{})
 	} else {
-		fmt.Println("Build successful!")
+		result := api.Build(config.Opts)
+		for _, msg := range result.Warnings {
+			fmt.Print("WARNING: ")
+			fmt.Println(msg.Text)
+		}
+		for _, msg := range result.Errors {
+			fmt.Print("ERROR: ")
+			fmt.Println(msg.Text)
+		}
+
+		if len(result.Errors) != 0 {
+			os.Exit(1)
+		}
 	}
 }
