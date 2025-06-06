@@ -1,0 +1,33 @@
+.buttons-container {
+  display: flex;
+  gap: 10px;
+}
+
+.buttons-container button {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 96px;
+  height: 40px;
+  border: 0px;
+  border-radius: 10px;
+}
+
+.buttons-container button:first-of-type {
+  color: white;
+  background: black;
+  font-weight: bold;
+}
+
+.buttons-container button:first-of-type img {
+  filter: invert(100%) sepia(1%) saturate(1181%) hue-rotate(52deg)
+    brightness(117%) contrast(100%);
+}
+
+.buttons-container button:first-of-type:hover {
+  background: #333;
+}
+
+.buttons-container button:first-of-type:active {
+  background: #444;
+}

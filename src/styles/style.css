@@ -1,4 +1,5 @@
 @import "common/bar.css";
+@import "common/buttons.css";
 @import "common/commands.css";
 @import "common/maze.css";
 @import "common/playback.css";
@@ -20,11 +21,11 @@ body {
 
 h1 {
   text-align: center;
+  margin-bottom: 40px;
 }
 
 .content-container {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  margin-top: 20px;
 }
