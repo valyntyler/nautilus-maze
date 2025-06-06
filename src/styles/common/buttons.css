@@ -12,6 +12,7 @@
   height: 40px;
   border: 0px;
   border-radius: 10px;
+  transition: background 0.1s;
 }
 
 .buttons-container button:first-of-type {
