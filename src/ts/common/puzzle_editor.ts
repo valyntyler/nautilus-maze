@@ -92,13 +92,20 @@ export default class PuzzleEditor extends Puzzle {
 
   private html() {
     const tools = document.createElement("div");
+    const img = document.createElement("img");
     const bar = document.getElementById("bar")!;
 
     tools.id = "tools";
     tools.className = "tools-container";
 
+    img.src = "./assets/bx-dots-vertical-rounded.svg";
+    img.id = "done";
+    img.className = "tool";
+    img.onclick = () => this.onview();
+
     bar.innerHTML = "";
     bar.appendChild(tools);
+    bar.appendChild(img);
 
     SideBar.hide();
   }
