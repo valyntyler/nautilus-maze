@@ -5,6 +5,7 @@
   };
 
   outputs = {
+    self,
     nixpkgs,
     flake-utils,
     ...
@@ -14,11 +15,13 @@
         pkgs = nixpkgs.legacyPackages.${system};
       in {
         devShells.default = pkgs.mkShell {
-          buildInputs = with pkgs; [go air];
+          buildInputs =
+            (with pkgs; [go air])
+            ++ (with self.packages.${system}; [build serve]);
         };
 
         packages = let
-          src = ./.;
+          src = self;
           vendorHash = "sha256-urFdCCyMIyyGN2Suuj8l1utLj7unGnk54dMly5+eajY=";
         in {
           build = pkgs.buildGoModule {
