@@ -1,7 +1,7 @@
 :root {
   --grid-rows: 10;
   --grid-cols: 10;
-  --cell-size: 40px;
+  --cell-size: 36px;
 }
 
 .maze-container {
