@@ -68,7 +68,7 @@ export default class Playback {
           break;
         }
         case " ": {
-          this.onevent(PlaybackEvent.Toggle);
+          if (e.target === document.body) this.onevent(PlaybackEvent.Toggle);
           break;
         }
       }
