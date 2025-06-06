@@ -41,6 +41,11 @@ h1 {
   background: transparent;
   backdrop-filter: blur(100px);
   /* box-shadow: 0 0 200px rgba(0, 0, 0, 0.2) inset; */
+  transition: opacity 0.2s;
+}
+
+.overlay.hidden {
+  opacity: 0;
 }
 
 .overlay .popup {
