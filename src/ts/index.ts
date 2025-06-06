@@ -53,6 +53,16 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
   };
+
+  document.addEventListener("keydown", (e) => {
+    switch (e.key) {
+      case "Escape": {
+        document
+          .querySelectorAll(".overlay")
+          .forEach((overlay) => overlay.classList.add("hidden"));
+      }
+    }
+  });
 });
 
 function updateButtons(buttons: [HTMLButtonElement, HTMLButtonElement]) {
