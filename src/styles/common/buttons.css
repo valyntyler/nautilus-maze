@@ -8,7 +8,10 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  width: 96px;
+  gap: 10px;
+  padding-left: 10px;
+  padding-right: 20px;
+  min-width: 110px;
   height: 40px;
   border: 0px;
   border-radius: 10px;
