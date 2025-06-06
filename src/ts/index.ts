@@ -20,14 +20,16 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   const overlay_success = document.getElementById("overlay-success")!;
-  const overlay_failure = document.getElementById("overlay-failure");
+  const overlay_failure = document.getElementById("overlay-failure")!;
   const dismiss_success = document.getElementById("dismiss-success")!;
-  const dismiss_failure = document.getElementById("dismiss-failure");
+  const dismiss_failure = document.getElementById("dismiss-failure")!;
 
-  dismiss_success.addEventListener("click", () => {
-    overlay_success.classList.add("hidden");
-    console.log("hi");
-  });
+  dismiss_success.addEventListener("click", () =>
+    overlay_success.classList.add("hidden"),
+  );
+  dismiss_failure.addEventListener("click", () =>
+    overlay_failure.classList.add("hidden"),
+  );
 
   const buttons = Array.from(document.getElementById("buttons")!.children) as [
     HTMLButtonElement,
