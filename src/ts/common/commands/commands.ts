@@ -4,6 +4,17 @@ import Transform from "../../data/transform";
 import Storage from "../storage/storage";
 
 export default class Commands {
+  public get steps(): Array<Transform> {
+    let current = this.transform;
+    return [
+      this.transform,
+      ...this.state.map((cmd) => {
+        current = Command.run(cmd, current, this.grid);
+        return current;
+      }),
+    ];
+  }
+
   public set selected(value: number | null) {
     Array.from(this.container.children).forEach((elem) =>
       elem.classList.remove("selected"),
@@ -24,17 +35,6 @@ export default class Commands {
 
   private set state(value: Array<Command>) {
     Storage.set_commands(value);
-  }
-
-  public getSteps(transform: Transform, grid: Grid): Array<Transform> {
-    let current = transform;
-    return [
-      transform,
-      ...this.state.map((cmd) => {
-        current = Command.run(cmd, current, grid);
-        return current;
-      }),
-    ];
   }
 
   private appendCommand(cmd: Command) {
@@ -78,7 +78,10 @@ export default class Commands {
     Storage.get_commands().forEach((cmd) => this.appendCommand(cmd));
   }
 
-  constructor() {
+  constructor(
+    private transform: Transform,
+    private grid: Grid,
+  ) {
     this.html();
     this.revive();
   }

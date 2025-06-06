@@ -2,6 +2,9 @@ import PlaybackButton from "./playback_button";
 import PlaybackEvent from "./playback_event";
 import PlaybackState from "./playback_state";
 import Transform from "../../data/transform";
+import Commands from "../commands/commands";
+import Maze from "../maze";
+import Robot from "../robot";
 
 export default class Playback {
   public onstepchange: (index: number, step: Transform) => void = () => {};
@@ -10,7 +13,6 @@ export default class Playback {
 
   private _state: PlaybackState = PlaybackState.Waiting;
   private _index: number = 0;
-  private _steps: Array<Transform>;
 
   private get state(): PlaybackState {
     return this._state;
@@ -27,18 +29,10 @@ export default class Playback {
 
   private set index(value: number) {
     if (value < 0) return;
-    if (value >= this.steps.length) return;
+    if (value >= this.commands.steps.length) return;
 
     this._index = value;
-    this.onstepchange(value, this.steps[value]);
-  }
-
-  private get steps(): Array<Transform> {
-    return this._steps;
-  }
-
-  private set steps(value: Array<Transform>) {
-    this._steps = value;
+    this.onstepchange(value, this.commands.steps[value]);
   }
 
   private html() {
@@ -91,7 +85,7 @@ export default class Playback {
 
       case PlaybackEvent.Next: {
         this.index++;
-        if (this.index === this.steps.length - 1) {
+        if (this.index === this.commands.steps.length - 1) {
           this.state = PlaybackState.Finished;
         } else {
           this.state = PlaybackState.Waiting;
@@ -101,7 +95,7 @@ export default class Playback {
 
       case PlaybackEvent.Play: {
         this.state = PlaybackState.Running;
-        while (this.index < this.steps.length - 1) {
+        while (this.index < this.commands.steps.length - 1) {
           this.index++;
           console.log(this.index);
           if (await this.signal(500)) return;
@@ -150,10 +144,8 @@ export default class Playback {
     return false;
   }
 
-  constructor(steps: Array<Transform>) {
+  constructor(private commands: Commands) {
     this.html();
     this.hookup();
-
-    this.steps = steps;
   }
 }

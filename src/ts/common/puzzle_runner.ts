@@ -11,10 +11,8 @@ export default class PuzzleRunner extends Puzzle {
     super();
     this.html();
 
-    this.commands = new Commands();
-    this.playback = new Playback(
-      this.commands.getSteps(this.robot.state, this.maze.state),
-    );
+    this.commands = new Commands(this.robot.state, this.maze.state);
+    this.playback = new Playback(this.commands);
 
     this.playback.onstepchange = (index, value) => {
       Object.assign(this.robot, value);
