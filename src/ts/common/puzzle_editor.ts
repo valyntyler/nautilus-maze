@@ -101,7 +101,6 @@ export default class PuzzleEditor extends Puzzle {
     img.src = "./assets/bx-dots-vertical-rounded.svg";
     img.id = "done";
     img.className = "tool";
-    img.onclick = () => this.onview();
 
     bar.innerHTML = "";
     bar.appendChild(tools);

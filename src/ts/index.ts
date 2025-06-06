@@ -19,24 +19,23 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  const onview = () => {
-    // window.history.pushState({}, "", "/view");
-    puzzle = new PuzzleRunner();
-    Storage.set_window(Window.View);
+  const buttons = Array.from(document.getElementById("buttons")!.children) as [
+    HTMLButtonElement,
+    HTMLButtonElement,
+  ];
 
-    puzzle.onview = onview;
-    puzzle.onedit = onedit;
+  buttons[0].onclick = () => {
+    switch (Storage.get_window()) {
+      case Window.View: {
+        puzzle = new PuzzleEditor();
+        Storage.set_window(Window.Edit);
+        break;
+      }
+      case Window.Edit: {
+        puzzle = new PuzzleRunner();
+        Storage.set_window(Window.View);
+        break;
+      }
+    }
   };
-
-  const onedit = () => {
-    // window.history.pushState({}, "", "/edit");
-    puzzle = new PuzzleEditor();
-    Storage.set_window(Window.Edit);
-
-    puzzle.onview = onview;
-    puzzle.onedit = onedit;
-  };
-
-  puzzle.onview = onview;
-  puzzle.onedit = onedit;
 });

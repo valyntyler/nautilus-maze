@@ -8,9 +8,6 @@ export default class Puzzle {
   protected maze: Maze;
   protected robot: Robot;
 
-  onview = () => {};
-  onedit = () => {};
-
   constructor() {
     this.container = document.getElementById("puzzle") as HTMLDivElement;
     this.container.innerHTML = "";

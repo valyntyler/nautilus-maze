@@ -34,7 +34,6 @@ export default class PuzzleRunner extends Puzzle {
 
     img.src = "./assets/bx-edit-alt.svg";
     img.id = "edit";
-    img.onclick = () => this.onedit();
 
     bar.innerHTML = "";
     bar.appendChild(img);
