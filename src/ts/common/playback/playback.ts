@@ -68,6 +68,12 @@ export default class Playback {
           break;
         }
         case " ": {
+          let up = false;
+          document.querySelectorAll(".overlay").forEach((overlay) => {
+            if (!overlay.classList.contains("hidden")) up = true;
+          });
+          if (up) return;
+
           if (e.target === document.body) this.onevent(PlaybackEvent.Toggle);
           break;
         }

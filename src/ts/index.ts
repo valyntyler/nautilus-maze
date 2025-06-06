@@ -56,6 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.addEventListener("keydown", (e) => {
     switch (e.key) {
+      case " ":
       case "Escape": {
         document
           .querySelectorAll(".overlay")
