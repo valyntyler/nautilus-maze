@@ -1,4 +1,9 @@
 .playback-container {
   display: flex;
   gap: 10px;
+  width: 100%;
+}
+
+.playback-container :first-child {
+  margin-right: auto;
 }

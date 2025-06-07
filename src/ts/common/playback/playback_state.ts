@@ -11,22 +11,27 @@ namespace PlaybackState {
     switch (state) {
       case PlaybackState.Waiting: {
         return [
+          PlaybackButton.Stop,
           PlaybackButton.Prev,
           PlaybackButton.Play,
           PlaybackButton.Next,
-          PlaybackButton.Stop,
         ];
       }
       case PlaybackState.Running: {
         return [
+          PlaybackButton.Stop,
           PlaybackButton.Prev,
           PlaybackButton.Pause,
           PlaybackButton.Next,
-          PlaybackButton.Stop,
         ];
       }
       case PlaybackState.Finished: {
-        return [PlaybackButton.Reset];
+        return [
+          PlaybackButton.Stop,
+          PlaybackButton.Prev,
+          PlaybackButton.Reset,
+          PlaybackButton.Next,
+        ];
       }
     }
   }

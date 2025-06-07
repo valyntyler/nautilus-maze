@@ -26,17 +26,12 @@ export default class PuzzleRunner extends Puzzle {
 
   private html() {
     const playback = document.createElement("div");
-    const img = document.createElement("img");
     const bar = document.getElementById("bar")!;
 
     playback.id = "playback";
     playback.className = "playback-container";
 
-    img.src = "./assets/bx-edit-alt.svg";
-    img.id = "edit";
-
     bar.innerHTML = "";
-    bar.appendChild(img);
     bar.appendChild(playback);
 
     SideBar.show();
