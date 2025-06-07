@@ -7,3 +7,7 @@
 .playback-container :first-child {
   margin-right: auto;
 }
+
+.playback-container .disabled {
+  opacity: 0.4;
+}

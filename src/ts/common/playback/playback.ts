@@ -3,8 +3,6 @@ import PlaybackEvent from "./playback_event";
 import PlaybackState from "./playback_state";
 import Transform from "../../data/transform";
 import Commands from "../commands/commands";
-import Maze from "../maze";
-import Robot from "../robot";
 
 export default class Playback {
   public onstepchange: (index: number, step: Transform) => void = () => {};
@@ -47,6 +45,16 @@ export default class Playback {
       image.src = btn.source;
       image.draggable = false;
       image.onclick = () => this.onevent(btn.event);
+
+      if (b === PlaybackButton.Prev && this.index === 0) {
+        image.classList.add("disabled");
+      }
+      if (
+        b === PlaybackButton.Next &&
+        this.index + 1 === this.commands.steps.length
+      ) {
+        image.classList.add("disabled");
+      }
 
       this.container.appendChild(image);
     }
@@ -103,6 +111,7 @@ export default class Playback {
         this.state = PlaybackState.Running;
         while (this.index < this.commands.steps.length - 1) {
           this.index++;
+          this.html();
           console.log(this.index);
           if (await this.signal(500)) return;
         }
