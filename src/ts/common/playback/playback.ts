@@ -122,6 +122,7 @@ export default class Playback {
       case PlaybackEvent.Stop: {
         this.state = PlaybackState.Waiting;
         this.index = 0;
+        this.html();
         break;
       }
 
