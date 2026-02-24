@@ -1,55 +1,55 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Nautilus Maze</title>
-    <link rel="stylesheet" href="./dist/index.css" />
-  </head>
-  <body>
-    <h1>Nautilus Maze</h1>
-    <div id="buttons" class="buttons-container">
-      <button><img src="./assets/bx-check.svg" /><span>Done</span></button>
-      <button><img src="./assets/bx-save.svg" /><span>Save</span></button>
-    </div>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Nautilus Maze</title>
+		<link rel="stylesheet" href="./dist/index.css">
+	</head>
+	<body>
+		<h1>Nautilus Maze</h1>
+		<div id="buttons" class="buttons-container">
+			<button><img src="./assets/bx-check.svg" alt="done"><span>Done</span></button>
+			<button><img src="./assets/bx-save.svg" alt="save"><span>Save</span></button>
+		</div>
 
-    <div id="overlay-success" class="overlay hidden">
-      <div class="popup">
-        <div>
-          <h1>🎉 Congratulations! 🎉</h1>
-          <span>You have completed this puzzle!</span>
-        </div>
-        <div class="buttons-container">
-          <button id="dismiss-success">
-            <img src="./assets/bx-check.svg" /><span>Awesome!</span>
-          </button>
-        </div>
-      </div>
-    </div>
+		<div id="overlay-success" class="overlay hidden">
+			<div class="popup">
+				<div>
+					<h1>🎉 Congratulations! 🎉</h1>
+					<span>You have completed this puzzle!</span>
+				</div>
+				<div class="buttons-container">
+					<button id="dismiss-success">
+						<img src="./assets/bx-check.svg" alt="continue"><span>Awesome!</span>
+					</button>
+				</div>
+			</div>
+		</div>
 
-    <div id="overlay-failure" class="overlay hidden">
-      <div class="popup">
-        <div>
-          <h1>Better luck next time :(</h1>
-          <span>Oops. That didn't quite hit the mark</span>
-        </div>
-        <div class="buttons-container">
-          <button id="dismiss-failure">
-            <img src="./assets/bx-rotate-ccw.svg" /><span>Retry</span>
-          </button>
-        </div>
-      </div>
-    </div>
+		<div id="overlay-failure" class="overlay hidden">
+			<div class="popup">
+				<div>
+					<h1>Better luck next time :(</h1>
+					<span>Oops. That didn't quite hit the mark</span>
+				</div>
+				<div class="buttons-container">
+					<button id="dismiss-failure">
+						<img src="./assets/bx-rotate-ccw.svg" alt="try again"><span>Retry</span>
+					</button>
+				</div>
+			</div>
+		</div>
 
-    <div class="content-container">
-      <div class="side" id="left"></div>
-      <div>
-        <div class="bar-container" id="bar"></div>
-        <div class="puzzle-container" id="puzzle"></div>
-      </div>
-      <div class="side" id="right"></div>
-    </div>
+		<div class="content-container">
+			<div class="side" id="left"></div>
+			<div>
+				<div class="bar-container" id="bar"></div>
+				<div class="puzzle-container" id="puzzle"></div>
+			</div>
+			<div class="side" id="right"></div>
+		</div>
 
-    <script src="./dist/index.js"></script>
-  </body>
+		<script src="./dist/index.js"></script>
+	</body>
 </html>
