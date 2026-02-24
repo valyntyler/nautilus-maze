@@ -14,7 +14,7 @@ func main() {
 
 	var opts = api.BuildOptions{
 		EntryPoints: []string{"src/ts/index.ts"},
-		Outdir:      "dist",
+		Outdir:      "out",
 		Bundle:      true,
 		Write:       true,
 		LogLevel:    api.LogLevelInfo,
