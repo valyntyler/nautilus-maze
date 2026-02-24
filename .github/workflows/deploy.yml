@@ -20,6 +20,8 @@ jobs:
         run: go mod download
       - name: Build website
         run: go run ./cmd/build
+      - name: Copy index.html
+        run: cp -r ./src/public/* ./dist
       - name: Upload production-ready build files
         uses: actions/upload-artifact@v4
         with:
