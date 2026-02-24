@@ -8,14 +8,7 @@
     flake-parts.lib.mkFlake {inherit inputs;} {
       systems = ["x86_64-linux" "aarch64-linux" "aarch64-darwin" "x86_64-darwin"];
       perSystem = {pkgs, ...}: rec {
-        devShells.default = pkgs.mkShell {
-          packages = with pkgs; [
-            air
-            go
-            packages.build
-            packages.serve
-          ];
-        };
+        devShells.default = pkgs.callPackage ./nix/shell.nix {inherit (packages) build serve;};
 
         packages = let
           src = ./.;
