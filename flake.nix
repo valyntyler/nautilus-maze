@@ -1,27 +1,24 @@
 {
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
-    flake-utils.url = "github:numtide/flake-utils";
+    flake-parts.url = "github:hercules-ci/flake-parts";
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-    flake-utils,
-    ...
-  }:
-    flake-utils.lib.eachDefaultSystem (
-      system: let
-        pkgs = nixpkgs.legacyPackages.${system};
-      in {
+  outputs = inputs @ {flake-parts, ...}:
+    flake-parts.lib.mkFlake {inherit inputs;} {
+      systems = ["x86_64-linux" "aarch64-linux" "aarch64-darwin" "x86_64-darwin"];
+      perSystem = {pkgs, ...}: rec {
         devShells.default = pkgs.mkShell {
-          buildInputs =
-            (with pkgs; [go air])
-            ++ (with self.packages.${system}; [build serve]);
+          packages = with pkgs; [
+            air
+            go
+            packages.build
+            packages.serve
+          ];
         };
 
         packages = let
-          src = self;
+          src = ./.;
           vendorHash = "sha256-urFdCCyMIyyGN2Suuj8l1utLj7unGnk54dMly5+eajY=";
         in {
           build = pkgs.buildGoModule {
@@ -33,6 +30,6 @@
             name = "serve";
           };
         };
-      }
-    );
+      };
+    };
 }
