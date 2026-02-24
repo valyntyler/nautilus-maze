@@ -3,10 +3,53 @@ package main
 import (
 	"flag"
 	"fmt"
+	"io"
+	"log"
 	"os"
+	"path/filepath"
 
 	"github.com/evanw/esbuild/pkg/api"
 )
+
+func copyFile(src, dst string) error {
+	in, err := os.Open(src)
+	if err != nil {
+		return err
+	}
+	defer func() {
+		if cerr := in.Close(); cerr != nil {
+			log.Printf("error closing source file %s: %v", src, cerr)
+		}
+	}()
+
+	out, err := os.Create(dst)
+	if err != nil {
+		return err
+	}
+	defer func() {
+		if cerr := out.Close(); cerr != nil {
+			log.Printf("error closing destination file %s: %v", dst, cerr)
+		}
+	}()
+
+	_, err = io.Copy(out, in)
+	return err
+}
+
+func copyDir(src string, dst string) error {
+	return filepath.Walk(src, func(path string, info os.FileInfo, err error) error {
+		if err != nil {
+			return err
+		}
+		relPath, _ := filepath.Rel(src, path)
+		targetPath := filepath.Join(dst, relPath)
+
+		if info.IsDir() {
+			return os.MkdirAll(targetPath, os.ModePerm)
+		}
+		return copyFile(path, targetPath)
+	})
+}
 
 func main() {
 	watch := flag.Bool("watch", false, "Watch for changes")
@@ -55,4 +98,9 @@ func main() {
 			os.Exit(1)
 		}
 	}
+
+	if err := copyDir("src/public", "out"); err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println("Copied src/public/ → out/")
 }
